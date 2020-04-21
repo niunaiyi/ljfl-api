@@ -2,11 +2,13 @@
 
 namespace App\Containers\User\Models;
 
+use App\Containers\Authorization\Traits\AuthenticationTrait;
 use App\Containers\Authorization\Traits\AuthorizationTrait;
 use App\Containers\Payment\Contracts\ChargeableInterface;
 use App\Containers\Payment\Models\PaymentAccount;
 use App\Containers\Payment\Traits\ChargeableTrait;
 use App\Ship\Parents\Models\UserModel;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class User.
@@ -18,6 +20,8 @@ class User extends UserModel implements ChargeableInterface
 
     use ChargeableTrait;
     use AuthorizationTrait;
+    use AuthenticationTrait;
+    use Notifiable;
 
     /**
      * The database table used by the model.
@@ -78,6 +82,9 @@ class User extends UserModel implements ChargeableInterface
         'remember_token',
     ];
 
+  /**
+   * @return \Illuminate\Database\Eloquent\Relations\HasMany
+   */
     public function paymentAccounts()
     {
         return $this->hasMany(PaymentAccount::class);

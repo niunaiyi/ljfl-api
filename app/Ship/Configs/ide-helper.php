@@ -68,7 +68,6 @@ return [
         'app/Containers/Settings',
         'app/Containers/Stripe',
         'app/Containers/User',
-        'app/Containers/Wepay',
     ],
 
 
@@ -82,8 +81,8 @@ return [
     */
 
     'extra' => [
-        'Eloquent' => array('Illuminate\Database\Eloquent\Builder', 'Illuminate\Database\Query\Builder'),
-        'Session' => array('Illuminate\Session\Store'),
+        'Eloquent' => ['Illuminate\Database\Eloquent\Builder', 'Illuminate\Database\Query\Builder'],
+        'Session' => ['Illuminate\Session\Store'],
     ],
 
     'magic' => [
