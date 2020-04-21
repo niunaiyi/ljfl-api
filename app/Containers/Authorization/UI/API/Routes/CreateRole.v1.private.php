@@ -16,9 +16,9 @@
  */
 
 $router->post('roles', [
-    'as' => 'api_authorization_create_role',
-    'uses'       => 'Controller@createRole',
-    'middleware' => [
-        'auth:api',
-    ],
+  'as' => 'api_authorization_create_role',
+  'uses' => 'Controller@createRole',
+  'middleware' => [
+    'auth:api',
+  ],
 ]);

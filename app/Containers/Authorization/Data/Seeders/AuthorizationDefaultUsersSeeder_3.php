@@ -13,22 +13,21 @@ use App\Ship\Parents\Seeders\Seeder;
 class AuthorizationDefaultUsersSeeder_3 extends Seeder
 {
 
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        // Default Users (with their roles) ---------------------------------------------
-        Apiato::call('User@CreateUserByCredentialsTask', [
-            $isClient = false,
-            'admin@admin.com',
-            'admin',
-            'Super Admin',
-        ])->assignRole(Apiato::call('Authorization@FindRoleTask', ['admin']));
+  /**
+   * Run the database seeds.
+   *
+   * @return void
+   */
+  public function run()
+  {
+    // Default Users (with their roles) ---------------------------------------------
+    Apiato::call('User@CreateUserByCredentialsTask', [
+      'admin',
+      '超级管理员',
+      '18602005866',
+      '123456',
+      '2'])->assignRole(Apiato::call('Authorization@FindRoleTask', ['admin']));
+    // ...
 
-        // ...
-
-    }
+  }
 }

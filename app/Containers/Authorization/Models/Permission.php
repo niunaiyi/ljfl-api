@@ -14,21 +14,21 @@ use Spatie\Permission\Models\Permission as SpatiePermission;
 class Permission extends SpatiePermission
 {
 
-    use HashIdTrait;
-    use HasResourceKeyTrait;
+  use HashIdTrait;
+  use HasResourceKeyTrait;
 
-    protected $guard_name = 'web';
+  protected $guard_name = 'web';
 
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name',
-        'guard_name',
-        'display_name',
-        'description',
-    ];
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+    'name',
+    'guard_name',
+    'display_name',
+    'description',
+  ];
 }

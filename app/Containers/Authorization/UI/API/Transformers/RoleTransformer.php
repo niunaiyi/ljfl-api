@@ -13,39 +13,39 @@ use App\Ship\Parents\Transformers\Transformer;
 class RoleTransformer extends Transformer
 {
 
-    protected $availableIncludes = [
+  protected $availableIncludes = [
 
+  ];
+
+  protected $defaultIncludes = [
+    'permissions'
+  ];
+
+  /**
+   * @param \App\Containers\Authorization\Models\Role $role
+   *
+   * @return array
+   */
+  public function transform(Role $role)
+  {
+    return [
+      'object' => 'Role',
+      'id' => $role->getHashedKey(), // << Unique Identifier
+      'name' => $role->name, // << Unique Identifier
+      'description' => $role->description,
+      'display_name' => $role->display_name,
+      'level' => $role->level,
     ];
+  }
 
-    protected $defaultIncludes = [
-        'permissions'
-    ];
-
-    /**
-     * @param \App\Containers\Authorization\Models\Role $role
-     *
-     * @return array
-     */
-    public function transform(Role $role)
-    {
-        return [
-            'object'       => 'Role',
-            'id'           => $role->getHashedKey(), // << Unique Identifier
-            'name'         => $role->name, // << Unique Identifier
-            'description'  => $role->description,
-            'display_name' => $role->display_name,
-            'level'        => $role->level,
-        ];
-    }
-
-    /**
-     * @param \App\Containers\Authorization\Models\Role $role
-     *
-     * @return  \League\Fractal\Resource\Collection
-     */
-    public function includePermissions(Role $role)
-    {
-        return $this->collection($role->permissions, new PermissionTransformer());
-    }
+  /**
+   * @param \App\Containers\Authorization\Models\Role $role
+   *
+   * @return  \League\Fractal\Resource\Collection
+   */
+  public function includePermissions(Role $role)
+  {
+    return $this->collection($role->permissions, new PermissionTransformer());
+  }
 
 }

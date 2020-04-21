@@ -2,13 +2,15 @@
 
 namespace App\Containers\User\Models;
 
-use App\Containers\Authorization\Traits\AuthenticationTrait;
+use App\Containers\Address\Models\Address;
 use App\Containers\Authorization\Traits\AuthorizationTrait;
 use App\Containers\Payment\Contracts\ChargeableInterface;
-use App\Containers\Payment\Models\PaymentAccount;
 use App\Containers\Payment\Traits\ChargeableTrait;
 use App\Ship\Parents\Models\UserModel;
+use EloquentFilter\Filterable;
 use Illuminate\Notifications\Notifiable;
+use LaravelFillableRelations\Eloquent\Concerns\HasFillableRelations;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Class User.
@@ -18,76 +20,59 @@ use Illuminate\Notifications\Notifiable;
 class User extends UserModel implements ChargeableInterface
 {
 
-    use ChargeableTrait;
-    use AuthorizationTrait;
-    use AuthenticationTrait;
-    use Notifiable;
-
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'users';
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'device',
-        'platform',
-        'gender',
-        'birth',
-        'social_provider',
-        'social_token',
-        'social_refresh_token',
-        'social_expires_in',
-        'social_token_secret',
-        'social_id',
-        'social_avatar',
-        'social_avatar_original',
-        'social_nickname',
-        'confirmed',
-        'is_client',
-    ];
-
-    protected $casts = [
-        'is_client' => 'boolean',
-        'confirmed' => 'boolean',
-    ];
-
-    /**
-     * The dates attributes.
-     *
-     * @var array
-     */
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+  use ChargeableTrait;
+  use AuthorizationTrait;
+  use Notifiable;
+  use HasRoles;
+  use HasFillableRelations;
+  use Filterable;
 
   /**
-   * @return \Illuminate\Database\Eloquent\Relations\HasMany
+   * The database table used by the model.
+   *
+   * @var string
    */
-    public function paymentAccounts()
-    {
-        return $this->hasMany(PaymentAccount::class);
-    }
+  protected $table = 'users';
 
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+    'username',
+    'realname',
+    'password',
+    'address_id',
+  ];
+
+  /**
+   * The dates attributes.
+   *
+   * @var array
+   */
+  protected $dates = [
+    'created_at',
+    'updated_at',
+    'deleted_at',
+  ];
+
+  /**
+   * The attributes excluded from the model's JSON form.
+   *
+   * @var array
+   */
+  protected $hidden = [
+    'password',
+  ];
+
+  public function setPasswordAttribute($password)
+  {
+    $this->attributes['password'] = bcrypt($password);
+  }
+
+  public function address()
+  {
+    return $this->hasOne(Address::class, 'id', 'address_id');
+  }
 }

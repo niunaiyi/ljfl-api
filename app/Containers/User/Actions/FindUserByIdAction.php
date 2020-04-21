@@ -16,20 +16,20 @@ use App\Ship\Transporters\DataTransporter;
 class FindUserByIdAction extends Action
 {
 
-    /**
-     * @param \App\Ship\Transporters\DataTransporter $data
-     *
-     * @return  \App\Containers\User\Models\User
-     */
-    public function run(DataTransporter $data): User
-    {
-        $user = Apiato::call('User@FindUserByIdTask', [$data->id]);
+  /**
+   * @param \App\Ship\Transporters\DataTransporter $data
+   *
+   * @return  \App\Containers\User\Models\User
+   */
+  public function run(DataTransporter $data): User
+  {
+    $user = Apiato::call('User@FindUserByIdTask', [$data->id]);
 
-        if (!$user) {
-            throw new NotFoundException();
-        }
-
-        return $user;
+    if (!$user) {
+      throw new NotFoundException();
     }
+
+    return $user;
+  }
 
 }

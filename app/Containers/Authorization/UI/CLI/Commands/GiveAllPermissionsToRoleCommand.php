@@ -14,28 +14,28 @@ use App\Ship\Parents\Commands\ConsoleCommand;
 class GiveAllPermissionsToRoleCommand extends ConsoleCommand
 {
 
-    protected $signature = 'apiato:permissions:toRole {role}';
+  protected $signature = 'apiato:permissions:toRole {role}';
 
-    protected $description = 'Give all system Permissions to a specific Role.';
+  protected $description = 'Give all system Permissions to a specific Role.';
 
-    /**
-     * @void
-     */
-    public function handle()
-    {
-        $roleName = $this->argument('role');
+  /**
+   * @void
+   */
+  public function handle()
+  {
+    $roleName = $this->argument('role');
 
-        $allPermissions = Apiato::call('Authorization@GetAllPermissionsTask', [true]);
+    $allPermissions = Apiato::call('Authorization@GetAllPermissionsTask', [true]);
 
-        $role = Apiato::call('Authorization@FindRoleTask', [$roleName]);
+    $role = Apiato::call('Authorization@FindRoleTask', [$roleName]);
 
-        if (!$role) {
-            throw new RoleNotFoundException("Role $roleName is not found!");
-        }
-
-        $role->syncPermissions($allPermissionsNames = $allPermissions->pluck('name')->toArray());
-
-        $this->info('Gave the Role (' . $roleName . ') the following Permissions: ' . implode(' - ',
-                $allPermissionsNames) . '.');
+    if (!$role) {
+      throw new RoleNotFoundException("Role $roleName is not found!");
     }
+
+    $role->syncPermissions($allPermissionsNames = $allPermissions->pluck('name')->toArray());
+
+    $this->info('Gave the Role (' . $roleName . ') the following Permissions: ' . implode(' - ',
+        $allPermissionsNames) . '.');
+  }
 }

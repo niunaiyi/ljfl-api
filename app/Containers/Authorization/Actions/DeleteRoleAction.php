@@ -15,17 +15,17 @@ use Spatie\Permission\Contracts\Role;
 class DeleteRoleAction extends Action
 {
 
-    /**
-     * @param \App\Ship\Transporters\DataTransporter $data
-     *
-     * @return  \Spatie\Permission\Contracts\Role
-     */
-    public function run(DataTransporter $data): Role
-    {
-        $role = Apiato::call('Authorization@FindRoleTask', [$data->id]);
+  /**
+   * @param \App\Ship\Transporters\DataTransporter $data
+   *
+   * @return  \Spatie\Permission\Contracts\Role
+   */
+  public function run(DataTransporter $data): Role
+  {
+    $role = Apiato::call('Authorization@FindRoleTask', [$data->id]);
 
-        Apiato::call('Authorization@DeleteRoleTask', [$role]);
+    Apiato::call('Authorization@DeleteRoleTask', [$role]);
 
-        return $role;
-    }
+    return $role;
+  }
 }

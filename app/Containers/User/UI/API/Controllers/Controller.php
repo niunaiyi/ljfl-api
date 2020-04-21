@@ -25,136 +25,136 @@ use App\Ship\Transporters\DataTransporter;
 class Controller extends ApiController
 {
 
-    /**
-     * @param \App\Containers\User\UI\API\Requests\RegisterUserRequest $request
-     *
-     * @return  mixed
-     */
-    public function registerUser(RegisterUserRequest $request)
-    {
-        $user = Apiato::call('User@RegisterUserAction', [new DataTransporter($request)]);
+  /**
+   * @param \App\Containers\User\UI\API\Requests\RegisterUserRequest $request
+   *
+   * @return  mixed
+   */
+  public function registerUser(RegisterUserRequest $request)
+  {
+    $user = Apiato::call('User@RegisterUserAction', [new DataTransporter($request)]);
 
-        return $this->transform($user, UserTransformer::class);
-    }
+    return $this->transform($user, UserTransformer::class);
+  }
 
-    /**
-     * @param \App\Containers\User\UI\API\Requests\CreateAdminRequest $request
-     *
-     * @return  mixed
-     */
-    public function createAdmin(CreateAdminRequest $request)
-    {
-        $admin = Apiato::call('User@CreateAdminAction', [new DataTransporter($request)]);
+  /**
+   * @param \App\Containers\User\UI\API\Requests\CreateAdminRequest $request
+   *
+   * @return  mixed
+   */
+  public function createAdmin(CreateAdminRequest $request)
+  {
+    $admin = Apiato::call('User@CreateAdminAction', [new DataTransporter($request)]);
 
-        return $this->transform($admin, UserTransformer::class);
-    }
+    return $this->transform($admin, UserTransformer::class);
+  }
 
-    /**
-     * @param \App\Containers\User\UI\API\Requests\UpdateUserRequest $request
-     *
-     * @return  mixed
-     */
-    public function updateUser(UpdateUserRequest $request)
-    {
-        $user = Apiato::call('User@UpdateUserAction', [new DataTransporter($request)]);
+  /**
+   * @param \App\Containers\User\UI\API\Requests\UpdateUserRequest $request
+   *
+   * @return  mixed
+   */
+  public function updateUser(UpdateUserRequest $request)
+  {
+    $user = Apiato::call('User@UpdateUserAction', [new DataTransporter($request)]);
 
-        return $this->transform($user, UserTransformer::class);
-    }
+    return $this->transform($user, UserTransformer::class);
+  }
 
-    /**
-     * @param \App\Containers\User\UI\API\Requests\DeleteUserRequest $request
-     *
-     * @return  \Illuminate\Http\JsonResponse
-     */
-    public function deleteUser(DeleteUserRequest $request)
-    {
-        Apiato::call('User@DeleteUserAction', [new DataTransporter($request)]);
+  /**
+   * @param \App\Containers\User\UI\API\Requests\DeleteUserRequest $request
+   *
+   * @return  \Illuminate\Http\JsonResponse
+   */
+  public function deleteUser(DeleteUserRequest $request)
+  {
+    Apiato::call('User@DeleteUserAction', [new DataTransporter($request)]);
 
-        return $this->noContent();
-    }
+    return $this->noContent();
+  }
 
-    /**
-     * @param \App\Containers\User\UI\API\Requests\GetAllUsersRequest $request
-     *
-     * @return  mixed
-     */
-    public function getAllUsers(GetAllUsersRequest $request)
-    {
-        $users = Apiato::call('User@GetAllUsersAction');
+  /**
+   * @param \App\Containers\User\UI\API\Requests\GetAllUsersRequest $request
+   *
+   * @return  mixed
+   */
+  public function getAllUsers(GetAllUsersRequest $request)
+  {
+    $users = Apiato::call('User@GetAllUsersAction');
 
-        return $this->transform($users, UserTransformer::class);
-    }
+    return $this->transform($users, UserTransformer::class);
+  }
 
-    /**
-     * @param \App\Containers\User\UI\API\Requests\GetAllUsersRequest $request
-     *
-     * @return  mixed
-     */
-    public function getAllClients(GetAllUsersRequest $request)
-    {
-        $users = Apiato::call('User@GetAllClientsAction');
+  /**
+   * @param \App\Containers\User\UI\API\Requests\GetAllUsersRequest $request
+   *
+   * @return  mixed
+   */
+  public function getAllClients(GetAllUsersRequest $request)
+  {
+    $users = Apiato::call('User@GetAllClientsAction');
 
-        return $this->transform($users, UserTransformer::class);
-    }
+    return $this->transform($users, UserTransformer::class);
+  }
 
-    /**
-     * @param \App\Containers\User\UI\API\Requests\GetAllUsersRequest $request
-     *
-     * @return  mixed
-     */
-    public function getAllAdmins(GetAllUsersRequest $request)
-    {
-        $users = Apiato::call('User@GetAllAdminsAction');
+  /**
+   * @param \App\Containers\User\UI\API\Requests\GetAllUsersRequest $request
+   *
+   * @return  mixed
+   */
+  public function getAllAdmins(GetAllUsersRequest $request)
+  {
+    $users = Apiato::call('User@GetAllAdminsAction');
 
-        return $this->transform($users, UserTransformer::class);
-    }
+    return $this->transform($users, UserTransformer::class);
+  }
 
-    /**
-     * @param \App\Containers\User\UI\API\Requests\FindUserByIdRequest $request
-     *
-     * @return  mixed
-     */
-    public function findUserById(FindUserByIdRequest $request)
-    {
-        $user = Apiato::call('User@FindUserByIdAction', [new DataTransporter($request)]);
+  /**
+   * @param \App\Containers\User\UI\API\Requests\FindUserByIdRequest $request
+   *
+   * @return  mixed
+   */
+  public function findUserById(FindUserByIdRequest $request)
+  {
+    $user = Apiato::call('User@FindUserByIdAction', [new DataTransporter($request)]);
 
-        return $this->transform($user, UserTransformer::class);
-    }
+    return $this->transform($user, UserTransformer::class);
+  }
 
-    /**
-     * @param GetAuthenticatedUserRequest $request
-     *
-     * @return mixed
-     */
-    public function getAuthenticatedUser(GetAuthenticatedUserRequest $request)
-    {
-        $user = Apiato::call('User@GetAuthenticatedUserAction');
+  /**
+   * @param GetAuthenticatedUserRequest $request
+   *
+   * @return mixed
+   */
+  public function getAuthenticatedUser(GetAuthenticatedUserRequest $request)
+  {
+    $user = Apiato::call('User@GetAuthenticatedUserAction');
 
-        return $this->transform($user, UserPrivateProfileTransformer::class);
-    }
+    return $this->transform($user, UserPrivateProfileTransformer::class);
+  }
 
-    /**
-     * @param \App\Containers\User\UI\API\Requests\ResetPasswordRequest $request
-     *
-     * @return  \Illuminate\Http\JsonResponse
-     */
-    public function resetPassword(ResetPasswordRequest $request)
-    {
-        Apiato::call('User@ResetPasswordAction', [new DataTransporter($request)]);
+  /**
+   * @param \App\Containers\User\UI\API\Requests\ResetPasswordRequest $request
+   *
+   * @return  \Illuminate\Http\JsonResponse
+   */
+  public function resetPassword(ResetPasswordRequest $request)
+  {
+    Apiato::call('User@ResetPasswordAction', [new DataTransporter($request)]);
 
-        return $this->noContent(204);
-    }
+    return $this->noContent(204);
+  }
 
-    /**
-     * @param \App\Containers\User\UI\API\Requests\ForgotPasswordRequest $request
-     *
-     * @return  \Illuminate\Http\JsonResponse
-     */
-    public function forgotPassword(ForgotPasswordRequest $request)
-    {
-        Apiato::call('User@ForgotPasswordAction', [new DataTransporter($request)]);
+  /**
+   * @param \App\Containers\User\UI\API\Requests\ForgotPasswordRequest $request
+   *
+   * @return  \Illuminate\Http\JsonResponse
+   */
+  public function forgotPassword(ForgotPasswordRequest $request)
+  {
+    Apiato::call('User@ForgotPasswordAction', [new DataTransporter($request)]);
 
-        return $this->noContent(202);
-    }
+    return $this->noContent(202);
+  }
 
 }

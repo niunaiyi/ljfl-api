@@ -22,29 +22,29 @@ use Illuminate\Support\Facades\Notification;
 class RegisterUserAction extends Action
 {
 
-    /**
-     * @param \App\Ship\Transporters\DataTransporter $data
-     *
-     * @return  \App\Containers\User\Models\User
-     */
-    public function run(DataTransporter $data): User
-    {
-        // create user record in the database and return it.
-        $user = Apiato::call('User@CreateUserByCredentialsTask', [
-            $isClient = true,
-            $data->email,
-            $data->password,
-            $data->name,
-            $data->gender,
-            $data->birth
-        ]);
+  /**
+   * @param \App\Ship\Transporters\DataTransporter $data
+   *
+   * @return  \App\Containers\User\Models\User
+   */
+  public function run(DataTransporter $data): User
+  {
+    // create user record in the database and return it.
+    $user = Apiato::call('User@CreateUserByCredentialsTask', [
+      $isClient = true,
+      $data->email,
+      $data->password,
+      $data->name,
+      $data->gender,
+      $data->birth
+    ]);
 
-        Mail::send(new UserRegisteredMail($user));
+    Mail::send(new UserRegisteredMail($user));
 
-        Notification::send($user, new UserRegisteredNotification($user));
+    Notification::send($user, new UserRegisteredNotification($user));
 
-        App::make(Dispatcher::class)->dispatch(New UserRegisteredEvent($user));
+    App::make(Dispatcher::class)->dispatch(new UserRegisteredEvent($user));
 
-        return $user;
-    }
+    return $user;
+  }
 }

@@ -14,15 +14,15 @@ use App\Ship\Transporters\DataTransporter;
 class DeleteUserAction extends Action
 {
 
-    /**
-     * @param \App\Ship\Transporters\DataTransporter $data
-     */
-    public function run(DataTransporter $data): void
-    {
-        $user = $data->id ?
-            Apiato::call('User@FindUserByIdTask',
-                [$data->id]) : Apiato::call('Authentication@GetAuthenticatedUserTask');
+  /**
+   * @param \App\Ship\Transporters\DataTransporter $data
+   */
+  public function run(DataTransporter $data): void
+  {
+    $user = $data->id ?
+      Apiato::call('User@FindUserByIdTask',
+        [$data->id]) : Apiato::call('Authentication@GetAuthenticatedUserTask');
 
-        Apiato::call('User@DeleteUserTask', [$user]);
-    }
+    Apiato::call('User@DeleteUserTask', [$user]);
+  }
 }

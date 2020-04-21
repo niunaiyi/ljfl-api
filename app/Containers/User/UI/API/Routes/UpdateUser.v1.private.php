@@ -15,9 +15,9 @@
  */
 
 $router->put('users/{id}', [
-    'as' => 'api_user_update_user',
-    'uses'       => 'Controller@updateUser',
-    'middleware' => [
-        'auth:api',
-    ],
+  'as' => 'api_user_update_user',
+  'uses' => 'Controller@updateUser',
+  'middleware' => [
+    'auth:api',
+  ],
 ]);

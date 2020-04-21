@@ -16,31 +16,30 @@ use Exception;
 class DeleteRoleTask extends Task
 {
 
-    protected $repository;
+  protected $repository;
 
-    public function __construct(RoleRepository $repository)
-    {
-        $this->repository = $repository;
+  public function __construct(RoleRepository $repository)
+  {
+    $this->repository = $repository;
+  }
+
+  /**
+   * @param Integer|Role $role
+   *
+   * @return bool
+   * @throws DeleteResourceFailedException
+   */
+  public function run($role): bool
+  {
+    if ($role instanceof Role) {
+      $role = $role->id;
     }
 
-    /**
-     * @param Integer|Role $role
-     *
-     * @return bool
-     * @throws DeleteResourceFailedException
-     */
-    public function run($role): bool
-    {
-        if ($role instanceof Role) {
-            $role = $role->id;
-        }
-
-        // delete the record from the roles table.
-        try {
-            return $this->repository->delete($role);
-        }
-        catch (Exception $exception) {
-            throw new DeleteResourceFailedException();
-        }
+    // delete the record from the roles table.
+    try {
+      return $this->repository->delete($role);
+    } catch (Exception $exception) {
+      throw new DeleteResourceFailedException();
     }
+  }
 }

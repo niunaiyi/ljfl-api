@@ -11,33 +11,33 @@ use App\Ship\Parents\Providers\MiddlewareProvider;
  */
 class MiddlewareServiceProvider extends MiddlewareProvider
 {
-    /**
-     * Register Middleware's
-     *
-     * @var  array
-     */
-    protected $middlewares = [
-        // ..
-    ];
+  /**
+   * Register Middleware's
+   *
+   * @var  array
+   */
+  protected $middlewares = [
+    // ..
+  ];
 
-    /**
-     * Register Container Middleware Groups
-     *
-     * @var  array
-     */
-    protected $middlewareGroups = [
-        'web' => [
+  /**
+   * Register Container Middleware Groups
+   *
+   * @var  array
+   */
+  protected $middlewareGroups = [
+    'web' => [
 
-        ],
-        'api' => [
+    ],
+    'api' => [
 
-        ],
-    ];
+    ],
+  ];
 
-    protected $routeMiddleware = [
-        // Laravel default route middleware's:
-        'can'      => \Illuminate\Auth\Middleware\Authorize::class,
-        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-    ];
+  protected $routeMiddleware = [
+    // Laravel default route middleware's:
+    'can' => \Illuminate\Auth\Middleware\Authorize::class,
+    'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+  ];
 
 }

@@ -13,14 +13,14 @@ use App\Ship\Parents\Actions\Action;
 class GetAllRolesAction extends Action
 {
 
-    /**
-     * @return mixed
-     */
-    public function run()
-    {
-        $roles = Apiato::call('Authorization@GetAllRolesTask', [], ['addRequestCriteria']);
+  /**
+   * @return mixed
+   */
+  public function run()
+  {
+    $roles = Apiato::call('Authorization@GetAllRolesTask', [], ['addRequestCriteria']);
 
-        return $roles;
-    }
+    return $roles;
+  }
 
 }

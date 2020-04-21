@@ -13,18 +13,18 @@ use App\Ship\Parents\Actions\Action;
 class GetAllClientsAction extends Action
 {
 
-    /**
-     * @return  mixed
-     */
-    public function run()
-    {
-        return Apiato::call('User@GetAllUsersTask',
-            [],
-            [
-                'addRequestCriteria',
-                'clients',
-                'ordered',
-            ]
-        );
-    }
+  /**
+   * @return  mixed
+   */
+  public function run()
+  {
+    return Apiato::call('User@GetAllUsersTask',
+      [],
+      [
+        'addRequestCriteria',
+        'clients',
+        'ordered',
+      ]
+    );
+  }
 }

@@ -16,21 +16,21 @@ use App\Ship\Transporters\DataTransporter;
 class FindRoleAction extends Action
 {
 
-    /**
-     * @param \App\Ship\Transporters\DataTransporter $data
-     *
-     * @return  \App\Containers\Authorization\Models\Role
-     * @throws  RoleNotFoundException
-     */
-    public function run(DataTransporter $data): Role
-    {
-        $role = Apiato::call('Authorization@FindRoleTask', [$data->id]);
+  /**
+   * @param \App\Ship\Transporters\DataTransporter $data
+   *
+   * @return  \App\Containers\Authorization\Models\Role
+   * @throws  RoleNotFoundException
+   */
+  public function run(DataTransporter $data): Role
+  {
+    $role = Apiato::call('Authorization@FindRoleTask', [$data->id]);
 
-        if (!$role) {
-            throw new RoleNotFoundException();
-        }
-
-        return $role;
+    if (!$role) {
+      throw new RoleNotFoundException();
     }
+
+    return $role;
+  }
 
 }

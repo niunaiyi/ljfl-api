@@ -14,25 +14,25 @@ use App\Ship\Parents\Tasks\Task;
 class FindPermissionTask extends Task
 {
 
-    protected $repository;
+  protected $repository;
 
-    public function __construct(PermissionRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+  public function __construct(PermissionRepository $repository)
+  {
+    $this->repository = $repository;
+  }
 
-    /**
-     * @param $permissionNameOrId
-     *
-     * @return  Permission
-     */
-    public function run($permissionNameOrId): Permission
-    {
-        $query = is_numeric($permissionNameOrId) ? ['id' => $permissionNameOrId] : ['name' => $permissionNameOrId];
+  /**
+   * @param $permissionNameOrId
+   *
+   * @return  Permission
+   */
+  public function run($permissionNameOrId): Permission
+  {
+    $query = is_numeric($permissionNameOrId) ? ['id' => $permissionNameOrId] : ['name' => $permissionNameOrId];
 
-        $permission = $this->repository->findWhere($query)->first();
+    $permission = $this->repository->findWhere($query)->first();
 
-        return $permission;
-    }
+    return $permission;
+  }
 
 }

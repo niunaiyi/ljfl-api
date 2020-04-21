@@ -16,29 +16,29 @@ use Exception;
 class FindUserByIdTask extends Task
 {
 
-    protected $repository;
+  protected $repository;
 
-    public function __construct(UserRepository $repository)
-    {
-        $this->repository = $repository;
+  public function __construct(UserRepository $repository)
+  {
+    $this->repository = $repository;
+  }
+
+  /**
+   * @param $userId
+   *
+   * @return User
+   * @throws NotFoundException
+   */
+  public function run($userId): User
+  {
+    // find the user by its id
+    try {
+      $user = $this->repository->find($userId);
+    } catch (Exception $e) {
+      throw new NotFoundException();
     }
 
-    /**
-     * @param $userId
-     *
-     * @return User
-     * @throws NotFoundException
-     */
-    public function run($userId): User
-    {
-        // find the user by its id
-        try {
-            $user = $this->repository->find($userId);
-        } catch (Exception $e) {
-            throw new NotFoundException();
-        }
-
-        return $user;
-    }
+    return $user;
+  }
 
 }

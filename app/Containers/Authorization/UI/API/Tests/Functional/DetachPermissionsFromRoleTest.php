@@ -17,75 +17,75 @@ use App\Containers\Authorization\Tests\ApiTestCase;
 class DetachPermissionsFromRoleTest extends ApiTestCase
 {
 
-    protected $endpoint = 'post@v1/permissions/detach';
+  protected $endpoint = 'post@v1/permissions/detach';
 
-    protected $access = [
-        'roles'       => '',
-        'permissions' => 'manage-roles',
+  protected $access = [
+    'roles' => '',
+    'permissions' => 'manage-roles',
+  ];
+
+  /**
+   * @test
+   */
+  public function testDetachSinglePermissionFromRole_()
+  {
+    $permissionA = factory(Permission::class)->create();
+
+    $roleA = factory(Role::class)->create();
+    $roleA->givePermissionTo($permissionA);
+
+    $data = [
+      'role_id' => $roleA->getHashedKey(),
+      'permissions_ids' => [$permissionA->getHashedKey()],
     ];
 
-    /**
-     * @test
-     */
-    public function testDetachSinglePermissionFromRole_()
-    {
-        $permissionA = factory(Permission::class)->create();
+    // send the HTTP request
+    $response = $this->makeCall($data);
 
-        $roleA = factory(Role::class)->create();
-        $roleA->givePermissionTo($permissionA);
+    $response->assertStatus(200);
 
-        $data = [
-            'role_id'         => $roleA->getHashedKey(),
-            'permissions_ids' => [$permissionA->getHashedKey()],
-        ];
+    $responseContent = $this->getResponseContentObject();
 
-        // send the HTTP request
-        $response = $this->makeCall($data);
+    $this->assertEquals($roleA->name, $responseContent->data->name);
 
-        $response->assertStatus(200);
+    $this->assertDatabaseMissing('role_has_permissions', [
+      'permission_id' => $permissionA->id,
+      'role_id' => $roleA->id
+    ]);
+  }
 
-        $responseContent = $this->getResponseContentObject();
+  /**
+   * @test
+   */
+  public function testDetachMultiplePermissionFromRole_()
+  {
+    $permissionA = factory(Permission::class)->create();
+    $permissionB = factory(Permission::class)->create();
 
-        $this->assertEquals($roleA->name, $responseContent->data->name);
+    $roleA = factory(Role::class)->create();
+    $roleA->givePermissionTo($permissionA);
+    $roleA->givePermissionTo($permissionB);
 
-        $this->assertDatabaseMissing('role_has_permissions', [
-            'permission_id' => $permissionA->id,
-            'role_id'       => $roleA->id
-        ]);
-    }
+    $data = [
+      'role_id' => $roleA->getHashedKey(),
+      'permissions_ids' => [$permissionA->getHashedKey(), $permissionB->getHashedKey()],
+    ];
 
-    /**
-     * @test
-     */
-    public function testDetachMultiplePermissionFromRole_()
-    {
-        $permissionA = factory(Permission::class)->create();
-        $permissionB = factory(Permission::class)->create();
+    // send the HTTP request
+    $response = $this->makeCall($data);
 
-        $roleA = factory(Role::class)->create();
-        $roleA->givePermissionTo($permissionA);
-        $roleA->givePermissionTo($permissionB);
+    $response->assertStatus(200);
 
-        $data = [
-            'role_id'         => $roleA->getHashedKey(),
-            'permissions_ids' => [$permissionA->getHashedKey(), $permissionB->getHashedKey()],
-        ];
+    $responseContent = $this->getResponseContentObject();
 
-        // send the HTTP request
-        $response = $this->makeCall($data);
+    $this->assertEquals($roleA->name, $responseContent->data->name);
 
-        $response->assertStatus(200);
-
-        $responseContent = $this->getResponseContentObject();
-
-        $this->assertEquals($roleA->name, $responseContent->data->name);
-
-        $this->assertDatabaseMissing('role_has_permissions', [
-            'permission_id' => $permissionA->id,
-            'permission_id' => $permissionB->id,
-            'role_id'       => $roleA->id
-        ]);
-    }
+    $this->assertDatabaseMissing('role_has_permissions', [
+      'permission_id' => $permissionA->id,
+      'permission_id' => $permissionB->id,
+      'role_id' => $roleA->id
+    ]);
+  }
 
 
 }

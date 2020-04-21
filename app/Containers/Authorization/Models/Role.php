@@ -14,22 +14,22 @@ use Spatie\Permission\Models\Role as SpatieRole;
 class Role extends SpatieRole
 {
 
-    use HashIdTrait;
-    use HasResourceKeyTrait;
+  use HashIdTrait;
+  use HasResourceKeyTrait;
 
-    protected $guard_name = 'web';
+  protected $guard_name = 'web';
 
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name',
-        'guard_name',
-        'display_name',
-        'description',
-        'level',
-    ];
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+    'name',
+    'guard_name',
+    'display_name',
+    'description',
+    'level',
+  ];
 }

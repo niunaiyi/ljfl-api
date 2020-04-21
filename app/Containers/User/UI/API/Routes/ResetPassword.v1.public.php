@@ -16,10 +16,10 @@
  *
  * @apiSuccessExample  {json}  Success-Response:
  * HTTP/1.1 204 OK
-{}
+ * {}
  */
 
 $router->any('password/reset', [
-    'as' => 'api_user_reset_password',
-    'uses'  => 'Controller@resetPassword',
+  'as' => 'api_user_reset_password',
+  'uses' => 'Controller@resetPassword',
 ]);

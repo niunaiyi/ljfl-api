@@ -11,38 +11,38 @@ use Illuminate\Support\Facades\Log;
 class UserRegisteredEvent extends Event implements ShouldQueue
 {
 
-    /**
-     * @var  \App\Containers\User\Models\User
-     */
-    protected $user;
+  /**
+   * @var  \App\Containers\User\Models\User
+   */
+  protected $user;
 
-    /**
-     * UserRegisteredNotification constructor.
-     *
-     * @param \App\Containers\User\Models\User $user
-     */
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
+  /**
+   * UserRegisteredNotification constructor.
+   *
+   * @param \App\Containers\User\Models\User $user
+   */
+  public function __construct(User $user)
+  {
+    $this->user = $user;
+  }
 
-    /**
-     * Handle the Event. (Single Listener Implementation)
-     */
-    public function handle()
-    {
-        Log::info('New User registration. ID = ' . $this->user->getHashedKey() . ' | Email = ' . $this->user->email . '.');
+  /**
+   * Handle the Event. (Single Listener Implementation)
+   */
+  public function handle()
+  {
+    Log::info('New User registration. ID = ' . $this->user->getHashedKey() . ' | Email = ' . $this->user->email . '.');
 
-        // ...
-    }
+    // ...
+  }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
-    public function broadcastOn()
-    {
-        return new PrivateChannel('channel-name');
-    }
+  /**
+   * Get the channels the event should broadcast on.
+   *
+   * @return \Illuminate\Broadcasting\Channel|array
+   */
+  public function broadcastOn()
+  {
+    return new PrivateChannel('channel-name');
+  }
 }

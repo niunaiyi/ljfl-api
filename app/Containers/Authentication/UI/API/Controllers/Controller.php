@@ -8,8 +8,10 @@ use App\Containers\Authentication\Data\Transporters\ProxyRefreshTransporter;
 use App\Containers\Authentication\UI\API\Requests\LoginRequest;
 use App\Containers\Authentication\UI\API\Requests\LogoutRequest;
 use App\Containers\Authentication\UI\API\Requests\RefreshRequest;
+use App\Containers\User\UI\API\Transformers\UserTransformer;
 use App\Ship\Parents\Controllers\ApiController;
 use App\Ship\Transporters\DataTransporter;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cookie;
 
@@ -20,6 +22,20 @@ use Illuminate\Support\Facades\Cookie;
  */
 class Controller extends ApiController
 {
+
+  /**
+   * @param LoginRequest $request
+   *
+   * @return JsonResponse
+   */
+  public function login(LoginRequest $request)
+  {
+    $dataTransporter = new DataTransporter($request);
+    $data = Apiato::call('Authentication@ApiLoginAction', [$dataTransporter]);
+
+    return $this->json(['user' => $this->transform($data['user'], UserTransformer::class),
+      'token' => $data['token']]);
+  }
 
     /**
      * @param \App\Containers\Authentication\UI\API\Requests\LogoutRequest $request
