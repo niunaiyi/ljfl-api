@@ -3,11 +3,10 @@
 namespace App\Containers\Address\Tasks;
 
 use App\Containers\Address\Data\Repositories\AddressRepository;
-use App\Ship\Exceptions\UpdateResourceFailedException;
+use App\Containers\Address\Models\Address;
 use App\Ship\Parents\Tasks\Task;
-use Exception;
 
-class UpdateAddressTask extends Task
+class GetAddressParentNameTask extends Task
 {
 
 	protected $repository;
@@ -17,10 +16,11 @@ class UpdateAddressTask extends Task
 		$this->repository = $repository;
 	}
 
-	public function run($id, array $data)
+	public function run($id)
 	{
 		try {
-			return $this->repository->update($data, $id);
+			$address = Address::find($id);
+			return $address->parent_name;
 		} catch (Exception $exception) {
 			throw new UpdateResourceFailedException();
 		}

@@ -16,33 +16,33 @@ use Illuminate\Database\Eloquent\Collection;
 class RevokeUserFromRoleAction extends Action
 {
 
-  /**
-   * @param \App\Ship\Transporters\DataTransporter $data
-   *
-   * @return  \App\Containers\User\Models\User
-   */
-  public function run(DataTransporter $data): User
-  {
-    // if user ID is passed then convert it to instance of User (could be user Id Or Model)
-    if (!$data->user_id instanceof User) {
-      $user = Apiato::call('User@FindUserByIdTask', [$data->user_id]);
-    }
+	/**
+	 * @param DataTransporter $data
+	 *
+	 * @return  User
+	 */
+	public function run(DataTransporter $data): User
+	{
+		// if user ID is passed then convert it to instance of User (could be user Id Or Model)
+		if (!$data->user_id instanceof User) {
+			$user = Apiato::call('User@FindUserByIdTask', [$data->user_id]);
+		}
 
-    // convert to array in case single ID was passed (could be Single Or Multiple Role Ids)
-    $rolesIds = (array)$data->roles_ids;
+		// convert to array in case single ID was passed (could be Single Or Multiple Role Ids)
+		$rolesIds = (array)$data->roles_ids;
 
-    $roles = new Collection();
+		$roles = new Collection();
 
-    foreach ($rolesIds as $roleId) {
-      $role = Apiato::call('Authorization@FindRoleTask', [$roleId]);
-      $roles->add($role);
-    }
+		foreach ($rolesIds as $roleId) {
+			$role = Apiato::call('Authorization@FindRoleTask', [$roleId]);
+			$roles->add($role);
+		}
 
-    foreach ($roles->pluck('name')->toArray() as $roleName) {
-      $user->removeRole($roleName);
-    }
+		foreach ($roles->pluck('name')->toArray() as $roleName) {
+			$user->removeRole($roleName);
+		}
 
-    return $user;
-  }
+		return $user;
+	}
 
 }

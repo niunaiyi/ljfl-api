@@ -15,17 +15,17 @@ use App\Ship\Transporters\DataTransporter;
 class CreatePermissionAction extends Action
 {
 
-  /**
-   * @param \App\Ship\Transporters\DataTransporter $data
-   *
-   * @return  \App\Containers\Authorization\Models\Permission
-   */
-  public function run(DataTransporter $data): Permission
-  {
-    $permission = Apiato::call('Authorization@CreatePermissionTask',
-      [$data->name, $data->description, $data->display_name]
-    );
+	/**
+	 * @param DataTransporter $data
+	 *
+	 * @return  Permission
+	 */
+	public function run(DataTransporter $data): Permission
+	{
+		$permission = Apiato::call('Authorization@CreatePermissionTask',
+			[$data->name, $data->description, $data->display_name]
+		);
 
-    return $permission;
-  }
+		return $permission;
+	}
 }

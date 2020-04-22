@@ -13,14 +13,14 @@ use App\Ship\Parents\Actions\Action;
 class GetAllPermissionsAction extends Action
 {
 
-  /**
-   * @return  mixed
-   */
-  public function run()
-  {
-    $permissions = Apiato::call('Authorization@GetAllPermissionsTask', [], ['addRequestCriteria']);
+	/**
+	 * @return  mixed
+	 */
+	public function run()
+	{
+		$permissions = Apiato::call('Authorization@GetAllPermissionsTask', [], ['addRequestCriteria']);
 
-    return $permissions;
-  }
+		return $permissions;
+	}
 
 }

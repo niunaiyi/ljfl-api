@@ -21,9 +21,9 @@
 
 /** @var Route $router */
 $router->get('addresses', [
-  'as' => 'api_address_get_all_addresses',
-  'uses' => 'Controller@getAllAddresses',
-  'middleware' => [
-    'auth:api',
-  ],
+	'as' => 'api_address_get_all_addresses',
+	'uses' => 'Controller@getAllAddresses',
+	'middleware' => [
+		'auth:api',
+	],
 ]);

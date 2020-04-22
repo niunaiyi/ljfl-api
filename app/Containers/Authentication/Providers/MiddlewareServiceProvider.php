@@ -13,34 +13,34 @@ use App\Ship\Parents\Providers\MiddlewareProvider;
 class MiddlewareServiceProvider extends MiddlewareProvider
 {
 
-    /**
-     * Register Middleware's
-     *
-     * @var  array
-     */
-    protected $middlewares = [
-        // ..
-    ];
+	/**
+	 * Register Middleware's
+	 *
+	 * @var  array
+	 */
+	protected $middlewares = [
+		// ..
+	];
 
-    /**
-     * Register Container Middleware Groups
-     *
-     * @var  array
-     */
-    protected $middlewareGroups = [
-        'web' => [
-            // ..
-        ],
-        'api' => [
-            // ..
-        ],
-    ];
+	/**
+	 * Register Container Middleware Groups
+	 *
+	 * @var  array
+	 */
+	protected $middlewareGroups = [
+		'web' => [
+			// ..
+		],
+		'api' => [
+			// ..
+		],
+	];
 
-    protected $routeMiddleware = [
-        // apiato User Authentication middleware for Web Pages
-        'auth:web' => WebAuthentication::class,
+	protected $routeMiddleware = [
+		// apiato User Authentication middleware for Web Pages
+		'auth:web' => WebAuthentication::class,
 
-        // ..
-    ];
+		// ..
+	];
 
 }

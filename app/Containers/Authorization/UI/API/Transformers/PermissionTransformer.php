@@ -13,28 +13,28 @@ use App\Ship\Parents\Transformers\Transformer;
 class PermissionTransformer extends Transformer
 {
 
-  protected $availableIncludes = [
+	protected $availableIncludes = [
 
-  ];
+	];
 
-  protected $defaultIncludes = [
+	protected $defaultIncludes = [
 
-  ];
+	];
 
-  /**
-   * @param \App\Containers\Authorization\Models\Permission $permission
-   *
-   * @return array
-   */
-  public function transform(Permission $permission)
-  {
-    return [
-      'object' => 'Permission',
-      'id' => $permission->getHashedKey(), // << Unique Identifier
-      'name' => $permission->name, // << Unique Identifier
-      'description' => $permission->description,
-      'display_name' => $permission->display_name,
-    ];
-  }
+	/**
+	 * @param Permission $permission
+	 *
+	 * @return array
+	 */
+	public function transform(Permission $permission)
+	{
+		return [
+			'object' => 'Permission',
+			'id' => $permission->getHashedKey(), // << Unique Identifier
+			'name' => $permission->name, // << Unique Identifier
+			'description' => $permission->description,
+			'display_name' => $permission->display_name,
+		];
+	}
 
 }

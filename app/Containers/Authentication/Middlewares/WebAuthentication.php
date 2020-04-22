@@ -16,39 +16,39 @@ use Illuminate\Http\Request;
 class WebAuthentication extends Middleware
 {
 
-    /**
-     * The Guard implementation.
-     *
-     * @var Guard
-     */
-    protected $auth;
+	/**
+	 * The Guard implementation.
+	 *
+	 * @var Guard
+	 */
+	protected $auth;
 
 
-    /**
-     * WebAuthentication constructor.
-     *
-     * @param \Illuminate\Contracts\Auth\Guard $auth
-     */
-    public function __construct(Guard $auth)
-    {
-        $this->auth = $auth;
-    }
+	/**
+	 * WebAuthentication constructor.
+	 *
+	 * @param Guard $auth
+	 */
+	public function __construct(Guard $auth)
+	{
+		$this->auth = $auth;
+	}
 
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure                 $next
-     *
-     * @return mixed
-     */
-    public function handle(Request $request, Closure $next)
-    {
-        if ($this->auth->guest()) {
-            return redirect(Apiato::getLoginWebPageName())
-                ->with('errorMessage', 'Credentials Incorrect.');
-        }
+	/**
+	 * Handle an incoming request.
+	 *
+	 * @param Request $request
+	 * @param Closure $next
+	 *
+	 * @return mixed
+	 */
+	public function handle(Request $request, Closure $next)
+	{
+		if ($this->auth->guest()) {
+			return redirect(Apiato::getLoginWebPageName())
+				->with('errorMessage', 'Credentials Incorrect.');
+		}
 
-        return $next($request);
-    }
+		return $next($request);
+	}
 }

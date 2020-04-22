@@ -16,37 +16,37 @@ use Illuminate\Support\Facades\Config;
 class CallOAuthServerTask extends Task
 {
 
-    /**
-     * @string
-     */
-    CONST AUTH_ROUTE = '/v1/oauth/token';
+	/**
+	 * @string
+	 */
+	const AUTH_ROUTE = '/v1/oauth/token';
 
-    /**
-     * @param $data
-     *
-     * @return  array
-     * @throws \App\Containers\Authentication\Exceptions\LoginFailedException
-     */
-    public function run($data)
-    {
-        // Full url to the oauth token endpoint
-        $authFullApiUrl = Config::get('apiato.api.url') . self::AUTH_ROUTE;
+	/**
+	 * @param $data
+	 *
+	 * @return  array
+	 * @throws LoginFailedException
+	 */
+	public function run($data)
+	{
+		// Full url to the oauth token endpoint
+		$authFullApiUrl = Config::get('apiato.api.url') . self::AUTH_ROUTE;
 
-        $headers = ['HTTP_ACCEPT' => 'application/json'];
+		$headers = ['HTTP_ACCEPT' => 'application/json'];
 
-        // Create and handle the oauth request
-        $request = Request::create($authFullApiUrl, 'POST', $data, [], [], $headers);
+		// Create and handle the oauth request
+		$request = Request::create($authFullApiUrl, 'POST', $data, [], [], $headers);
 
-        $response = App::handle($request);
+		$response = App::handle($request);
 
-        // response content as Array
-        $content = \GuzzleHttp\json_decode($response->getContent(), true);
+		// response content as Array
+		$content = \GuzzleHttp\json_decode($response->getContent(), true);
 
-        // If the internal request to the oauth token endpoint was not successful we throw an exception
-        if (!$response->isSuccessful()) {
-            throw new LoginFailedException($content['message'], null, $response->getStatusCode());
-        }
+		// If the internal request to the oauth token endpoint was not successful we throw an exception
+		if (!$response->isSuccessful()) {
+			throw new LoginFailedException($content['message'], null, $response->getStatusCode());
+		}
 
-        return $content;
-    }
+		return $content;
+	}
 }

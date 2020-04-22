@@ -15,24 +15,24 @@ use Laravel\Passport\PassportServiceProvider;
 class MainServiceProvider extends MainProvider
 {
 
-    /**
-     * Container Service Providers.
-     *
-     * @var array
-     */
-    public $serviceProviders = [
-        PassportServiceProvider::class,
-        AuthProvider::class,
-        MiddlewareServiceProvider::class,
-    ];
+	/**
+	 * Container Service Providers.
+	 *
+	 * @var array
+	 */
+	public $serviceProviders = [
+		PassportServiceProvider::class,
+		AuthProvider::class,
+		MiddlewareServiceProvider::class,
+	];
 
-    /**
-     * Container Aliases
-     *
-     * @var  array
-     */
-    public $aliases = [
+	/**
+	 * Container Aliases
+	 *
+	 * @var  array
+	 */
+	public $aliases = [
 
-    ];
+	];
 
 }

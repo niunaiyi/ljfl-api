@@ -11,35 +11,34 @@ use Illuminate\Support\Facades\Config;
 
 class CheckIfUserIsConfirmedTask extends Task
 {
-    private $user;
+	private $user;
 
-    public function run()
-    {
-        // is the config flag set?
-        if(Config::get('authentication-container.require_email_confirmation')) {
+	public function run()
+	{
+		// is the config flag set?
+		if (Config::get('authentication-container.require_email_confirmation')) {
 
-            if(! $this->user) {
-                throw new LoginFailedException();
-            }
+			if (!$this->user) {
+				throw new LoginFailedException();
+			}
 
-            if(! $this->user->confirmed) {
-                throw new UserNotConfirmedException();
-            }
-        }
-    }
+			if (!$this->user->confirmed) {
+				throw new UserNotConfirmedException();
+			}
+		}
+	}
 
-    public function loginWithCredentials($username, $password, $field = 'email')
-    {
-        if(Auth::attempt([$field => $username, 'password' => $password])) {
-            $this->user = Auth::user();
-        }
-        else {
-            throw new LoginFailedException();
-        }
-    }
+	public function loginWithCredentials($username, $password, $field = 'email')
+	{
+		if (Auth::attempt([$field => $username, 'password' => $password])) {
+			$this->user = Auth::user();
+		} else {
+			throw new LoginFailedException();
+		}
+	}
 
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-    }
+	public function setUser(User $user)
+	{
+		$this->user = $user;
+	}
 }

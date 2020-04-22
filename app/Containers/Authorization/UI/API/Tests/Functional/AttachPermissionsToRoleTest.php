@@ -17,66 +17,66 @@ use App\Containers\Authorization\Tests\ApiTestCase;
 class AttachPermissionsToRoleTest extends ApiTestCase
 {
 
-  protected $endpoint = 'post@v1/permissions/attach';
+	protected $endpoint = 'post@v1/permissions/attach';
 
-  protected $access = [
-    'roles' => '',
-    'permissions' => 'manage-roles',
-  ];
+	protected $access = [
+		'roles' => '',
+		'permissions' => 'manage-roles',
+	];
 
-  /**
-   * @test
-   */
-  public function testAttachSinglePermissionToRole_()
-  {
-    $roleA = factory(Role::class)->create();
-    $permissionA = factory(Permission::class)->create();
+	/**
+	 * @test
+	 */
+	public function testAttachSinglePermissionToRole_()
+	{
+		$roleA = factory(Role::class)->create();
+		$permissionA = factory(Permission::class)->create();
 
-    $data = [
-      'role_id' => $roleA->getHashedKey(),
-      'permissions_ids' => $permissionA->getHashedKey(),
-    ];
+		$data = [
+			'role_id' => $roleA->getHashedKey(),
+			'permissions_ids' => $permissionA->getHashedKey(),
+		];
 
-    // send the HTTP request
-    $response = $this->makeCall($data);
+		// send the HTTP request
+		$response = $this->makeCall($data);
 
-    // assert response status is correct
-    $response->assertStatus(200);
+		// assert response status is correct
+		$response->assertStatus(200);
 
-    $responseContent = $this->getResponseContentObject();
+		$responseContent = $this->getResponseContentObject();
 
-    $this->assertEquals($roleA['name'], $responseContent->data->name);
+		$this->assertEquals($roleA['name'], $responseContent->data->name);
 
-    $this->assertDatabaseHas('role_has_permissions', [
-      'permission_id' => $permissionA->id,
-      'role_id' => $roleA->id
-    ]);
-  }
+		$this->assertDatabaseHas('role_has_permissions', [
+			'permission_id' => $permissionA->id,
+			'role_id' => $roleA->id
+		]);
+	}
 
-  public function testAttachMultiplePermissionToRole_()
-  {
-    $roleA = factory(Role::class)->create();
+	public function testAttachMultiplePermissionToRole_()
+	{
+		$roleA = factory(Role::class)->create();
 
-    $permissionA = factory(Permission::class)->create();
-    $permissionB = factory(Permission::class)->create();
+		$permissionA = factory(Permission::class)->create();
+		$permissionB = factory(Permission::class)->create();
 
-    $data = [
-      'role_id' => $roleA->getHashedKey(),
-      'permissions_ids' => [$permissionA->getHashedKey(), $permissionB->getHashedKey()]
-    ];
+		$data = [
+			'role_id' => $roleA->getHashedKey(),
+			'permissions_ids' => [$permissionA->getHashedKey(), $permissionB->getHashedKey()]
+		];
 
-    // send the HTTP request
-    $response = $this->makeCall($data);
+		// send the HTTP request
+		$response = $this->makeCall($data);
 
-    // assert response status is correct
-    $response->assertStatus(200);
+		// assert response status is correct
+		$response->assertStatus(200);
 
-    $this->assertDatabaseHas('role_has_permissions', [
-      'permission_id' => $permissionA->id,
-      'permission_id' => $permissionB->id,
-      'role_id' => $roleA->id
-    ]);
+		$this->assertDatabaseHas('role_has_permissions', [
+			'permission_id' => $permissionA->id,
+			'permission_id' => $permissionB->id,
+			'role_id' => $roleA->id
+		]);
 
-  }
+	}
 
 }

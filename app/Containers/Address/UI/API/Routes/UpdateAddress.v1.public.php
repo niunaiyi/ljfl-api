@@ -21,8 +21,8 @@
 
 /** @var Route $router */
 $router->patch('addresses/{id}', [
-  'as' => 'api_address_update_address',
-  'uses' => 'Controller@updateAddress',
+	'as' => 'api_address_update_address',
+	'uses' => 'Controller@updateAddress',
 //    'middleware' => [
 //      'auth:api',
 //    ],

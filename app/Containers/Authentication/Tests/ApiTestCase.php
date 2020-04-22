@@ -11,5 +11,5 @@ use App\Containers\Authentication\Tests\TestCase as BaseTestCase;
  */
 class ApiTestCase extends BaseTestCase
 {
-    // ..
+	// ..
 }

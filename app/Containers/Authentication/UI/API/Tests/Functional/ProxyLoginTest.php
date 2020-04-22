@@ -16,209 +16,209 @@ use Illuminate\Support\Facades\DB;
  */
 class ProxyLoginTest extends ApiTestCase
 {
-    protected $endpoint = 'post@v1/clients/web/admin/login';
+	protected $endpoint = 'post@v1/clients/web/admin/login';
 
-    protected $access = [
-        'permissions' => '',
-        'roles'       => '',
-    ];
+	protected $access = [
+		'permissions' => '',
+		'roles' => '',
+	];
 
-    private $testingFilesCreated = false;
+	private $testingFilesCreated = false;
 
-    /**
-     * @test
-     */
-    public function testClientWebAdminProxyLogin_()
-    {
-        // create data to be used for creating the testing user and to be sent with the post request
-        $data = [
-            'email'    => 'testing@mail.com',
-            'password' => 'testingpass'
-        ];
+	/**
+	 * @test
+	 */
+	public function testClientWebAdminProxyLogin_()
+	{
+		// create data to be used for creating the testing user and to be sent with the post request
+		$data = [
+			'email' => 'testing@mail.com',
+			'password' => 'testingpass'
+		];
 
-        $user = $this->getTestingUser($data);
-        $this->actingAs($user, 'web');
+		$user = $this->getTestingUser($data);
+		$this->actingAs($user, 'web');
 
-        $clientId = '100';
-        $clientSecret = 'XXp8x4QK7d3J9R7OVRXWrhc19XPRroHTTKIbY8XX';
+		$clientId = '100';
+		$clientSecret = 'XXp8x4QK7d3J9R7OVRXWrhc19XPRroHTTKIbY8XX';
 
-        // create client
-        DB::table('oauth_clients')->insert([
-            [
-                'id'                     => $clientId,
-                'secret'                 => $clientSecret,
-                'name'                   => 'Testing',
-                'redirect'               => 'http://localhost',
-                'password_client'        => '1',
-                'personal_access_client' => '0',
-                'revoked'                => '0',
-            ],
-        ]);
+		// create client
+		DB::table('oauth_clients')->insert([
+			[
+				'id' => $clientId,
+				'secret' => $clientSecret,
+				'name' => 'Testing',
+				'redirect' => 'http://localhost',
+				'password_client' => '1',
+				'personal_access_client' => '0',
+				'revoked' => '0',
+			],
+		]);
 
-        // make the clients credentials available as env variables
-        Config::set('authentication-container.clients.web.admin.id', $clientId);
-        Config::set('authentication-container.clients.web.admin.secret', $clientSecret);
+		// make the clients credentials available as env variables
+		Config::set('authentication-container.clients.web.admin.id', $clientId);
+		Config::set('authentication-container.clients.web.admin.secret', $clientSecret);
 
-        // create testing oauth keys files
-        $publicFilePath = $this->createTestingKey('oauth-public.key');
-        $privateFilePath = $this->createTestingKey('oauth-private.key');
+		// create testing oauth keys files
+		$publicFilePath = $this->createTestingKey('oauth-public.key');
+		$privateFilePath = $this->createTestingKey('oauth-private.key');
 
-        $response = $this->makeCall($data);
+		$response = $this->makeCall($data);
 
-        $response->assertStatus(200);
+		$response->assertStatus(200);
 
-        $response->assertCookie('refreshToken');
+		$response->assertCookie('refreshToken');
 
-        $this->assertResponseContainKeyValue([
-            'token_type' => 'Bearer',
-        ]);
+		$this->assertResponseContainKeyValue([
+			'token_type' => 'Bearer',
+		]);
 
-        $this->assertResponseContainKeys(['expires_in', 'access_token']);
+		$this->assertResponseContainKeys(['expires_in', 'access_token']);
 
-        // delete testing keys files if they were created for this test
-        if ($this->testingFilesCreated) {
-            unlink($publicFilePath);
-            unlink($privateFilePath);
-        }
-    }
+		// delete testing keys files if they were created for this test
+		if ($this->testingFilesCreated) {
+			unlink($publicFilePath);
+			unlink($privateFilePath);
+		}
+	}
 
-    /**
-     * @test
-     */
-    public function testClientWebAdminProxyUnconfirmedLogin_()
-    {
-        // create data to be used for creating the testing user and to be sent with the post request
-        $data = [
-            'email'     => 'testing2@mail.com',
-            'password'  => 'testingpass',
-            'confirmed' => false,
-        ];
+	/**
+	 * @param $fileName
+	 *
+	 * @return  string
+	 */
+	private function createTestingKey($fileName)
+	{
+		$filePath = storage_path($fileName);
 
-        $user = $this->getTestingUser($data);
-        $this->actingAs($user, 'web');
+		if (!file_exists($filePath)) {
+			$keysStubDirectory = __DIR__ . '/Stubs/';
 
-        $clientId = '100';
-        $clientSecret = 'XXp8x4QK7d3J9R7OVRXWrhc19XPRroHTTKIbY8XX';
+			copy($keysStubDirectory . $fileName, $filePath);
 
-        // create client
-        DB::table('oauth_clients')->insert([
-            [
-                'id'                     => $clientId,
-                'secret'                 => $clientSecret,
-                'name'                   => 'Testing',
-                'redirect'               => 'http://localhost',
-                'password_client'        => '1',
-                'personal_access_client' => '0',
-                'revoked'                => '0',
-            ],
-        ]);
+			$this->testingFilesCreated = true;
+		}
 
-        // make the clients credentials available as env variables
-        Config::set('authentication-container.clients.web.admin.id', $clientId);
-        Config::set('authentication-container.clients.web.admin.secret', $clientSecret);
+		return $filePath;
+	}
 
-        // create testing oauth keys files
-        $publicFilePath = $this->createTestingKey('oauth-public.key');
-        $privateFilePath = $this->createTestingKey('oauth-private.key');
+	/**
+	 * @test
+	 */
+	public function testClientWebAdminProxyUnconfirmedLogin_()
+	{
+		// create data to be used for creating the testing user and to be sent with the post request
+		$data = [
+			'email' => 'testing2@mail.com',
+			'password' => 'testingpass',
+			'confirmed' => false,
+		];
 
-        $response = $this->makeCall($data);
+		$user = $this->getTestingUser($data);
+		$this->actingAs($user, 'web');
 
-        if (Config::get('authentication-container.require_email_confirmation')) {
-            $response->assertStatus(409);
-        } else {
-            $response->assertStatus(200);
-        }
+		$clientId = '100';
+		$clientSecret = 'XXp8x4QK7d3J9R7OVRXWrhc19XPRroHTTKIbY8XX';
 
-        // delete testing keys files if they were created for this test
-        if ($this->testingFilesCreated) {
-            unlink($publicFilePath);
-            unlink($privateFilePath);
-        }
-    }
+		// create client
+		DB::table('oauth_clients')->insert([
+			[
+				'id' => $clientId,
+				'secret' => $clientSecret,
+				'name' => 'Testing',
+				'redirect' => 'http://localhost',
+				'password_client' => '1',
+				'personal_access_client' => '0',
+				'revoked' => '0',
+			],
+		]);
 
-    public function testLoginWithNameAttribute()
-    {
-        // create data to be used for creating the testing user and to be sent with the post request
-        $data = [
-            'email'    => 'testing@mail.com',
-            'password' => 'testingpass',
-            'name'     => 'username',
-        ];
+		// make the clients credentials available as env variables
+		Config::set('authentication-container.clients.web.admin.id', $clientId);
+		Config::set('authentication-container.clients.web.admin.secret', $clientSecret);
 
-        $user = $this->getTestingUser($data);
-        $this->actingAs($user, 'web');
+		// create testing oauth keys files
+		$publicFilePath = $this->createTestingKey('oauth-public.key');
+		$privateFilePath = $this->createTestingKey('oauth-private.key');
 
-        $clientId = '100';
-        $clientSecret = 'XXp8x4QK7d3J9R7OVRXWrhc19XPRroHTTKIbY8XX';
+		$response = $this->makeCall($data);
 
-        // create client
-        DB::table('oauth_clients')->insert([
-            [
-              'id'                     => $clientId,
-              'secret'                 => $clientSecret,
-              'name'                   => 'Testing',
-              'redirect'               => 'http://localhost',
-              'password_client'        => '1',
-              'personal_access_client' => '0',
-              'revoked'                => '0',
-            ],
-        ]);
+		if (Config::get('authentication-container.require_email_confirmation')) {
+			$response->assertStatus(409);
+		} else {
+			$response->assertStatus(200);
+		}
 
-        // make the clients credentials available as env variables
-        Config::set('authentication-container.clients.web.admin.id', $clientId);
-        Config::set('authentication-container.clients.web.admin.secret', $clientSecret);
+		// delete testing keys files if they were created for this test
+		if ($this->testingFilesCreated) {
+			unlink($publicFilePath);
+			unlink($privateFilePath);
+		}
+	}
 
-        // specifically allow to login with "name" attribute
-        Config::set('authentication-container.login.attributes',
-            [
-              'email' => ['email'],
-              'name' => [],
-            ]
-        );
+	public function testLoginWithNameAttribute()
+	{
+		// create data to be used for creating the testing user and to be sent with the post request
+		$data = [
+			'email' => 'testing@mail.com',
+			'password' => 'testingpass',
+			'name' => 'username',
+		];
 
-        // create testing oauth keys files
-        $publicFilePath = $this->createTestingKey('oauth-public.key');
-        $privateFilePath = $this->createTestingKey('oauth-private.key');
+		$user = $this->getTestingUser($data);
+		$this->actingAs($user, 'web');
 
-        $request = [
-            'password' => 'testingpass',
-            'name'     => 'username',
-        ];
+		$clientId = '100';
+		$clientSecret = 'XXp8x4QK7d3J9R7OVRXWrhc19XPRroHTTKIbY8XX';
 
-        $response = $this->makeCall($request);
+		// create client
+		DB::table('oauth_clients')->insert([
+			[
+				'id' => $clientId,
+				'secret' => $clientSecret,
+				'name' => 'Testing',
+				'redirect' => 'http://localhost',
+				'password_client' => '1',
+				'personal_access_client' => '0',
+				'revoked' => '0',
+			],
+		]);
 
-        $response->assertStatus(200);
+		// make the clients credentials available as env variables
+		Config::set('authentication-container.clients.web.admin.id', $clientId);
+		Config::set('authentication-container.clients.web.admin.secret', $clientSecret);
 
-        $this->assertResponseContainKeyValue([
-            'token_type' => 'Bearer',
-        ]);
+		// specifically allow to login with "name" attribute
+		Config::set('authentication-container.login.attributes',
+			[
+				'email' => ['email'],
+				'name' => [],
+			]
+		);
 
-        $this->assertResponseContainKeys(['expires_in', 'access_token', 'refresh_token']);
+		// create testing oauth keys files
+		$publicFilePath = $this->createTestingKey('oauth-public.key');
+		$privateFilePath = $this->createTestingKey('oauth-private.key');
 
-        // delete testing keys files if they were created for this test
-        if ($this->testingFilesCreated) {
-          unlink($publicFilePath);
-          unlink($privateFilePath);
-        }
-    }
+		$request = [
+			'password' => 'testingpass',
+			'name' => 'username',
+		];
 
-    /**
-     * @param $fileName
-     *
-     * @return  string
-     */
-    private function createTestingKey($fileName)
-    {
-        $filePath = storage_path($fileName);
+		$response = $this->makeCall($request);
 
-        if (!file_exists($filePath)) {
-            $keysStubDirectory = __DIR__ . '/Stubs/';
+		$response->assertStatus(200);
 
-            copy($keysStubDirectory . $fileName, $filePath);
+		$this->assertResponseContainKeyValue([
+			'token_type' => 'Bearer',
+		]);
 
-            $this->testingFilesCreated = true;
-        }
+		$this->assertResponseContainKeys(['expires_in', 'access_token', 'refresh_token']);
 
-        return $filePath;
-    }
+		// delete testing keys files if they were created for this test
+		if ($this->testingFilesCreated) {
+			unlink($publicFilePath);
+			unlink($privateFilePath);
+		}
+	}
 }

@@ -8,15 +8,15 @@ use App\Ship\Parents\Tasks\Task;
 class GetAllAddressesTask extends Task
 {
 
-  protected $repository;
+	protected $repository;
 
-  public function __construct(AddressRepository $repository)
-  {
-    $this->repository = $repository;
-  }
+	public function __construct(AddressRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-  public function run()
-  {
-    return $this->repository->paginate();
-  }
+	public function run()
+	{
+		return $this->repository->paginate();
+	}
 }

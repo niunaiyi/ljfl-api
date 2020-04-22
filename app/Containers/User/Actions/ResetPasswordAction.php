@@ -18,30 +18,30 @@ use Illuminate\Support\Str;
 class ResetPasswordAction extends Action
 {
 
-  /**
-   * @param \App\Ship\Transporters\DataTransporter $data
-   */
-  public function run(DataTransporter $data): void
-  {
-    $data = [
-      'email' => $data->email,
-      'token' => $data->token,
-      'password' => $data->password,
-      'password_confirmation' => $data->password,
-    ];
+	/**
+	 * @param DataTransporter $data
+	 */
+	public function run(DataTransporter $data): void
+	{
+		$data = [
+			'email' => $data->email,
+			'token' => $data->token,
+			'password' => $data->password,
+			'password_confirmation' => $data->password,
+		];
 
-    try {
-      Password::broker()->reset(
-        $data,
-        function ($user, $password) {
-          $user->forceFill([
-            'password' => Hash::make($password),
-            'remember_token' => Str::random(60),
-          ])->save();
-        }
-      );
-    } catch (Exception $e) {
-      throw new InternalErrorException();
-    }
-  }
+		try {
+			Password::broker()->reset(
+				$data,
+				function ($user, $password) {
+					$user->forceFill([
+						'password' => Hash::make($password),
+						'remember_token' => Str::random(60),
+					])->save();
+				}
+			);
+		} catch (Exception $e) {
+			throw new InternalErrorException();
+		}
+	}
 }

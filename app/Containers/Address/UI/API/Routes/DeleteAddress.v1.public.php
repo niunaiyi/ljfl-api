@@ -21,9 +21,9 @@
 
 /** @var Route $router */
 $router->delete('addresses/{id}', [
-  'as' => 'api_address_delete_address',
-  'uses' => 'Controller@deleteAddress',
-  'middleware' => [
-    'auth:api',
-  ],
+	'as' => 'api_address_delete_address',
+	'uses' => 'Controller@deleteAddress',
+	'middleware' => [
+		'auth:api',
+	],
 ]);

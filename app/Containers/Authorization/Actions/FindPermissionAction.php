@@ -16,21 +16,21 @@ use App\Ship\Transporters\DataTransporter;
 class FindPermissionAction extends Action
 {
 
-  /**
-   * @param \App\Ship\Transporters\DataTransporter $data
-   *
-   * @return  \App\Containers\Authorization\Models\Permission
-   * @throws  PermissionNotFoundException
-   */
-  public function run(DataTransporter $data): Permission
-  {
-    $permission = Apiato::call('Authorization@FindPermissionTask', [$data->id]);
+	/**
+	 * @param DataTransporter $data
+	 *
+	 * @return  Permission
+	 * @throws  PermissionNotFoundException
+	 */
+	public function run(DataTransporter $data): Permission
+	{
+		$permission = Apiato::call('Authorization@FindPermissionTask', [$data->id]);
 
-    if (!$permission) {
-      throw new PermissionNotFoundException();
-    }
+		if (!$permission) {
+			throw new PermissionNotFoundException();
+		}
 
-    return $permission;
-  }
+		return $permission;
+	}
 
 }

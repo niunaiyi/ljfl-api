@@ -15,24 +15,24 @@ use App\Ship\Transporters\DataTransporter;
 class SyncPermissionsOnRoleAction extends Action
 {
 
-  /**
-   * @param \App\Ship\Transporters\DataTransporter $data
-   *
-   * @return  \App\Containers\Authorization\Models\Role
-   */
-  public function run(DataTransporter $data): Role
-  {
-    $role = Apiato::call('Authorization@FindRoleTask', [$data->role_id]);
+	/**
+	 * @param DataTransporter $data
+	 *
+	 * @return  Role
+	 */
+	public function run(DataTransporter $data): Role
+	{
+		$role = Apiato::call('Authorization@FindRoleTask', [$data->role_id]);
 
-    // convert to array in case single ID was passed
-    $permissionsIds = (array)$data->permissions_ids;
+		// convert to array in case single ID was passed
+		$permissionsIds = (array)$data->permissions_ids;
 
-    $permissions = array_map(function ($permissionId) {
-      return Apiato::call('Authorization@FindPermissionTask', [$permissionId]);
-    }, $permissionsIds);
+		$permissions = array_map(function ($permissionId) {
+			return Apiato::call('Authorization@FindPermissionTask', [$permissionId]);
+		}, $permissionsIds);
 
-    $role->syncPermissions($permissions);
+		$role->syncPermissions($permissions);
 
-    return $role;
-  }
+		return $role;
+	}
 }

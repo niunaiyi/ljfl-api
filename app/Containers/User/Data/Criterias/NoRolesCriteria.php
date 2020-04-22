@@ -13,14 +13,14 @@ use Prettus\Repository\Contracts\RepositoryInterface as PrettusRepositoryInterfa
 class NoRolesCriteria extends Criteria
 {
 
-  /**
-   * @param                                                   $model
-   * @param \Prettus\Repository\Contracts\RepositoryInterface $repository
-   *
-   * @return mixed
-   */
-  public function apply($model, PrettusRepositoryInterface $repository)
-  {
-    return $model->doesntHave('roles');
-  }
+	/**
+	 * @param                                                   $model
+	 * @param PrettusRepositoryInterface $repository
+	 *
+	 * @return mixed
+	 */
+	public function apply($model, PrettusRepositoryInterface $repository)
+	{
+		return $model->doesntHave('roles');
+	}
 }

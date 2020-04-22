@@ -15,18 +15,18 @@ use App\Ship\Parents\Actions\Action;
 class GetAuthenticatedUserAction extends Action
 {
 
-  /**
-   * @return  \App\Containers\User\Models\User
-   * @throws  NotFoundException
-   */
-  public function run(): User
-  {
-    $user = Apiato::call('Authentication@GetAuthenticatedUserTask');
+	/**
+	 * @return  User
+	 * @throws  NotFoundException
+	 */
+	public function run(): User
+	{
+		$user = Apiato::call('Authentication@GetAuthenticatedUserTask');
 
-    if (!$user) {
-      throw new NotFoundException();
-    }
+		if (!$user) {
+			throw new NotFoundException();
+		}
 
-    return $user;
-  }
+		return $user;
+	}
 }

@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Auth;
 class WebLogoutAction extends Action
 {
 
-    /**
-     * @return void
-     */
-    public function run(): void
-    {
-        Auth::logout();
-    }
+	/**
+	 * @return void
+	 */
+	public function run(): void
+	{
+		Auth::logout();
+	}
 }

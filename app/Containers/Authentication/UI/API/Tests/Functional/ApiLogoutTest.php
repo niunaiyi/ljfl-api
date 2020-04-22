@@ -15,20 +15,20 @@ use App\Containers\Authentication\Tests\ApiTestCase;
 class ApiLogoutTest extends ApiTestCase
 {
 
-    protected $endpoint = 'delete@v1/logout';
+	protected $endpoint = 'delete@v1/logout';
 
-    protected $access = [
-        'permissions' => '',
-        'roles'       => '',
-    ];
+	protected $access = [
+		'permissions' => '',
+		'roles' => '',
+	];
 
-    /**
-     * @test
-     */
-    public function testLogout()
-    {
-        $response = $this->makeCall([], [
-            'Authorization' => 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImUxODk3NjU3YTVlZWQxMDkyMThlZjVmOThl
+	/**
+	 * @test
+	 */
+	public function testLogout()
+	{
+		$response = $this->makeCall([], [
+			'Authorization' => 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImUxODk3NjU3YTVlZWQxMDkyMThlZjVmOThl
            MGMzMzg5OTQ3MzNkZDYyZWM0Nzk5Y2E0NWQ1NjUyYmQ0NjFiZWUzZWQ5YjU1ZjNmMGE2NTA3In0.eyJhdWQiOiIyIiwianRpIjoiZTE4OTc
            2NTdhNWVlZDEwOTIxOGVmNWY5OGUwYzMzODk5NDczM2RkNjJlYzQ3OTljYTQ1ZDU2NTJiZDQ2MWJlZTNlZDliNTVmM2YwYTY1MDciLCJpYXQ
            iOjE1MTI4NzgzNjMsIm5iZiI6MTUxMjg3ODM2MywiZXhwIjoxODI4MjM4MzYyLCJzdWIiOiI0Iiwic2NvcGVzIjpbXX0.q1MXp5odmhlurbG
@@ -39,14 +39,14 @@ class ApiLogoutTest extends ApiTestCase
            7rEDvO23uClDWnZUhHKgqtPhO8oG7A1hFR8arLN1lEKrP44zO5470cD6_Pw7Ngi1coJeG5jXmtRb9gCpksdYQBB5csURioYSZuHNZQBGVWZV
            zlURPWvgtSd_aL646KmMmy64L4MA1QXsqXzzuLULGbcSntB8N-2XcogdTFe0ZG6RL8UzcArZx0Xur8CCi01UuPkBCnv5R4hxIjsQDkmFIDmr
            Cyo2VuoVyrlxWIgsTm04'
-        ]);
+		]);
 
-        $response->assertStatus(202);
+		$response->assertStatus(202);
 
-        $this->assertResponseContainKeyValue([
-            'message' => 'Token revoked successfully.',
-        ]);
+		$this->assertResponseContainKeyValue([
+			'message' => 'Token revoked successfully.',
+		]);
 
-    }
+	}
 
 }

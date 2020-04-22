@@ -15,17 +15,17 @@ use App\Ship\Transporters\DataTransporter;
 class DetachPermissionsFromRoleAction extends Action
 {
 
-  /**
-   * @param \App\Ship\Transporters\DataTransporter $data
-   *
-   * @return  \App\Containers\Authorization\Models\Role
-   */
-  public function run(DataTransporter $data): Role
-  {
-    $role = Apiato::call('Authorization@FindRoleTask', [$data->role_id]);
+	/**
+	 * @param DataTransporter $data
+	 *
+	 * @return  Role
+	 */
+	public function run(DataTransporter $data): Role
+	{
+		$role = Apiato::call('Authorization@FindRoleTask', [$data->role_id]);
 
-    $role = Apiato::call('Authorization@DetachPermissionsFromRoleTask', [$role, $data->permissions_ids]);
+		$role = Apiato::call('Authorization@DetachPermissionsFromRoleTask', [$role, $data->permissions_ids]);
 
-    return $role;
-  }
+		return $role;
+	}
 }

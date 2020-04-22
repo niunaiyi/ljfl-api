@@ -21,9 +21,9 @@
 
 /** @var Route $router */
 $router->post('addresses', [
-  'as' => 'api_address_create_address',
-  'uses' => 'Controller@createAddress',
-  'middleware' => [
-    'auth:api',
-  ],
+	'as' => 'api_address_create_address',
+	'uses' => 'Controller@createAddress',
+	'middleware' => [
+		'auth:api',
+	],
 ]);

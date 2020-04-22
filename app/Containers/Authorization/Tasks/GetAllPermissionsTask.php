@@ -13,29 +13,29 @@ use App\Ship\Parents\Tasks\Task;
 class GetAllPermissionsTask extends Task
 {
 
-  /**
-   * @var PermissionRepository
-   */
-  protected $repository;
+	/**
+	 * @var PermissionRepository
+	 */
+	protected $repository;
 
-  /**
-   * GetAllPermissionsTask constructor.
-   *
-   * @param PermissionRepository $repository
-   */
-  public function __construct(PermissionRepository $repository)
-  {
-    $this->repository = $repository;
-  }
+	/**
+	 * GetAllPermissionsTask constructor.
+	 *
+	 * @param PermissionRepository $repository
+	 */
+	public function __construct(PermissionRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-  /**
-   * @param bool $skipPagination
-   *
-   * @return  mixed
-   */
-  public function run($skipPagination = false)
-  {
-    return $skipPagination ? $this->repository->all() : $this->repository->paginate();
-  }
+	/**
+	 * @param bool $skipPagination
+	 *
+	 * @return  mixed
+	 */
+	public function run($skipPagination = false)
+	{
+		return $skipPagination ? $this->repository->all() : $this->repository->paginate();
+	}
 
 }

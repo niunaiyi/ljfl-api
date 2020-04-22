@@ -8,10 +8,10 @@ use App\Ship\Parents\Requests\Request;
 
 class GetAllAddressesAction extends Action
 {
-  public function run(Request $request)
-  {
-    $addresses = Apiato::call('Address@GetAllAddressesTask', [], ['addRequestCriteria']);
+	public function run(Request $request)
+	{
+		$addresses = Apiato::call('Address@GetAllAddressesTask', [], ['addRequestCriteria']);
 
-    return $addresses;
-  }
+		return $addresses;
+	}
 }

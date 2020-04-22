@@ -10,12 +10,11 @@ use App\Ship\Parents\Repositories\Repository;
 class AddressRepository extends Repository
 {
 
-  /**
-   * @var array
-   */
-  protected $fieldSearchable = [
-    'id' => '=',
-    // ...
-  ];
-
+	/**
+	 * @var array
+	 */
+	protected $fieldSearchable = [
+		'name' => 'like',
+		'parent_name' => 'like',
+	];
 }

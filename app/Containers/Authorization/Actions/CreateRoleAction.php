@@ -16,19 +16,19 @@ use function is_null;
 class CreateRoleAction extends Action
 {
 
-  /**
-   * @param \App\Ship\Transporters\DataTransporter $data
-   *
-   * @return  \App\Containers\Authorization\Models\Role
-   */
-  public function run(DataTransporter $data): Role
-  {
-    $level = is_null($data->level) ? 0 : $data->level;
+	/**
+	 * @param DataTransporter $data
+	 *
+	 * @return  Role
+	 */
+	public function run(DataTransporter $data): Role
+	{
+		$level = is_null($data->level) ? 0 : $data->level;
 
-    $role = Apiato::call('Authorization@CreateRoleTask',
-      [$data->name, $data->description, $data->display_name, $level]
-    );
+		$role = Apiato::call('Authorization@CreateRoleTask',
+			[$data->name, $data->description, $data->display_name, $level]
+		);
 
-    return $role;
-  }
+		return $role;
+	}
 }

@@ -13,14 +13,14 @@ use Prettus\Repository\Contracts\RepositoryInterface as PrettusRepositoryInterfa
 class AdminsCriteria extends Criteria
 {
 
-  /**
-   * @param                                                   $model
-   * @param \Prettus\Repository\Contracts\RepositoryInterface $repository
-   *
-   * @return mixed
-   */
-  public function apply($model, PrettusRepositoryInterface $repository)
-  {
-    return $model->where('is_client', false);
-  }
+	/**
+	 * @param                                                   $model
+	 * @param PrettusRepositoryInterface $repository
+	 *
+	 * @return mixed
+	 */
+	public function apply($model, PrettusRepositoryInterface $repository)
+	{
+		return $model->where('is_client', false);
+	}
 }

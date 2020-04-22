@@ -8,8 +8,8 @@ use App\Ship\Parents\Requests\Request;
 
 class DeleteAddressAction extends Action
 {
-  public function run(Request $request)
-  {
-    return Apiato::call('Address@DeleteAddressTask', [$request->id]);
-  }
+	public function run(Request $request)
+	{
+		return Apiato::call('Address@DeleteAddressTask', [$request->id]);
+	}
 }

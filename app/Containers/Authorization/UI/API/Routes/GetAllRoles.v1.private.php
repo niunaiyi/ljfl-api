@@ -12,9 +12,9 @@
  */
 
 $router->get('roles', [
-  'as' => 'api_authorization_get_all_roles',
-  'uses' => 'Controller@getAllRoles',
-  'middleware' => [
-    'auth:api',
-  ],
+	'as' => 'api_authorization_get_all_roles',
+	'uses' => 'Controller@getAllRoles',
+	'middleware' => [
+		'auth:api',
+	],
 ]);

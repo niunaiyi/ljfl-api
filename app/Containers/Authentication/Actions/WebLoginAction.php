@@ -15,17 +15,17 @@ use Illuminate\Contracts\Auth\Authenticatable;
 class WebLoginAction extends Action
 {
 
-    /**
-     * @param \App\Ship\Transporters\DataTransporter $data
-     *
-     * @return  \Illuminate\Contracts\Auth\Authenticatable
-     */
-    public function run(DataTransporter $data): Authenticatable
-    {
-        $user = Apiato::call('Authentication@WebLoginTask', [$data->email, $data->password, $data->remember]);
+	/**
+	 * @param DataTransporter $data
+	 *
+	 * @return  Authenticatable
+	 */
+	public function run(DataTransporter $data): Authenticatable
+	{
+		$user = Apiato::call('Authentication@WebLoginTask', [$data->email, $data->password, $data->remember]);
 
-        Apiato::call('Authentication@CheckIfUserIsConfirmedTask', [], [['setUser' => [$user]]]);
+		Apiato::call('Authentication@CheckIfUserIsConfirmedTask', [], [['setUser' => [$user]]]);
 
-        return $user;
-    }
+		return $user;
+	}
 }

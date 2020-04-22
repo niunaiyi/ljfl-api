@@ -16,22 +16,22 @@ use Illuminate\Contracts\Auth\Authenticatable;
 class WebAdminLoginAction extends Action
 {
 
-    /**
-     * @param \App\Ship\Transporters\DataTransporter $data
-     *
-     * @return  \Illuminate\Contracts\Auth\Authenticatable
-     */
-    public function run(DataTransporter $data): Authenticatable
-    {
-        $user = Apiato::call('Authentication@WebLoginTask',
-            [$data->email, $data->password, $data->remember_me ?? false]);
+	/**
+	 * @param DataTransporter $data
+	 *
+	 * @return  Authenticatable
+	 */
+	public function run(DataTransporter $data): Authenticatable
+	{
+		$user = Apiato::call('Authentication@WebLoginTask',
+			[$data->email, $data->password, $data->remember_me ?? false]);
 
-        Apiato::call('Authentication@CheckIfUserIsConfirmedTask', [], [['setUser' => [$user]]]);
+		Apiato::call('Authentication@CheckIfUserIsConfirmedTask', [], [['setUser' => [$user]]]);
 
-        if (!$user->hasAdminRole()) {
-            throw new UserNotAdminException();
-        }
+		if (!$user->hasAdminRole()) {
+			throw new UserNotAdminException();
+		}
 
-        return $user;
-    }
+		return $user;
+	}
 }

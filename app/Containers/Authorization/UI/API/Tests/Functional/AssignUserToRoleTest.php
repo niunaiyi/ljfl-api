@@ -19,102 +19,102 @@ use Illuminate\Support\Facades\Config;
 class AssignUserToRoleTest extends ApiTestCase
 {
 
-  protected $endpoint = 'post@v1/roles/assign?include=roles';
+	protected $endpoint = 'post@v1/roles/assign?include=roles';
 
-  protected $access = [
-    'roles' => '',
-    'permissions' => 'manage-admins-access',
-  ];
+	protected $access = [
+		'roles' => '',
+		'permissions' => 'manage-admins-access',
+	];
 
-  /**
-   * @test
-   */
-  public function testAssignUserToRole_()
-  {
-    $randomUser = factory(User::class)->create();
+	/**
+	 * @test
+	 */
+	public function testAssignUserToRole_()
+	{
+		$randomUser = factory(User::class)->create();
 
-    $role = factory(Role::class)->create();
+		$role = factory(Role::class)->create();
 
-    $data = [
-      'roles_ids' => [$role->getHashedKey()],
-      'user_id' => $randomUser->getHashedKey(),
-    ];
+		$data = [
+			'roles_ids' => [$role->getHashedKey()],
+			'user_id' => $randomUser->getHashedKey(),
+		];
 
-    // send the HTTP request
-    $response = $this->makeCall($data);
+		// send the HTTP request
+		$response = $this->makeCall($data);
 
-    // assert response status is correct
-    $response->assertStatus(200);
+		// assert response status is correct
+		$response->assertStatus(200);
 
-    $responseContent = $this->getResponseContentObject();
+		$responseContent = $this->getResponseContentObject();
 
-    $this->assertEquals($data['user_id'], $responseContent->data->id);
+		$this->assertEquals($data['user_id'], $responseContent->data->id);
 
-    $this->assertEquals($data['roles_ids'][0], $responseContent->data->roles->data[0]->id);
-  }
+		$this->assertEquals($data['roles_ids'][0], $responseContent->data->roles->data[0]->id);
+	}
 
-  /**
-   * @test
-   */
-  public function testAssignUserToRoleWithRealId_()
-  {
-    $randomUser = factory(User::class)->create();
+	/**
+	 * @test
+	 */
+	public function testAssignUserToRoleWithRealId_()
+	{
+		$randomUser = factory(User::class)->create();
 
-    $role = factory(Role::class)->create();
+		$role = factory(Role::class)->create();
 
-    $data = [
-      'roles_ids' => [$role->id], // testing against real ID's
-      'user_id' => $randomUser->id, // testing against real ID's
-    ];
+		$data = [
+			'roles_ids' => [$role->id], // testing against real ID's
+			'user_id' => $randomUser->id, // testing against real ID's
+		];
 
-    // send the HTTP request
-    $response = $this->makeCall($data);
+		// send the HTTP request
+		$response = $this->makeCall($data);
 
-    // assert response status is correct. Note: this will return 200 if `HASH_ID=false` in the .env
-    if (Config::get('apiato.hash-id')) {
-      $response->assertStatus(400);
+		// assert response status is correct. Note: this will return 200 if `HASH_ID=false` in the .env
+		if (Config::get('apiato.hash-id')) {
+			$response->assertStatus(400);
 
-      $this->assertResponseContainKeyValue([
-        'message' => 'Only Hashed ID\'s allowed.',
-      ]);
-    } else {
-      $response->assertStatus(200);
-    }
+			$this->assertResponseContainKeyValue([
+				'message' => 'Only Hashed ID\'s allowed.',
+			]);
+		} else {
+			$response->assertStatus(200);
+		}
 
-  }
+	}
 
-  /**
-   * @test
-   */
-  public function testAssignUserToManyRoles_()
-  {
-    $randomUser = factory(User::class)->create();
+	/**
+	 * @test
+	 */
+	public function testAssignUserToManyRoles_()
+	{
+		$randomUser = factory(User::class)->create();
 
-    $role1 = factory(Role::class)->create();
-    $role2 = factory(Role::class)->create();
+		$role1 = factory(Role::class)->create();
+		$role2 = factory(Role::class)->create();
 
-    $data = [
-      'roles_ids' => [
-        $role1->getHashedKey(),
-        $role2->getHashedKey(),
-      ],
-      'user_id' => $randomUser->getHashedKey(),
-    ];
+		$data = [
+			'roles_ids' => [
+				$role1->getHashedKey(),
+				$role2->getHashedKey(),
+			],
+			'user_id' => $randomUser->getHashedKey(),
+		];
 
-    // send the HTTP request
-    $response = $this->makeCall($data);
+		// send the HTTP request
+		$response = $this->makeCall($data);
 
-    // assert response status is correct
-    $response->assertStatus(200);
+		// assert response status is correct
+		$response->assertStatus(200);
 
-    $responseContent = $this->getResponseContentObject();
+		$responseContent = $this->getResponseContentObject();
 
-    $this->assertTrue(count($responseContent->data->roles->data) > 1);
+		$this->assertTrue(count($responseContent->data->roles->data) > 1);
 
-    $roleIds = Arr::pluck($responseContent->data->roles->data, 'id');
-    $this->assertContains($data['roles_ids'][0], $roleIds);
+		$roleIds = Arr::pluck($responseContent->data->roles->data, 'id');
+		$this->assertContains($data['roles_ids'][0], $roleIds);
 
-    $this->assertContains($data['roles_ids'][1], $roleIds);
-  }
+		$this->assertContains($data['roles_ids'][1], $roleIds);
+	}
 
 }

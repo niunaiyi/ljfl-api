@@ -9,6 +9,10 @@ use App\Containers\Authentication\UI\WEB\Requests\ViewDashboardRequest;
 use App\Ship\Parents\Controllers\WebController;
 use App\Ship\Transporters\DataTransporter;
 use Exception;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 
 /**
  * Class Controller
@@ -18,48 +22,48 @@ use Exception;
 class Controller extends WebController
 {
 
-    /**
-     * @return  \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function showLoginPage()
-    {
-        return view('authentication::login');
-    }
+	/**
+	 * @return  Factory|View
+	 */
+	public function showLoginPage()
+	{
+		return view('authentication::login');
+	}
 
-    /**
-     * @return  \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function logoutAdmin(LogoutRequest $request)
-    {
-        Apiato::call('Authentication@WebLogoutAction');
+	/**
+	 * @return  RedirectResponse|Redirector
+	 */
+	public function logoutAdmin(LogoutRequest $request)
+	{
+		Apiato::call('Authentication@WebLogoutAction');
 
-        return redirect('login');
-    }
+		return redirect('login');
+	}
 
-    /**
-     * @param \App\Containers\Authentication\UI\WEB\Requests\LoginRequest $request
-     *
-     * @return  \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function loginAdmin(LoginRequest $request)
-    {
-        try {
-            $result = Apiato::call('Authentication@WebAdminLoginAction', [new DataTransporter($request)]);
-        } catch (Exception $e) {
-            return redirect('login')->with('status', $e->getMessage());
-        }
+	/**
+	 * @param LoginRequest $request
+	 *
+	 * @return  RedirectResponse|Redirector
+	 */
+	public function loginAdmin(LoginRequest $request)
+	{
+		try {
+			$result = Apiato::call('Authentication@WebAdminLoginAction', [new DataTransporter($request)]);
+		} catch (Exception $e) {
+			return redirect('login')->with('status', $e->getMessage());
+		}
 
-        return is_array($result) ? redirect('login')->with($result) : redirect('dashboard');
-    }
+		return is_array($result) ? redirect('login')->with($result) : redirect('dashboard');
+	}
 
-    /**
-     * @param \App\Containers\Authentication\UI\WEB\Requests\ViewDashboardRequest $request
-     *
-     * @return  \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function viewDashboardPage(ViewDashboardRequest $request)
-    {
-        return view('authentication::dashboard');
-    }
+	/**
+	 * @param ViewDashboardRequest $request
+	 *
+	 * @return  Factory|View
+	 */
+	public function viewDashboardPage(ViewDashboardRequest $request)
+	{
+		return view('authentication::dashboard');
+	}
 
 }
