@@ -4,14 +4,16 @@
  * @apiGroup           Users
  * @apiName            createAdmin
  * @api                {post} /v1/admins Create Admin type Users
- * @apiDescription     Create non client users for the Dashboard.
+ * @apiDescription     创建一个管理员.
  *
  * @apiVersion         1.0.0
  * @apiPermission      none
  *
- * @apiParam           {String}  email
+ * @apiParam           {String}  username
+ * @apiParam           {String}  realname
  * @apiParam           {String}  password
- * @apiParam           {String}  name
+ * @apiParam           {String}  phonenumber
+ * @apiParam           {Number}  address_id
  *
  * @apiUse             UserSuccessSingleResponse
  */

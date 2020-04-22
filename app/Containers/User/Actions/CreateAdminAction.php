@@ -24,9 +24,10 @@ class CreateAdminAction extends Action
 	{
 		$admin = Apiato::call('User@CreateUserByCredentialsTask', [
 			$isClient = false,
-			$data->email,
+			$data->username,
 			$data->password,
-			$data->name
+			$data->realname,
+			$data->phonenumber,
 		]);
 
 		// NOTE: if not using a single general role for all Admins, comment out that line below. And assign Roles

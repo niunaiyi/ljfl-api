@@ -4,18 +4,17 @@
  * @apiGroup           Address
  * @apiName            deleteAddress
  *
- * @api                {DELETE} /v1/addresses/:id Endpoint title here..
+ * @api                {DELETE} /v1/addresses/:id 删除地址
  * @apiDescription     Endpoint description here..
  *
  * @apiVersion         1.0.0
- * @apiPermission      none
+ * @apiPermission      token
  *
- * @apiParam           {String}  parameters here..
+ * @apiParam           {Number}  id 地址标识
  *
  * @apiSuccessExample  {json}  Success-Response:
- * HTTP/1.1 200 OK
+ * HTTP/1.1 204 OK
  * {
- * // Insert the response of the request here...
  * }
  */
 

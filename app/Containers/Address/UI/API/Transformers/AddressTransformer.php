@@ -36,11 +36,6 @@ class AddressTransformer extends Transformer
 		$response['object'] = 'Address';
 		$response['hasChildren'] = $entity->children()->count() > 0;
 		$response['parent_id'] = (string)$parent_id;
-		$response['id'] = $entity->getHashedKey();
-
-		$response = $this->ifAdmin([
-			'real_id' => $entity->id,
-		], $response);
 
 		return $response;
 	}
