@@ -14,34 +14,34 @@ use Prettus\Repository\Contracts\RepositoryInterface as PrettusRepositoryInterfa
 class ThisUserCriteria extends Criteria
 {
 
-    /**
-     * @var int
-     */
-    private $userId;
+	/**
+	 * @var int
+	 */
+	private $userId;
 
-    /**
-     * ThisUserCriteria constructor.
-     *
-     * @param $userId
-     */
-    public function __construct($userId = null)
-    {
-        $this->userId = $userId;
-    }
+	/**
+	 * ThisUserCriteria constructor.
+	 *
+	 * @param $userId
+	 */
+	public function __construct($userId = null)
+	{
+		$this->userId = $userId;
+	}
 
-    /**
-     * @param                                                   $model
-     * @param \Prettus\Repository\Contracts\RepositoryInterface $repository
-     *
-     * @return mixed
-     */
-    public function apply($model, PrettusRepositoryInterface $repository)
-    {
-        if(!$this->userId){
-            $this->userId = Auth::user()->id;
-        }
+	/**
+	 * @param                                                   $model
+	 * @param \Prettus\Repository\Contracts\RepositoryInterface $repository
+	 *
+	 * @return mixed
+	 */
+	public function apply($model, PrettusRepositoryInterface $repository)
+	{
+		if (!$this->userId) {
+			$this->userId = Auth::user()->id;
+		}
 
-        return $model->where('user_id', '=', $this->userId);
-    }
+		return $model->where('user_id', '=', $this->userId);
+	}
 
 }

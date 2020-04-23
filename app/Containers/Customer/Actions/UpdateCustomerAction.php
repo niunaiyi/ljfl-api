@@ -8,14 +8,14 @@ use App\Ship\Parents\Requests\Request;
 
 class UpdateCustomerAction extends Action
 {
-  public function run(Request $request)
-  {
-    $data = $request->sanitizeInput([
-      // add your request data here
-    ]);
+	public function run(Request $request)
+	{
+		$data = $request->sanitizeInput([
+			// add your request data here
+		]);
 
-    $customer = Apiato::call('Customer@UpdateCustomerTask', [$request->id, $data]);
+		$customer = Apiato::call('Customer@UpdateCustomerTask', [$request->id, $data]);
 
-    return $customer;
-  }
+		return $customer;
+	}
 }

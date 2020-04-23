@@ -16,39 +16,39 @@ use Illuminate\Support\Facades\Config;
 class CreateStripeCustomerTask extends Task
 {
 
-    private $stripe;
+	private $stripe;
 
-    /**
-     * StripeApi constructor.
-     *
-     * @param \Cartalyst\Stripe\Stripe $stripe
-     */
-    public function __construct(Stripe $stripe)
-    {
-        $this->stripe = $stripe->make(Config::get('settings.stripe.secret'), Config::get('settings.stripe.version'));
-    }
+	/**
+	 * StripeApi constructor.
+	 *
+	 * @param \Cartalyst\Stripe\Stripe $stripe
+	 */
+	public function __construct(Stripe $stripe)
+	{
+		$this->stripe = $stripe->make(Config::get('settings.stripe.secret'), Config::get('settings.stripe.version'));
+	}
 
-    /**
-     * @param string $email
-     * @param string $description
-     *
-     * @return array stripe customer object
-     * @throws StripeApiErrorException
-     */
-    public function run($email, $description = '')
-    {
-        try {
+	/**
+	 * @param string $email
+	 * @param string $description
+	 *
+	 * @return array stripe customer object
+	 * @throws StripeApiErrorException
+	 */
+	public function run($email, $description = '')
+	{
+		try {
 
-            $response = $this->stripe->customers()->create([
-                'email'       => $email,
-                'description' => $description,
-            ]);
+			$response = $this->stripe->customers()->create([
+				'email' => $email,
+				'description' => $description,
+			]);
 
-        } catch (Exception $e) {
-            throw (new StripeApiErrorException('Stripe API error (createCustomer)'))->debug($e->getMessage(), true);
-        }
+		} catch (Exception $e) {
+			throw (new StripeApiErrorException('Stripe API error (createCustomer)'))->debug($e->getMessage(), true);
+		}
 
-        return $response;
-    }
+		return $response;
+	}
 
 }

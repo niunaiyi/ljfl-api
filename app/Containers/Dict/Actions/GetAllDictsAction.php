@@ -8,10 +8,10 @@ use App\Ship\Parents\Requests\Request;
 
 class GetAllDictsAction extends Action
 {
-  public function run(Request $request)
-  {
-    $dicts = Apiato::call('Dict@GetAllDictsTask', [], ['addRequestCriteria']);
+	public function run(Request $request)
+	{
+		$dicts = Apiato::call('Dict@GetAllDictsTask', [], ['addRequestCriteria']);
 
-    return $dicts;
-  }
+		return $dicts;
+	}
 }

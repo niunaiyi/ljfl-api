@@ -11,31 +11,31 @@ use Illuminate\Database\Schema\Blueprint;
 class CreatePaymentAccountsTable extends Migration
 {
 
-    /**
-     * Run the migrations.
-     */
-    public function up()
-    {
-        Schema::create('payment_accounts', function (Blueprint $table) {
+	/**
+	 * Run the migrations.
+	 */
+	public function up()
+	{
+		Schema::create('payment_accounts', function (Blueprint $table) {
 
-            $table->increments('id');
-            $table->string('name')->nullable();
+			$table->increments('id');
+			$table->string('name')->nullable();
 
-            $table->morphs('accountable');
+			$table->morphs('accountable');
 
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+			$table->integer('user_id')->unsigned();
+			$table->foreign('user_id')->references('id')->on('users');
 
-            $table->timestamps();
-            $table->softDeletes();
-        });
-    }
+			$table->timestamps();
+			$table->softDeletes();
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down()
-    {
-        Schema::drop('payment_accounts');
-    }
+	/**
+	 * Reverse the migrations.
+	 */
+	public function down()
+	{
+		Schema::drop('payment_accounts');
+	}
 }

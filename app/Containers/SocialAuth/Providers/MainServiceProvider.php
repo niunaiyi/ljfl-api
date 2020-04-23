@@ -16,31 +16,31 @@ use Laravel\Socialite\SocialiteServiceProvider;
 class MainServiceProvider extends MainProvider
 {
 
-    /**
-     * Container Service Providers.
-     *
-     * @var array
-     */
-    public $serviceProviders = [
-        SocialiteServiceProvider::class
-    ];
+	/**
+	 * Container Service Providers.
+	 *
+	 * @var array
+	 */
+	public $serviceProviders = [
+		SocialiteServiceProvider::class
+	];
 
-    /**
-     * Container Aliases
-     *
-     * @var  array
-     */
-    public $aliases = [
-        'Socialite' => Socialite::class,
-    ];
+	/**
+	 * Container Aliases
+	 *
+	 * @var  array
+	 */
+	public $aliases = [
+		'Socialite' => Socialite::class,
+	];
 
-    /**
-     * Register anything in the container.
-     */
-    public function register()
-    {
-        parent::register();
+	/**
+	 * Register anything in the container.
+	 */
+	public function register()
+	{
+		parent::register();
 
-        // do your binding here..
-    }
+		// do your binding here..
+	}
 }

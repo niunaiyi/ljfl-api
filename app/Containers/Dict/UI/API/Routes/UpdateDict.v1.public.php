@@ -21,9 +21,9 @@
 
 /** @var Route $router */
 $router->patch('dicts/{id}', [
-  'as' => 'api_dict_update_dict',
-  'uses' => 'Controller@updateDict',
-  'middleware' => [
-    'auth:api',
-  ],
+	'as' => 'api_dict_update_dict',
+	'uses' => 'Controller@updateDict',
+	'middleware' => [
+		'auth:api',
+	],
 ]);

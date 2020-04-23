@@ -21,9 +21,9 @@
 
 /** @var Route $router */
 $router->patch('customers/{id}', [
-  'as' => 'api_customer_update_customer',
-  'uses' => 'Controller@updateCustomer',
-  'middleware' => [
-    'auth:api',
-  ],
+	'as' => 'api_customer_update_customer',
+	'uses' => 'Controller@updateCustomer',
+	'middleware' => [
+		'auth:api',
+	],
 ]);

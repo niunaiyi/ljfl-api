@@ -14,15 +14,15 @@ use Prettus\Repository\Contracts\RepositoryInterface as PrettusRepositoryInterfa
 class CreatedTodayCriteria extends Criteria
 {
 
-    /**
-     * @param                                                   $model
-     * @param \Prettus\Repository\Contracts\RepositoryInterface $repository
-     *
-     * @return  mixed
-     */
-    public function apply($model, PrettusRepositoryInterface $repository)
-    {
-        return $model->where('created_at', '>=', Carbon::today()->toDateString());
-    }
+	/**
+	 * @param                                                   $model
+	 * @param \Prettus\Repository\Contracts\RepositoryInterface $repository
+	 *
+	 * @return  mixed
+	 */
+	public function apply($model, PrettusRepositoryInterface $repository)
+	{
+		return $model->where('created_at', '>=', Carbon::today()->toDateString());
+	}
 
 }

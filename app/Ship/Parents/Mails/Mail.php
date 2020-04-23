@@ -12,5 +12,5 @@ use Illuminate\Queue\SerializesModels;
  */
 abstract class Mail extends AbstractMail
 {
-    use SerializesModels;
+	use SerializesModels;
 }

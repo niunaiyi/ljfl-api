@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
  */
 class PaymentMethodNotFoundException extends Exception
 {
-    public $httpStatusCode = SymfonyResponse::HTTP_PAYMENT_REQUIRED;
+	public $httpStatusCode = SymfonyResponse::HTTP_PAYMENT_REQUIRED;
 
-    public $message = 'Payment method is not found.';
+	public $message = 'Payment method is not found.';
 }

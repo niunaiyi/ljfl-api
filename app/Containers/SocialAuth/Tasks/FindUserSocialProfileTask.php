@@ -14,32 +14,32 @@ use Laravel\Socialite\Facades\Socialite;
 class FindUserSocialProfileTask extends Task
 {
 
-    /**
-     * @param            $provider
-     * @param array|null $requestData
-     *
-     * @return  mixed
-     * @throws  UnsupportedSocialAuthProviderException
-     */
-    public function run($provider, array $requestData = null)
-    {
-        switch ($provider) {
-            case 'facebook':
-                $user = Socialite::driver($provider)->userFromToken($requestData['oauth_token']);
-                break;
-            case 'twitter':
-                $user = Socialite::driver($provider)->userFromTokenAndSecret($requestData['oauth_token'],
-                    $requestData['oauth_secret']);
-                break;
-            case 'add-your-provider-here':
-                $user = null;
-                // ....
-                break;
-            default:
-                throw new UnsupportedSocialAuthProviderException("The Social Auth Provider $provider is unsupported.");
-        }
+	/**
+	 * @param            $provider
+	 * @param array|null $requestData
+	 *
+	 * @return  mixed
+	 * @throws  UnsupportedSocialAuthProviderException
+	 */
+	public function run($provider, array $requestData = null)
+	{
+		switch ($provider) {
+			case 'facebook':
+				$user = Socialite::driver($provider)->userFromToken($requestData['oauth_token']);
+				break;
+			case 'twitter':
+				$user = Socialite::driver($provider)->userFromTokenAndSecret($requestData['oauth_token'],
+					$requestData['oauth_secret']);
+				break;
+			case 'add-your-provider-here':
+				$user = null;
+				// ....
+				break;
+			default:
+				throw new UnsupportedSocialAuthProviderException("The Social Auth Provider $provider is unsupported.");
+		}
 
-        return $user;
-    }
+		return $user;
+	}
 
 }

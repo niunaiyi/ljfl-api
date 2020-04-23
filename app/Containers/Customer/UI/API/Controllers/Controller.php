@@ -18,58 +18,58 @@ use App\Ship\Parents\Controllers\ApiController;
  */
 class Controller extends ApiController
 {
-  /**
-   * @param CreateCustomerRequest $request
-   * @return \Illuminate\Http\JsonResponse
-   */
-  public function createCustomer(CreateCustomerRequest $request)
-  {
-    $customer = Apiato::call('Customer@CreateCustomerAction', [$request]);
+	/**
+	 * @param CreateCustomerRequest $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function createCustomer(CreateCustomerRequest $request)
+	{
+		$customer = Apiato::call('Customer@CreateCustomerAction', [$request]);
 
-    return $this->created($this->transform($customer, CustomerTransformer::class));
-  }
+		return $this->created($this->transform($customer, CustomerTransformer::class));
+	}
 
-  /**
-   * @param FindCustomerByIdRequest $request
-   * @return array
-   */
-  public function findCustomerById(FindCustomerByIdRequest $request)
-  {
-    $customer = Apiato::call('Customer@FindCustomerByIdAction', [$request]);
+	/**
+	 * @param FindCustomerByIdRequest $request
+	 * @return array
+	 */
+	public function findCustomerById(FindCustomerByIdRequest $request)
+	{
+		$customer = Apiato::call('Customer@FindCustomerByIdAction', [$request]);
 
-    return $this->transform($customer, CustomerTransformer::class);
-  }
+		return $this->transform($customer, CustomerTransformer::class);
+	}
 
-  /**
-   * @param GetAllCustomersRequest $request
-   * @return array
-   */
-  public function getAllCustomers(GetAllCustomersRequest $request)
-  {
-    $customers = Apiato::call('Customer@GetAllCustomersAction', [$request]);
+	/**
+	 * @param GetAllCustomersRequest $request
+	 * @return array
+	 */
+	public function getAllCustomers(GetAllCustomersRequest $request)
+	{
+		$customers = Apiato::call('Customer@GetAllCustomersAction', [$request]);
 
-    return $this->transform($customers, CustomerTransformer::class);
-  }
+		return $this->transform($customers, CustomerTransformer::class);
+	}
 
-  /**
-   * @param UpdateCustomerRequest $request
-   * @return array
-   */
-  public function updateCustomer(UpdateCustomerRequest $request)
-  {
-    $customer = Apiato::call('Customer@UpdateCustomerAction', [$request]);
+	/**
+	 * @param UpdateCustomerRequest $request
+	 * @return array
+	 */
+	public function updateCustomer(UpdateCustomerRequest $request)
+	{
+		$customer = Apiato::call('Customer@UpdateCustomerAction', [$request]);
 
-    return $this->transform($customer, CustomerTransformer::class);
-  }
+		return $this->transform($customer, CustomerTransformer::class);
+	}
 
-  /**
-   * @param DeleteCustomerRequest $request
-   * @return \Illuminate\Http\JsonResponse
-   */
-  public function deleteCustomer(DeleteCustomerRequest $request)
-  {
-    Apiato::call('Customer@DeleteCustomerAction', [$request]);
+	/**
+	 * @param DeleteCustomerRequest $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function deleteCustomer(DeleteCustomerRequest $request)
+	{
+		Apiato::call('Customer@DeleteCustomerAction', [$request]);
 
-    return $this->noContent();
-  }
+		return $this->noContent();
+	}
 }

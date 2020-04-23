@@ -25,6 +25,6 @@
 // Implementation in the Laravel Passport package
 
 $router->post('login', [
-  'as' => 'api_authentication_login',
-  'uses' => 'Controller@login',
+	'as' => 'api_authentication_login',
+	'uses' => 'Controller@login',
 ]);

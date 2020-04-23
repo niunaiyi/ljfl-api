@@ -10,25 +10,25 @@ use Exception;
 class CreateStripeAccountTask extends Task
 {
 
-    protected $repository;
+	protected $repository;
 
-    public function __construct(StripeAccountRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+	public function __construct(StripeAccountRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-    /**
-     * @param array $data
-     *
-     * @return mixed
-     * @throws CreateResourceFailedException
-     */
-    public function run(array $data)
-    {
-        try {
-            return $this->repository->create($data);
-        } catch (Exception $exception) {
-            throw new CreateResourceFailedException();
-        }
-    }
+	/**
+	 * @param array $data
+	 *
+	 * @return mixed
+	 * @throws CreateResourceFailedException
+	 */
+	public function run(array $data)
+	{
+		try {
+			return $this->repository->create($data);
+		} catch (Exception $exception) {
+			throw new CreateResourceFailedException();
+		}
+	}
 }

@@ -19,6 +19,6 @@
  */
 
 $router->post('password/forgot', [
-  'as' => 'api_user_forgot_password',
-  'uses' => 'Controller@forgotPassword',
+	'as' => 'api_user_forgot_password',
+	'uses' => 'Controller@forgotPassword',
 ]);

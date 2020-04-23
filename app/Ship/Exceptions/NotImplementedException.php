@@ -13,8 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 class NotImplementedException extends Exception
 {
 
-    public $httpStatusCode = Response::HTTP_NOT_IMPLEMENTED;
+	public $httpStatusCode = Response::HTTP_NOT_IMPLEMENTED;
 
-    public $message = 'This method is not yet implemented.';
+	public $message = 'This method is not yet implemented.';
 
 }

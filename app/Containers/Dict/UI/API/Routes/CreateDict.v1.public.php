@@ -20,9 +20,9 @@
  */
 
 $router->post('dicts', [
-  'as' => 'api_dict_create_dict',
-  'uses' => 'Controller@createDict',
-  'middleware' => [
-    'auth:api',
-  ],
+	'as' => 'api_dict_create_dict',
+	'uses' => 'Controller@createDict',
+	'middleware' => [
+		'auth:api',
+	],
 ]);

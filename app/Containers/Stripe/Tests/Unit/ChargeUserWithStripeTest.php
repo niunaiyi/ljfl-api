@@ -19,32 +19,32 @@ use Illuminate\Support\Facades\App;
 class ChargeUserWithStripeTest extends TestCase
 {
 
-    use MockablePaymentsTrait;
+	use MockablePaymentsTrait;
 
-    /**
-     * @test
-     */
-    public function testChargeUserWithStripe()
-    {
-        // Mock the payments
-        $this->mockPayments();
+	/**
+	 * @test
+	 */
+	public function testChargeUserWithStripe()
+	{
+		// Mock the payments
+		$this->mockPayments();
 
-        // create testing user
-        $user = $this->getTestingUser();
+		// create testing user
+		$user = $this->getTestingUser();
 
-        $stripeAccount = factory(StripeAccount::class)->create([
-            'customer_id' => 'cus_8mBD5S1SoyD4zL',
-        ]);
+		$stripeAccount = factory(StripeAccount::class)->create([
+			'customer_id' => 'cus_8mBD5S1SoyD4zL',
+		]);
 
-        App::make(AssignPaymentAccountToUserTask::class)->run($stripeAccount, $user, 'nickname');
+		App::make(AssignPaymentAccountToUserTask::class)->run($stripeAccount, $user, 'nickname');
 
-        $amount = 100;
+		$amount = 100;
 
-        // Start the test:
-        $account = $user->paymentAccounts->first();
+		// Start the test:
+		$account = $user->paymentAccounts->first();
 
-        $transaction = $user->charge($account, $amount);
+		$transaction = $user->charge($account, $amount);
 
-        $this->assertEquals($transaction->gateway, 'Stripe');
-    }
+		$this->assertEquals($transaction->gateway, 'Stripe');
+	}
 }

@@ -16,37 +16,36 @@ use Exception;
 class UpdateSettingsByKeyTask extends Task
 {
 
-    protected $repository;
+	protected $repository;
 
-    public function __construct(SettingRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+	public function __construct(SettingRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-    /**
-     * @param $key
-     * @param $value
-     *
-     * @return mixed
-     * @throws NotFoundException
-     * @throws UpdateResourceFailedException
-     */
-    public function run($key, $value)
-    {
-        $setting = $this->repository->findWhere(['key' => $key])->first();
+	/**
+	 * @param $key
+	 * @param $value
+	 *
+	 * @return mixed
+	 * @throws NotFoundException
+	 * @throws UpdateResourceFailedException
+	 */
+	public function run($key, $value)
+	{
+		$setting = $this->repository->findWhere(['key' => $key])->first();
 
-        if (!$setting) {
-            throw new NotFoundException();
-        }
+		if (!$setting) {
+			throw new NotFoundException();
+		}
 
-        try {
-            return $this->repository->update([
-                'value' => $value
-            ], $setting->id);
-        }
-        catch (Exception $exception) {
-            throw new UpdateResourceFailedException();
-        }
-    }
+		try {
+			return $this->repository->update([
+				'value' => $value
+			], $setting->id);
+		} catch (Exception $exception) {
+			throw new UpdateResourceFailedException();
+		}
+	}
 
 }

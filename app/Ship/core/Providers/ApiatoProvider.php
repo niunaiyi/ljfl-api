@@ -32,86 +32,86 @@ use Vinkla\Hashids\HashidsServiceProvider;
 class ApiatoProvider extends AbstractMainProvider
 {
 
-    use FactoriesLoaderTrait;
-    use AutoLoaderTrait;
-    use ValidationTrait;
+	use FactoriesLoaderTrait;
+	use AutoLoaderTrait;
+	use ValidationTrait;
 
-    /**
-     * Register any Service Providers on the Ship layer (including third party packages).
-     *
-     * @var array
-     */
-    public $serviceProviders = [
-        // Third Party Packages Providers:
-        HashidsServiceProvider::class,
-        RepositoryServiceProvider::class,
-        CorsServiceProvider::class,
-        FractalServiceProvider::class,
+	/**
+	 * Register any Service Providers on the Ship layer (including third party packages).
+	 *
+	 * @var array
+	 */
+	public $serviceProviders = [
+		// Third Party Packages Providers:
+		HashidsServiceProvider::class,
+		RepositoryServiceProvider::class,
+		CorsServiceProvider::class,
+		FractalServiceProvider::class,
 
-        // add the Laravel Tinker Service Provider
-        TinkerServiceProvider::class,
+		// add the Laravel Tinker Service Provider
+		TinkerServiceProvider::class,
 
-        // Internal Apiato Providers:
-        RoutesProvider::class, // exceptionally adding the Route Provider, unlike all other providers in the parents.
-        ShipProvider::class, // the ShipProvider for the Ship third party packages.
-        GeneratorsServiceProvider::class, // the code generator provider.
-    ];
+		// Internal Apiato Providers:
+		RoutesProvider::class, // exceptionally adding the Route Provider, unlike all other providers in the parents.
+		ShipProvider::class, // the ShipProvider for the Ship third party packages.
+		GeneratorsServiceProvider::class, // the code generator provider.
+	];
 
-    /**
-     * Register any Alias on the Ship layer (including third party packages).
-     *
-     * @var  array
-     */
-    protected $aliases = [
-        'Hashids' => Hashids::class,
-        'Fractal' => FractalFacade::class,
-    ];
+	/**
+	 * Register any Alias on the Ship layer (including third party packages).
+	 *
+	 * @var  array
+	 */
+	protected $aliases = [
+		'Hashids' => Hashids::class,
+		'Fractal' => FractalFacade::class,
+	];
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        // Autoload most of the Containers and Ship Components
-        $this->runLoadersBoot();
+	/**
+	 * Bootstrap any application services.
+	 *
+	 * @return void
+	 */
+	public function boot()
+	{
+		// Autoload most of the Containers and Ship Components
+		$this->runLoadersBoot();
 
-        // load all service providers defined in this class
-        parent::boot();
+		// load all service providers defined in this class
+		parent::boot();
 
-        // Solves the "specified key was too long" error, introduced in L5.4
-        Schema::defaultStringLength(191);
+		// Solves the "specified key was too long" error, introduced in L5.4
+		Schema::defaultStringLength(191);
 
-        // Registering custom validation rules
-        $this->extendValidationRules();
-    }
+		// Registering custom validation rules
+		$this->extendValidationRules();
+	}
 
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        parent::register();
+	/**
+	 * Register any application services.
+	 *
+	 * @return void
+	 */
+	public function register()
+	{
+		parent::register();
 
-        $this->overrideLaravelBaseProviders();
+		$this->overrideLaravelBaseProviders();
 
-        // Register Core Facade Classes, should not be registered in the alias property above, since they are used
-        // by the auto-loading scripts, before the $aliases property is executed.
-        $this->app->alias(Apiato::class, 'Apiato');
-    }
+		// Register Core Facade Classes, should not be registered in the alias property above, since they are used
+		// by the auto-loading scripts, before the $aliases property is executed.
+		$this->app->alias(Apiato::class, 'Apiato');
+	}
 
-    /**
-     * Register Overided Base providers
-     *
-     * @see \Illuminate\Foundation\Application::registerBaseServiceProviders
-     * @return void
-     */
-    private function overrideLaravelBaseProviders()
-    {
-        App::register(EventServiceProvider::class); //The custom apiato eventserviceprovider
-    }
+	/**
+	 * Register Overided Base providers
+	 *
+	 * @return void
+	 * @see \Illuminate\Foundation\Application::registerBaseServiceProviders
+	 */
+	private function overrideLaravelBaseProviders()
+	{
+		App::register(EventServiceProvider::class); //The custom apiato eventserviceprovider
+	}
 
 }

@@ -13,34 +13,34 @@
  * @apiSuccessExample  {json}  Success-Response:
  * HTTP/1.1 200 OK
  *{
- *	"data": [
- *		{
- *			"id": 1489,
- *			"name": "1104",
- *			"dzlx_value": 101007,
- *			"hylx_value": 102001,
- *			"position": "{\"lat\": 31.82761109, \"lng\": 117.23366095}",
- *			"parent_name": "安徽省.合肥市.经开区.海恒社区.近春园居委会.滨湖时光.C02.1104",
- *			"created_at": "2019-12-01T06:00:07.000000Z",
- *			"updated_at": "2020-01-14T16:40:00.000000Z",
- *			"object": "Address",
- *			"hasChildren": false,
- *			"parent_id": "217"
+ *    "data": [
+ *        {
+ *            "id": 1489,
+ *            "name": "1104",
+ *            "dzlx_value": 101007,
+ *            "hylx_value": 102001,
+ *            "position": "{\"lat\": 31.82761109, \"lng\": 117.23366095}",
+ *            "parent_name": "安徽省.合肥市.经开区.海恒社区.近春园居委会.滨湖时光.C02.1104",
+ *            "created_at": "2019-12-01T06:00:07.000000Z",
+ *            "updated_at": "2020-01-14T16:40:00.000000Z",
+ *            "object": "Address",
+ *            "hasChildren": false,
+ *            "parent_id": "217"
  *
- *		{
- *			"id": 5239,
- *			"name": "1604",
- *			"dzlx_value": 101007,
- *			"hylx_value": 102001,
- *			"position": "{\"lat\": 31.82761109, \"lng\": 117.23366095}",
- *			"parent_name": "安徽省.合肥市.经开区.海恒社区.近春园居委会.滨湖时光.C02.1604",
- *			"created_at": "2019-12-01T06:00:27.000000Z",
- *			"updated_at": "2020-01-14T16:40:25.000000Z",
- *			"object": "Address",
- *			"hasChildren": false,
- *			"parent_id": "217"
- *		}
- *	]
+ *        {
+ *            "id": 5239,
+ *            "name": "1604",
+ *            "dzlx_value": 101007,
+ *            "hylx_value": 102001,
+ *            "position": "{\"lat\": 31.82761109, \"lng\": 117.23366095}",
+ *            "parent_name": "安徽省.合肥市.经开区.海恒社区.近春园居委会.滨湖时光.C02.1604",
+ *            "created_at": "2019-12-01T06:00:27.000000Z",
+ *            "updated_at": "2020-01-14T16:40:25.000000Z",
+ *            "object": "Address",
+ *            "hasChildren": false,
+ *            "parent_id": "217"
+ *        }
+ *    ]
  *}
  */
 

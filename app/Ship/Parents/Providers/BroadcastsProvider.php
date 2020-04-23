@@ -16,16 +16,16 @@ use function app_path;
 class BroadcastsProvider extends AbstractBroadcastsProvider
 {
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        Broadcast::routes();
+	/**
+	 * Bootstrap any application services.
+	 *
+	 * @return void
+	 */
+	public function boot()
+	{
+		Broadcast::routes();
 
-        require app_path('Ship/Broadcasts/Routes.php');
-    }
+		require app_path('Ship/Broadcasts/Routes.php');
+	}
 
 }

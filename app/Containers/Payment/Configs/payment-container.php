@@ -2,30 +2,30 @@
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Payment Container
-    |--------------------------------------------------------------------------
-    */
+	/*
+	|--------------------------------------------------------------------------
+	| Payment Container
+	|--------------------------------------------------------------------------
+	*/
 
 
-    /*
-     * The default currency if no currency is passed
-     */
-    'currency' => 'USD',
+	/*
+	 * The default currency if no currency is passed
+	 */
+	'currency' => 'USD',
 
-    'gateways' => [
+	'gateways' => [
 
-        'stripe' => [
-            'container'   => 'Stripe',
-            'charge_task' => App\Containers\Stripe\Tasks\ChargeWithStripeTask::class,
-        ],
+		'stripe' => [
+			'container' => 'Stripe',
+			'charge_task' => App\Containers\Stripe\Tasks\ChargeWithStripeTask::class,
+		],
 
-        'paypal' => [
-            // ...
-        ],
+		'paypal' => [
+			// ...
+		],
 
-        // ...
-    ],
+		// ...
+	],
 
 ];

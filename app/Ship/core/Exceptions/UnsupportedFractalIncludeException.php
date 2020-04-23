@@ -13,8 +13,8 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 class UnsupportedFractalIncludeException extends Exception
 {
 
-    public $httpStatusCode = SymfonyResponse::HTTP_BAD_REQUEST;
+	public $httpStatusCode = SymfonyResponse::HTTP_BAD_REQUEST;
 
-    public $message = 'Requested a invalid Include Parameter.';
+	public $message = 'Requested a invalid Include Parameter.';
 
 }

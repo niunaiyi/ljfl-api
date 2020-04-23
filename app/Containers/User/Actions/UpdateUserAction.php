@@ -6,7 +6,7 @@ use Apiato\Core\Foundation\Facades\Apiato;
 use App\Containers\User\Models\User;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Transporters\DataTransporter;
-use Illuminate\Support\Facades\Hash;
+use App\Ship\Parents\Requests\Request;
 
 /**
  * Class UpdateUserAction.
@@ -17,29 +17,25 @@ class UpdateUserAction extends Action
 {
 
 	/**
-	 * @param DataTransporter $data
-	 *
+	 * @param Request $request
 	 * @return  User
 	 */
-	public function run(DataTransporter $data): User
+	public function run(Request $request): User
 	{
-		$userData = [
-			'password' => $data->password ? Hash::make($data->password) : null,
-			'name' => $data->name,
-			'email' => $data->email,
-			'gender' => $data->gender,
-			'birth' => $data->birth,
-			'social_token' => $data->token,
-			'social_expires_in' => $data->expiresIn,
-			'social_refresh_token' => $data->refreshToken,
-			'social_token_secret' => $data->tokenSecret,
-		];
+		$data = $request->sanitizeInput([
+			'password',
+			'username',
+			'realname',
+			'phonenumber',
+			'address_id',
+		]);
 
-		// remove null values and their keys
-		$userData = array_filter($userData);
+		if ($request->has('roles')) {
+			$user = Apiato::call('User@UpdateUserRolesTask', [$request->id, $request->roles['data']]);
+		}
 
-		$user = Apiato::call('User@UpdateUserTask', [$userData, $data->id]);
 
+		$user = Apiato::call('User@UpdateUserTask', [$request->id, $data]);
 		return $user;
 	}
 }

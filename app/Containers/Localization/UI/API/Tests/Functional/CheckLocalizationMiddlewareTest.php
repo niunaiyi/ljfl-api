@@ -14,68 +14,68 @@ use Illuminate\Support\Facades\Config;
 class CheckLocalizationMiddlewareTest extends ApiTestCase
 {
 
-    // the endpoint to be called within this test (e.g., get@v1/users)
-    protected $endpoint = 'get@v1/localizations';
+	// the endpoint to be called within this test (e.g., get@v1/users)
+	protected $endpoint = 'get@v1/localizations';
 
-    // fake some access rights
-    protected $access = [
-        'permissions' => '',
-        'roles'       => '',
-    ];
+	// fake some access rights
+	protected $access = [
+		'permissions' => '',
+		'roles' => '',
+	];
 
-    /**
-     * @test
-     */
-    public function test_if_middleware_sets_default_app_language()
-    {
-        $data = [];
-        $requestHeaders = [];
+	/**
+	 * @test
+	 */
+	public function test_if_middleware_sets_default_app_language()
+	{
+		$data = [];
+		$requestHeaders = [];
 
-        // send the HTTP request
-        $response = $this->makeCall($data, $requestHeaders);
+		// send the HTTP request
+		$response = $this->makeCall($data, $requestHeaders);
 
-        // assert the response status
-        $response->assertStatus(200);
+		// assert the response status
+		$response->assertStatus(200);
 
-        $defaultLanguage = Config::get('app.locale');
+		$defaultLanguage = Config::get('app.locale');
 
-        // check if the header is properly set
-        $response->assertHeader('content-language', $defaultLanguage);
-    }
+		// check if the header is properly set
+		$response->assertHeader('content-language', $defaultLanguage);
+	}
 
-    public function test_if_middleware_sets_custom_language()
-    {
-        $language = 'fr';
+	public function test_if_middleware_sets_custom_language()
+	{
+		$language = 'fr';
 
-        $data = [];
-        $requestHeaders = [
-            'accept-language' => $language,
-        ];
+		$data = [];
+		$requestHeaders = [
+			'accept-language' => $language,
+		];
 
-        // send the HTTP request
-        $response = $this->makeCall($data, $requestHeaders);
+		// send the HTTP request
+		$response = $this->makeCall($data, $requestHeaders);
 
-        // assert the response status
-        $response->assertStatus(200);
+		// assert the response status
+		$response->assertStatus(200);
 
-        // check if the header is properly set
-        $response->assertHeader('content-language', $language);
-    }
+		// check if the header is properly set
+		$response->assertHeader('content-language', $language);
+	}
 
-    public function test_if_middleware_throws_error_on_wrong_language()
-    {
-        $language = 'xxx';
+	public function test_if_middleware_throws_error_on_wrong_language()
+	{
+		$language = 'xxx';
 
-        $data = [];
-        $requestHeaders = [
-            'accept-language' => $language,
-        ];
+		$data = [];
+		$requestHeaders = [
+			'accept-language' => $language,
+		];
 
-        // send the HTTP request
-        $response = $this->makeCall($data, $requestHeaders);
+		// send the HTTP request
+		$response = $this->makeCall($data, $requestHeaders);
 
-        // assert the response status
-        $response->assertStatus(412);
-    }
+		// assert the response status
+		$response->assertStatus(412);
+	}
 
 }

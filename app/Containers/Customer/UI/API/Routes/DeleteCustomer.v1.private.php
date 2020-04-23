@@ -21,9 +21,9 @@
 
 /** @var Route $router */
 $router->delete('customers/{id}', [
-  'as' => 'api_customer_delete_customer',
-  'uses' => 'Controller@deleteCustomer',
-  'middleware' => [
-    'auth:api',
-  ],
+	'as' => 'api_customer_delete_customer',
+	'uses' => 'Controller@deleteCustomer',
+	'middleware' => [
+		'auth:api',
+	],
 ]);

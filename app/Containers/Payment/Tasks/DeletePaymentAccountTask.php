@@ -16,23 +16,23 @@ use Exception;
 class DeletePaymentAccountTask extends Task
 {
 
-    protected $repository;
+	protected $repository;
 
-    public function __construct(PaymentAccountRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+	public function __construct(PaymentAccountRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-    public function run(PaymentAccount $account)
-    {
-        try {
-            // first, get the associated account and remove this one!
-            $account->accountable->delete();
+	public function run(PaymentAccount $account)
+	{
+		try {
+			// first, get the associated account and remove this one!
+			$account->accountable->delete();
 
-            // then remove the payment account
-            return $this->repository->delete($account->id);
-        } catch (Exception $exception) {
-            throw new DeleteResourceFailedException();
-        }
-    }
+			// then remove the payment account
+			return $this->repository->delete($account->id);
+		} catch (Exception $exception) {
+			throw new DeleteResourceFailedException();
+		}
+	}
 }

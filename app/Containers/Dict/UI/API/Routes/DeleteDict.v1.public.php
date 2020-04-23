@@ -21,9 +21,9 @@
 
 /** @var Route $router */
 $router->delete('dicts/{id}', [
-  'as' => 'api_dict_delete_dict',
-  'uses' => 'Controller@deleteDict',
-  'middleware' => [
-    'auth:api',
-  ],
+	'as' => 'api_dict_delete_dict',
+	'uses' => 'Controller@deleteDict',
+	'middleware' => [
+		'auth:api',
+	],
 ]);

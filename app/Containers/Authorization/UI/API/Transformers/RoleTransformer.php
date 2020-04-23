@@ -29,14 +29,9 @@ class RoleTransformer extends Transformer
 	 */
 	public function transform(Role $role)
 	{
-		return [
-			'object' => 'Role',
-			'id' => $role->getHashedKey(), // << Unique Identifier
-			'name' => $role->name, // << Unique Identifier
-			'description' => $role->description,
-			'display_name' => $role->display_name,
-			'level' => $role->level,
-		];
+		$reponse = $role->toArray();
+		$reponse['object'] = 'Role';
+		return $reponse;
 	}
 
 	/**

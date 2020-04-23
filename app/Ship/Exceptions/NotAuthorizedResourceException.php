@@ -13,8 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 class NotAuthorizedResourceException extends Exception
 {
 
-    public $httpStatusCode = Response::HTTP_FORBIDDEN;
+	public $httpStatusCode = Response::HTTP_FORBIDDEN;
 
-    public $message = 'You are not authorized to request this resource.';
+	public $message = 'You are not authorized to request this resource.';
 
 }

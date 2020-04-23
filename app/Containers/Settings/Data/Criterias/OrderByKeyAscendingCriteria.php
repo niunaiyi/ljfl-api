@@ -12,14 +12,14 @@ use Prettus\Repository\Contracts\RepositoryInterface as PrettusRepositoryInterfa
  */
 class OrderByKeyAscendingCriteria extends Criteria
 {
-    /**
-     * @param                                                   $model
-     * @param \Prettus\Repository\Contracts\RepositoryInterface $repository
-     *
-     * @return mixed
-     */
-    public function apply($model, PrettusRepositoryInterface $repository)
-    {
-        return $model->orderBy('key', 'asc');
-    }
+	/**
+	 * @param                                                   $model
+	 * @param \Prettus\Repository\Contracts\RepositoryInterface $repository
+	 *
+	 * @return mixed
+	 */
+	public function apply($model, PrettusRepositoryInterface $repository)
+	{
+		return $model->orderBy('key', 'asc');
+	}
 }

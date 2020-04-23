@@ -12,13 +12,13 @@ use App\Ship\Parents\Seeders\Seeder;
 class SettingsDefaultSettingsSeeder extends Seeder
 {
 
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
 //        $settings = new Settings();
 //        $settings->key = 'referring_user_points';
 //        $settings->value = '200';
@@ -28,5 +28,5 @@ class SettingsDefaultSettingsSeeder extends Seeder
 //        $settings->key = 'referred_user_points';
 //        $settings->value = '200';
 //        $settings->save();
-    }
+	}
 }

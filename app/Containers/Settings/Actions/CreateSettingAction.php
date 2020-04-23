@@ -15,20 +15,20 @@ use App\Ship\Transporters\DataTransporter;
 class CreateSettingAction extends Action
 {
 
-    /**
-     * @param \App\Ship\Transporters\DataTransporter $data
-     *
-     * @return  \App\Containers\Settings\Models\Setting
-     */
-    public function run(DataTransporter $data): Setting
-    {
-        $data = $data->sanitizeInput([
-            'key',
-            'value'
-        ]);
+	/**
+	 * @param \App\Ship\Transporters\DataTransporter $data
+	 *
+	 * @return  \App\Containers\Settings\Models\Setting
+	 */
+	public function run(DataTransporter $data): Setting
+	{
+		$data = $data->sanitizeInput([
+			'key',
+			'value'
+		]);
 
-        $setting = Apiato::call('Settings@CreateSettingTask', [$data]);
+		$setting = Apiato::call('Settings@CreateSettingTask', [$data]);
 
-        return $setting;
-    }
+		return $setting;
+	}
 }

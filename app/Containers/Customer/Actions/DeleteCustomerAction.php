@@ -8,8 +8,8 @@ use App\Ship\Parents\Requests\Request;
 
 class DeleteCustomerAction extends Action
 {
-  public function run(Request $request)
-  {
-    return Apiato::call('Customer@DeleteCustomerTask', [$request->id]);
-  }
+	public function run(Request $request)
+	{
+		return Apiato::call('Customer@DeleteCustomerTask', [$request->id]);
+	}
 }

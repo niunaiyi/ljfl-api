@@ -18,11 +18,16 @@ use Spatie\Permission\Traits\HasRoles;
 abstract class UserModel extends AbstractUserModel
 {
 
-    use Notifiable;
-    use SoftDeletes;
-    use HashIdTrait;
-    use HasRoles;
-    use HasApiTokens;
-    use HasResourceKeyTrait;
+	use Notifiable;
+	use SoftDeletes;
+	use HashIdTrait;
+	use HasRoles;
+	use HasApiTokens;
+	use HasResourceKeyTrait;
 
+	protected $casts = [
+		'created_at' => 'datetime:Y-m-d H:m:s',
+		'updated_at' => 'datetime:Y-m-d H:m:s',
+		'deleted_at' => 'datetime:Y-m-d H:m:s',
+	];
 }

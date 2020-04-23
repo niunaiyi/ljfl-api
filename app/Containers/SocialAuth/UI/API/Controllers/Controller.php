@@ -16,23 +16,23 @@ use App\Ship\Transporters\DataTransporter;
 class Controller extends ApiController
 {
 
-    /**
-     * @param \App\Containers\SocialAuth\UI\API\Requests\ApiAuthenticateRequest $request
-     * @param                                                                   $providerUrlInput
-     *
-     * @return  array
-     */
-    public function authenticateAll(ApiAuthenticateRequest $request, $providerUrlInput)
-    {
-        $dataTransporter = new DataTransporter($request);
-        $dataTransporter->provider = $providerUrlInput;
+	/**
+	 * @param \App\Containers\SocialAuth\UI\API\Requests\ApiAuthenticateRequest $request
+	 * @param                                                                   $providerUrlInput
+	 *
+	 * @return  array
+	 */
+	public function authenticateAll(ApiAuthenticateRequest $request, $providerUrlInput)
+	{
+		$dataTransporter = new DataTransporter($request);
+		$dataTransporter->provider = $providerUrlInput;
 
-        $data = Apiato::call('Socialauth@SocialLoginAction', [$dataTransporter]);
+		$data = Apiato::call('Socialauth@SocialLoginAction', [$dataTransporter]);
 
-        return $this->transform($data['user'], UserTransformer::class, [], [
-            'token_type'   => 'personal',
-            'access_token' => $data['token']->accessToken,
-        ]);
-    }
+		return $this->transform($data['user'], UserTransformer::class, [], [
+			'token_type' => 'personal',
+			'access_token' => $data['token']->accessToken,
+		]);
+	}
 
 }

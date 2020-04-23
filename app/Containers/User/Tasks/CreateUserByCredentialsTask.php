@@ -17,46 +17,46 @@ use Illuminate\Support\Facades\Hash;
 class CreateUserByCredentialsTask extends Task
 {
 
-  protected $repository;
+	protected $repository;
 
-  public function __construct(UserRepository $repository)
-  {
-    $this->repository = $repository;
-  }
+	public function __construct(UserRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-  /**
-   * @param string $username
-   * @param string $realname
-   * @param string $phonenumber
-   * @param string $password
-   * @param string $address_id
-   *
-   * @return  mixed
-   */
-  public function run(
-    string $username,
-    string $realname,
-    string $phonenumber,
-    string $password,
-    string $address_id
-  ): User
-  {
+	/**
+	 * @param string $username
+	 * @param string $realname
+	 * @param string $phonenumber
+	 * @param string $password
+	 * @param string $address_id
+	 *
+	 * @return  mixed
+	 */
+	public function run(
+		string $username,
+		string $realname,
+		string $phonenumber,
+		string $password,
+		string $address_id
+	): User
+	{
 
-    try {
-      // create new user
-      $user = $this->repository->create([
-        'password' => bcrypt($password),
-        'username' => $username,
-        'realname' => $realname,
-        'phonenumber' => $phonenumber,
-        'address_id' => $address_id,
-      ]);
+		try {
+			// create new user
+			$user = $this->repository->create([
+				'password' => bcrypt($password),
+				'username' => $username,
+				'realname' => $realname,
+				'phonenumber' => $phonenumber,
+				'address_id' => $address_id,
+			]);
 
-    } catch (Exception $e) {
-      throw (new CreateResourceFailedException())->debug($e);
-    }
+		} catch (Exception $e) {
+			throw (new CreateResourceFailedException())->debug($e);
+		}
 
-    return $user;
-  }
+		return $user;
+	}
 
 }

@@ -13,36 +13,36 @@ use App\Ship\Parents\Providers\MiddlewareProvider;
 class MiddlewareServiceProvider extends MiddlewareProvider
 {
 
-    /**
-     * Register Middleware's
-     *
-     * @var  array
-     */
-    protected $middlewares = [
-        RequestsMonitorMiddleware::class,
-    ];
+	/**
+	 * Register Middleware's
+	 *
+	 * @var  array
+	 */
+	protected $middlewares = [
+		RequestsMonitorMiddleware::class,
+	];
 
-    /**
-     * Register Container Middleware Groups
-     *
-     * @var  array
-     */
-    protected $middlewareGroups = [
-        'web' => [
+	/**
+	 * Register Container Middleware Groups
+	 *
+	 * @var  array
+	 */
+	protected $middlewareGroups = [
+		'web' => [
 
-        ],
-        'api' => [
+		],
+		'api' => [
 
-        ],
-    ];
+		],
+	];
 
-    /**
-     * Register Route Middleware's
-     *
-     * @var  array
-     */
-    protected $routeMiddleware = [
-        // ..
-    ];
+	/**
+	 * Register Route Middleware's
+	 *
+	 * @var  array
+	 */
+	protected $routeMiddleware = [
+		// ..
+	];
 
 }

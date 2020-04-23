@@ -8,8 +8,8 @@ use App\Ship\Parents\Requests\Request;
 
 class DeleteDictAction extends Action
 {
-  public function run(Request $request)
-  {
-    return Apiato::call('Dict@DeleteDictTask', [$request->id]);
-  }
+	public function run(Request $request)
+	{
+		return Apiato::call('Dict@DeleteDictTask', [$request->id]);
+	}
 }

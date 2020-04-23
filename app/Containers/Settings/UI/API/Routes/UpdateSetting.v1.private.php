@@ -14,24 +14,24 @@
  *
  * @apiSuccessExample  {json}  Success-Response:
  * HTTP/1.1 200 OK
-{
-    "data": {
-        "object": "Setting",
-        "id": "aadfa72342sa",
-        "key": "foo",
-        "value": "bar"
-    },
-    "meta": {
-        "include": [],
-        "custom": []
-    }
-}
+ * {
+ * "data": {
+ * "object": "Setting",
+ * "id": "aadfa72342sa",
+ * "key": "foo",
+ * "value": "bar"
+ * },
+ * "meta": {
+ * "include": [],
+ * "custom": []
+ * }
+ * }
  */
 
 $router->patch('settings/{id}', [
-    'as' => 'api_settings_update_setting',
-    'uses'  => 'Controller@updateSetting',
-    'middleware' => [
-      'auth:api',
-    ],
+	'as' => 'api_settings_update_setting',
+	'uses' => 'Controller@updateSetting',
+	'middleware' => [
+		'auth:api',
+	],
 ]);

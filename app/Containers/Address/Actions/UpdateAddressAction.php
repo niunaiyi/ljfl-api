@@ -3,13 +3,14 @@
 namespace App\Containers\Address\Actions;
 
 use Apiato\Core\Foundation\Facades\Apiato;
+use App\Containers\Address\Models\Address;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
 use Log;
 
 class UpdateAddressAction extends Action
 {
-	public function run(Request $request)
+	public function run(Request $request): Address
 	{
 		$data = $request->sanitizeInput([
 			'dzlx_value',

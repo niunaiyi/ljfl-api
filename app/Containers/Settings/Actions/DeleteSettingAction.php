@@ -14,13 +14,13 @@ use App\Ship\Transporters\DataTransporter;
 class DeleteSettingAction extends Action
 {
 
-    /**
-     * @param \App\Ship\Transporters\DataTransporter $data
-     */
-    public function run(DataTransporter $data): void
-    {
-        $setting = Apiato::call('Settings@FindSettingByIdTask', [$data->id]);
+	/**
+	 * @param \App\Ship\Transporters\DataTransporter $data
+	 */
+	public function run(DataTransporter $data): void
+	{
+		$setting = Apiato::call('Settings@FindSettingByIdTask', [$data->id]);
 
-        Apiato::call('Settings@DeleteSettingTask', [$setting]);
-    }
+		Apiato::call('Settings@DeleteSettingTask', [$setting]);
+	}
 }

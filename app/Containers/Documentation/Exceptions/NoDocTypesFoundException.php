@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class NoDocTypesFoundException extends Exception
 {
-    public $httpStatusCode = Response::HTTP_MISDIRECTED_REQUEST;
+	public $httpStatusCode = Response::HTTP_MISDIRECTED_REQUEST;
 
-    public $message = 'Please update your config file.';
+	public $message = 'Please update your config file.';
 }

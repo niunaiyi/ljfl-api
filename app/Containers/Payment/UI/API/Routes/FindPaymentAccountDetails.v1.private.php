@@ -15,15 +15,15 @@
  *
  * @apiSuccessExample  {json}  Success-Response:
  * HTTP/1.1 200 OK
-{
-  // Insert the response of the request here...
-}
+ * {
+ * // Insert the response of the request here...
+ * }
  */
 
 $router->get('user/paymentaccounts/{id}', [
-    'as' => 'api_payment_get_payment_account_details',
-    'uses'  => 'Controller@findPaymentAccountDetails',
-    'middleware' => [
-      'auth:api',
-    ],
+	'as' => 'api_payment_get_payment_account_details',
+	'uses' => 'Controller@findPaymentAccountDetails',
+	'middleware' => [
+		'auth:api',
+	],
 ]);

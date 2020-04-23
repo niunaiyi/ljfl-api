@@ -13,15 +13,15 @@ use Illuminate\Support\Facades\Config;
 class Notification extends LaravelNotification
 {
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
-    {
-        return Config::get('notification.channels');
-    }
+	/**
+	 * Get the notification's delivery channels.
+	 *
+	 * @param mixed $notifiable
+	 * @return array
+	 */
+	public function via($notifiable)
+	{
+		return Config::get('notification.channels');
+	}
 
 }

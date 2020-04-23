@@ -8,15 +8,15 @@ use App\Ship\Parents\Tasks\Task;
 class GetAllCustomersTask extends Task
 {
 
-  protected $repository;
+	protected $repository;
 
-  public function __construct(CustomerRepository $repository)
-  {
-    $this->repository = $repository;
-  }
+	public function __construct(CustomerRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-  public function run()
-  {
-    return $this->repository->paginate();
-  }
+	public function run()
+	{
+		return $this->repository->paginate();
+	}
 }

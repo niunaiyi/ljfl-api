@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ChargerTaskDoesNotImplementInterfaceException extends Exception
 {
-    public $httpStatusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+	public $httpStatusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
 
-    public $message = 'The task is not valid. Maybe you are missing an Interface?';
+	public $message = 'The task is not valid. Maybe you are missing an Interface?';
 }

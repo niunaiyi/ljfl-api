@@ -13,30 +13,30 @@ use Prettus\Repository\Contracts\RepositoryInterface as PrettusRepositoryInterfa
 class GroupByCriteria extends Criteria
 {
 
-    /**
-     * @var
-     */
-    private $field;
+	/**
+	 * @var
+	 */
+	private $field;
 
-    /**
-     * ThisFieldCriteria constructor.
-     *
-     * @param $field
-     */
-    public function __construct($field)
-    {
-        $this->field = $field;
-    }
+	/**
+	 * ThisFieldCriteria constructor.
+	 *
+	 * @param $field
+	 */
+	public function __construct($field)
+	{
+		$this->field = $field;
+	}
 
-    /**
-     * @param                                                   $model
-     * @param \Prettus\Repository\Contracts\RepositoryInterface $repository
-     *
-     * @return  mixed
-     */
-    public function apply($model, PrettusRepositoryInterface $repository)
-    {
-        return $model->groupBy($this->field);
-    }
+	/**
+	 * @param                                                   $model
+	 * @param \Prettus\Repository\Contracts\RepositoryInterface $repository
+	 *
+	 * @return  mixed
+	 */
+	public function apply($model, PrettusRepositoryInterface $repository)
+	{
+		return $model->groupBy($this->field);
+	}
 
 }

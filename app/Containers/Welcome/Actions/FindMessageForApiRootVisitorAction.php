@@ -12,11 +12,11 @@ use App\Ship\Parents\Actions\Action;
 class FindMessageForApiRootVisitorAction extends Action
 {
 
-    /**
-     * @return  array
-     */
-    public function run()
-    {
-        return [trans('localization::messages.welcome')];
-    }
+	/**
+	 * @return  array
+	 */
+	public function run()
+	{
+		return [trans('localization::messages.welcome')];
+	}
 }

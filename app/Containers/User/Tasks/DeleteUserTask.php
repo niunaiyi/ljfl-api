@@ -16,26 +16,26 @@ use Exception;
 class DeleteUserTask extends Task
 {
 
-  protected $repository;
+	protected $repository;
 
-  public function __construct(UserRepository $repository)
-  {
-    $this->repository = $repository;
-  }
+	public function __construct(UserRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-  /**
-   *
-   * @param User $user
-   *
-   * @return bool
-   * @throws DeleteResourceFailedException
-   */
-  public function run(User $user)
-  {
-    try {
-      return $this->repository->delete($user->id);
-    } catch (Exception $exception) {
-      throw new DeleteResourceFailedException();
-    }
-  }
+	/**
+	 *
+	 * @param User $user
+	 *
+	 * @return bool
+	 * @throws DeleteResourceFailedException
+	 */
+	public function run($id)
+	{
+		try {
+			return $this->repository->delete($id);
+		} catch (Exception $exception) {
+			throw new DeleteResourceFailedException();
+		}
+	}
 }

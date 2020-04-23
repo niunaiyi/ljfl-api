@@ -14,27 +14,27 @@ use App\Ship\Parents\Tasks\Task;
 class FindSettingByKeyTask extends Task
 {
 
-    protected $repository;
+	protected $repository;
 
-    public function __construct(SettingRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+	public function __construct(SettingRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-    /**
-     * @param $key
-     *
-     * @return mixed
-     * @throws NotFoundException
-     */
-    public function run($key)
-    {
-        $result = $this->repository->findWhere(['key' => $key])->first();
+	/**
+	 * @param $key
+	 *
+	 * @return mixed
+	 * @throws NotFoundException
+	 */
+	public function run($key)
+	{
+		$result = $this->repository->findWhere(['key' => $key])->first();
 
-        if (! $result) {
-            throw new NotFoundException();
-        }
+		if (!$result) {
+			throw new NotFoundException();
+		}
 
-        return $result->value;
-    }
+		return $result->value;
+	}
 }

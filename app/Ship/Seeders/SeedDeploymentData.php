@@ -12,14 +12,14 @@ use App\Ship\Parents\Seeders\Seeder;
 class SeedDeploymentData extends Seeder
 {
 
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        // Create data for live deployment here
-    }
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+		// Create data for live deployment here
+	}
 
 }

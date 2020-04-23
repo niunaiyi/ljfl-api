@@ -17,27 +17,27 @@ use Exception;
 class FindPaymentAccountByIdTask extends Task
 {
 
-    protected $repository;
+	protected $repository;
 
-    public function __construct(PaymentAccountRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+	public function __construct(PaymentAccountRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-    /**
-     * @param $id
-     *
-     * @return  mixed
-     * @throws  NotFoundException
-     */
-    public function run($id): PaymentAccount
-    {
-        try {
-            $paymentAccount = $this->repository->find($id);
-        } catch (Exception $exception) {
-            throw new NotFoundException();
-        }
+	/**
+	 * @param $id
+	 *
+	 * @return  mixed
+	 * @throws  NotFoundException
+	 */
+	public function run($id): PaymentAccount
+	{
+		try {
+			$paymentAccount = $this->repository->find($id);
+		} catch (Exception $exception) {
+			throw new NotFoundException();
+		}
 
-        return $paymentAccount;
-    }
+		return $paymentAccount;
+	}
 }

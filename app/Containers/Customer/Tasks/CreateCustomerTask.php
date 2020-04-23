@@ -10,19 +10,19 @@ use Exception;
 class CreateCustomerTask extends Task
 {
 
-  protected $repository;
+	protected $repository;
 
-  public function __construct(CustomerRepository $repository)
-  {
-    $this->repository = $repository;
-  }
+	public function __construct(CustomerRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-  public function run(array $data)
-  {
-    try {
-      return $this->repository->create($data);
-    } catch (Exception $exception) {
-      throw new CreateResourceFailedException();
-    }
-  }
+	public function run(array $data)
+	{
+		try {
+			return $this->repository->create($data);
+		} catch (Exception $exception) {
+			throw new CreateResourceFailedException();
+		}
+	}
 }

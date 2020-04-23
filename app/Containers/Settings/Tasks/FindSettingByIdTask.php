@@ -10,26 +10,25 @@ use Exception;
 class FindSettingByIdTask extends Task
 {
 
-    protected $repository;
+	protected $repository;
 
-    public function __construct(SettingRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+	public function __construct(SettingRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-    /**
-     * @param $id
-     *
-     * @return mixed
-     * @throws NotFoundException
-     */
-    public function run($id)
-    {
-        try {
-            return $this->repository->find($id);
-        }
-        catch (Exception $exception) {
-            throw new NotFoundException();
-        }
-    }
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 * @throws NotFoundException
+	 */
+	public function run($id)
+	{
+		try {
+			return $this->repository->find($id);
+		} catch (Exception $exception) {
+			throw new NotFoundException();
+		}
+	}
 }

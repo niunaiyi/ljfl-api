@@ -14,30 +14,30 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PaymentAccount extends Model
 {
 
-    use SoftDeletes;
+	use SoftDeletes;
 
-    protected $fillable = [
-        'user_id',
-        'name',
-        'accountable_id',
-        'accountable_type',
-    ];
+	protected $fillable = [
+		'user_id',
+		'name',
+		'accountable_id',
+		'accountable_type',
+	];
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-    ];
+	protected $dates = [
+		'created_at',
+		'updated_at',
+	];
 
-    protected $casts = [
-        'user_id' => 'integer',
-    ];
+	protected $casts = [
+		'user_id' => 'integer',
+	];
 
 
-    /**
-     * @return  \Illuminate\Database\Eloquent\Relations\MorphTo
-     */
-    public function accountable()
-    {
-        return $this->morphTo();
-    }
+	/**
+	 * @return  \Illuminate\Database\Eloquent\Relations\MorphTo
+	 */
+	public function accountable()
+	{
+		return $this->morphTo();
+	}
 }

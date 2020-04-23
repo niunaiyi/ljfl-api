@@ -28,7 +28,7 @@
  *                               102004:住宅</br>
  *                               102005:党政机关</br>
  *                               102006:企业</br>
- * @apiParam		   {json}    [position]  地理位置
+ * @apiParam           {json}    [position]  地理位置
  * @apiParam           {Number}  [parent_id] 上级地址
  *
  * @apiParamExample {json} position:
@@ -40,26 +40,26 @@
  * @apiSuccessExample  {json}  Success-Response:
  * HTTP/1.1 200 OK
  * {
- *	"data": {
- *		"name": "1502",
- *		"dzlx_value": 101007,
- *		"hylx_value": 102001,
- *		"position": {
- * 			"lat":32.82761129,
- * 			"lng":117.23366095
- * 		},
- *		"parent_name": "安徽省.合肥市.经开区.海恒社区.近春园居委会.滨湖时光.B03",
- *		"updated_at": "2020-04-22T07:26:32.000000Z",
- *		"created_at": "2020-04-22T07:26:32.000000Z",
- *		"id": 51103,
- *		"object": "Address",
- *		"hasChildren": true,
- *		"parent_id": "41",
- *	},
- *	"meta": {
- *		"include": [],
- *		"custom": []
- *	}
+ *    "data": {
+ *        "name": "1502",
+ *        "dzlx_value": 101007,
+ *        "hylx_value": 102001,
+ *        "position": {
+ *            "lat":32.82761129,
+ *            "lng":117.23366095
+ *        },
+ *        "parent_name": "安徽省.合肥市.经开区.海恒社区.近春园居委会.滨湖时光.B03",
+ *        "updated_at": "2020-04-22T07:26:32.000000Z",
+ *        "created_at": "2020-04-22T07:26:32.000000Z",
+ *        "id": 51103,
+ *        "object": "Address",
+ *        "hasChildren": true,
+ *        "parent_id": "41",
+ *    },
+ *    "meta": {
+ *        "include": [],
+ *        "custom": []
+ *    }
  * }
  */
 
@@ -67,7 +67,7 @@
 $router->patch('addresses/{id}', [
 	'as' => 'api_address_update_address',
 	'uses' => 'Controller@updateAddress',
-//    'middleware' => [
-//      'auth:api',
-//    ],
+	'middleware' => [
+		'auth:api',
+	],
 ]);

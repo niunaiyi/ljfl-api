@@ -11,5 +11,5 @@ use App\Containers\Localization\Tests\TestCase as BaseTestCase;
  */
 class ApiTestCase extends BaseTestCase
 {
-    // ..
+	// ..
 }

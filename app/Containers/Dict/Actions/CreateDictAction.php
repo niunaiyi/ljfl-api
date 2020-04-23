@@ -8,14 +8,14 @@ use App\Ship\Parents\Requests\Request;
 
 class CreateDictAction extends Action
 {
-  public function run(Request $request)
-  {
-    $data = $request->sanitizeInput([
-      // add your request data here
-    ]);
+	public function run(Request $request)
+	{
+		$data = $request->sanitizeInput([
+			// add your request data here
+		]);
 
-    $dict = Apiato::call('Dict@CreateDictTask', [$data]);
+		$dict = Apiato::call('Dict@CreateDictTask', [$data]);
 
-    return $dict;
-  }
+		return $dict;
+	}
 }

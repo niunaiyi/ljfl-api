@@ -14,17 +14,17 @@ use App\Ship\Parents\Controllers\ApiController;
  */
 class Controller extends ApiController
 {
-    /**
-     * Get all supported Localizations of the application.
-     *
-     * @param GetAllLocalizationsRequest $request
-     *
-     * @return array
-     */
-    public function getAllLocalizations(GetAllLocalizationsRequest $request)
-    {
-        $localizations = Apiato::call('Localization@GetAllLocalizationsAction');
+	/**
+	 * Get all supported Localizations of the application.
+	 *
+	 * @param GetAllLocalizationsRequest $request
+	 *
+	 * @return array
+	 */
+	public function getAllLocalizations(GetAllLocalizationsRequest $request)
+	{
+		$localizations = Apiato::call('Localization@GetAllLocalizationsAction');
 
-        return $this->transform($localizations, LocalizationTransformer::class);
-    }
+		return $this->transform($localizations, LocalizationTransformer::class);
+	}
 }

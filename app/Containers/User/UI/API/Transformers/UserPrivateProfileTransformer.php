@@ -14,36 +14,36 @@ use App\Ship\Parents\Transformers\Transformer;
 class UserPrivateProfileTransformer extends Transformer
 {
 
-  /**
-   * @var  array
-   */
-  protected $availableIncludes = [
-    'roles',
-  ];
+	/**
+	 * @var  array
+	 */
+	protected $availableIncludes = [
+		'roles',
+	];
 
-  /**
-   * @var  array
-   */
-  protected $defaultIncludes = [
+	/**
+	 * @var  array
+	 */
+	protected $defaultIncludes = [
 
-  ];
+	];
 
-  /**
-   * @param \App\Containers\User\Models\User $user
-   *
-   * @return array
-   */
-  public function transform(User $user)
-  {
-    $response = $user->toArray();
-    $response  ['object'] = 'User';
+	/**
+	 * @param \App\Containers\User\Models\User $user
+	 *
+	 * @return array
+	 */
+	public function transform(User $user)
+	{
+		$response = $user->toArray();
+		$response  ['object'] = 'User';
 
-    return $response;
-  }
+		return $response;
+	}
 
-  public function includeRoles(User $user)
-  {
-    return $this->collection($user->roles, new RoleTransformer());
-  }
+	public function includeRoles(User $user)
+	{
+		return $this->collection($user->roles, new RoleTransformer());
+	}
 
 }

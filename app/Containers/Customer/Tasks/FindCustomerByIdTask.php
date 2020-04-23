@@ -10,19 +10,19 @@ use Exception;
 class FindCustomerByIdTask extends Task
 {
 
-  protected $repository;
+	protected $repository;
 
-  public function __construct(CustomerRepository $repository)
-  {
-    $this->repository = $repository;
-  }
+	public function __construct(CustomerRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-  public function run($id)
-  {
-    try {
-      return $this->repository->find($id);
-    } catch (Exception $exception) {
-      throw new NotFoundException();
-    }
-  }
+	public function run($id)
+	{
+		try {
+			return $this->repository->find($id);
+		} catch (Exception $exception) {
+			throw new NotFoundException();
+		}
+	}
 }

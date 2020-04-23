@@ -10,12 +10,12 @@ use App\Ship\Parents\Repositories\Repository;
 class PaymentAccountRepository extends Repository
 {
 
-    /**
-     * @var array
-     */
-    protected $fieldSearchable = [
-        'id'    => '=',
-        'name'  => 'like',
-    ];
+	/**
+	 * @var array
+	 */
+	protected $fieldSearchable = [
+		'id' => '=',
+		'name' => 'like',
+	];
 
 }

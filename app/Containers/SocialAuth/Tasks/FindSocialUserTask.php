@@ -13,25 +13,25 @@ use App\Ship\Parents\Tasks\Task;
 class FindSocialUserTask extends Task
 {
 
-    protected $repository;
+	protected $repository;
 
-    public function __construct(UserRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+	public function __construct(UserRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-    /**
-     * @param $socialProvider
-     * @param $socialId
-     *
-     * @return  mixed
-     */
-    public function run($socialProvider, $socialId)
-    {
-        return $this->repository->findWhere([
-            'social_provider' => $socialProvider,
-            'social_id'       => $socialId,
-        ])->first();
-    }
+	/**
+	 * @param $socialProvider
+	 * @param $socialId
+	 *
+	 * @return  mixed
+	 */
+	public function run($socialProvider, $socialId)
+	{
+		return $this->repository->findWhere([
+			'social_provider' => $socialProvider,
+			'social_id' => $socialId,
+		])->first();
+	}
 
 }

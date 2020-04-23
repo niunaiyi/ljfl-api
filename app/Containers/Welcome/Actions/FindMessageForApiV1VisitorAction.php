@@ -12,11 +12,11 @@ use App\Ship\Parents\Actions\Action;
 class FindMessageForApiV1VisitorAction extends Action
 {
 
-    /**
-     * @return  array
-     */
-    public function run()
-    {
-        return [trans('localization::messages.welcome') . ' (API V1)'];
-    }
+	/**
+	 * @return  array
+	 */
+	public function run()
+	{
+		return [trans('localization::messages.welcome') . ' (API V1)'];
+	}
 }

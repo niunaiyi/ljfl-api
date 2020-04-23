@@ -15,18 +15,18 @@ use App\Ship\Parents\Tasks\Task;
 class CreatePasswordResetTask extends Task
 {
 
-  /**
-   * @param \App\Containers\User\Models\User $user
-   *
-   * @return mixed
-   * @throws InternalErrorException
-   */
-  public function run(User $user)
-  {
-    try {
-      return app('auth.password.broker')->createToken($user);
-    } catch (Exception $e) {
-      throw new InternalErrorException();
-    }
-  }
+	/**
+	 * @param \App\Containers\User\Models\User $user
+	 *
+	 * @return mixed
+	 * @throws InternalErrorException
+	 */
+	public function run(User $user)
+	{
+		try {
+			return app('auth.password.broker')->createToken($user);
+		} catch (Exception $e) {
+			throw new InternalErrorException();
+		}
+	}
 }

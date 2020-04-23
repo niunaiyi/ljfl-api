@@ -15,19 +15,19 @@ use App\Ship\Parents\Tasks\Task;
 class CheckIfPaymentAccountBelongsToUserTask extends Task
 {
 
-    /**
-     * @param \App\Containers\User\Models\User              $user
-     * @param \App\Containers\Payment\Models\PaymentAccount $account
-     *
-     * @return bool
-     * @throws PaymentAccountDoesNotBelongToUserException
-     */
-    public function run(User $user, PaymentAccount $account): bool
-    {
-        if ($user->id !== $account->user_id) {
-            throw new PaymentAccountDoesNotBelongToUserException();
-        }
+	/**
+	 * @param \App\Containers\User\Models\User $user
+	 * @param \App\Containers\Payment\Models\PaymentAccount $account
+	 *
+	 * @return bool
+	 * @throws PaymentAccountDoesNotBelongToUserException
+	 */
+	public function run(User $user, PaymentAccount $account): bool
+	{
+		if ($user->id !== $account->user_id) {
+			throw new PaymentAccountDoesNotBelongToUserException();
+		}
 
-        return true;
-    }
+		return true;
+	}
 }

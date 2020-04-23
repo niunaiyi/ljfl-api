@@ -12,28 +12,28 @@ use App\Containers\Payment\Models\PaymentTransaction;
 trait MockablePaymentsTrait
 {
 
-    public function mockPayments()
-    {
-        // Mock Stripe charging
-        if (class_exists($chargeWithStripeTask = \App\Containers\Stripe\Tasks\ChargeWithStripeTask::class)) {
-            $this->mockIt($chargeWithStripeTask)
-                 ->shouldReceive('charge')
-                 ->andReturn(new PaymentTransaction([
-                        'user_id' => 1,
+	public function mockPayments()
+	{
+		// Mock Stripe charging
+		if (class_exists($chargeWithStripeTask = \App\Containers\Stripe\Tasks\ChargeWithStripeTask::class)) {
+			$this->mockIt($chargeWithStripeTask)
+				->shouldReceive('charge')
+				->andReturn(new PaymentTransaction([
+						'user_id' => 1,
 
-                        'gateway' => 'Stripe',
-                        'transaction_id' => 'tx_1234567890',
-                        'status' => 'success',
-                        'is_successful' => true,
+						'gateway' => 'Stripe',
+						'transaction_id' => 'tx_1234567890',
+						'status' => 'success',
+						'is_successful' => true,
 
-                        'amount' => '100',
-                        'currency' => 'USD',
+						'amount' => '100',
+						'currency' => 'USD',
 
-                        'data' => [],
-                        'custom' => [],
-                    ])
-                 );
-        }
+						'data' => [],
+						'custom' => [],
+					])
+				);
+		}
 
-    }
+	}
 }

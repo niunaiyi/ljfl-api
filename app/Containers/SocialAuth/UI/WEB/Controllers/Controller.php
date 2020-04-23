@@ -13,24 +13,24 @@ use Laravel\Socialite\Facades\Socialite;
 class Controller extends WebController
 {
 
-    /**
-     * @param $provider
-     *
-     * @return  mixed
-     */
-    public function redirectAll($provider)
-    {
-        return Socialite::driver($provider)->redirect();
-    }
+	/**
+	 * @param $provider
+	 *
+	 * @return  mixed
+	 */
+	public function redirectAll($provider)
+	{
+		return Socialite::driver($provider)->redirect();
+	}
 
-    /**
-     * @param $provider
-     *
-     * @return  mixed
-     */
-    public function handleCallbackAll($provider)
-    {
-        return Socialite::driver($provider)->user();
-    }
+	/**
+	 * @param $provider
+	 *
+	 * @return  mixed
+	 */
+	public function handleCallbackAll($provider)
+	{
+		return Socialite::driver($provider)->user();
+	}
 
 }

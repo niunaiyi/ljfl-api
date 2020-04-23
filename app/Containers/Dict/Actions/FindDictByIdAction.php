@@ -8,10 +8,10 @@ use App\Ship\Parents\Requests\Request;
 
 class FindDictByIdAction extends Action
 {
-  public function run(Request $request)
-  {
-    $dict = Apiato::call('Dict@FindDictByIdTask', [$request->id]);
+	public function run(Request $request)
+	{
+		$dict = Apiato::call('Dict@FindDictByIdTask', [$request->id]);
 
-    return $dict;
-  }
+		return $dict;
+	}
 }

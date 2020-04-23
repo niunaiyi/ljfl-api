@@ -10,19 +10,19 @@ use Exception;
 class FindDictByIdTask extends Task
 {
 
-  protected $repository;
+	protected $repository;
 
-  public function __construct(DictRepository $repository)
-  {
-    $this->repository = $repository;
-  }
+	public function __construct(DictRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-  public function run($id)
-  {
-    try {
-      return $this->repository->find($id);
-    } catch (Exception $exception) {
-      throw new NotFoundException();
-    }
-  }
+	public function run($id)
+	{
+		try {
+			return $this->repository->find($id);
+		} catch (Exception $exception) {
+			throw new NotFoundException();
+		}
+	}
 }

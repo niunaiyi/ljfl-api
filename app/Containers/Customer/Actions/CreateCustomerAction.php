@@ -8,14 +8,14 @@ use App\Ship\Parents\Requests\Request;
 
 class CreateCustomerAction extends Action
 {
-  public function run(Request $request)
-  {
-    $data = $request->sanitizeInput([
-      // add your request data here
-    ]);
+	public function run(Request $request)
+	{
+		$data = $request->sanitizeInput([
+			// add your request data here
+		]);
 
-    $customer = Apiato::call('Customer@CreateCustomerTask', [$data]);
+		$customer = Apiato::call('Customer@CreateCustomerTask', [$data]);
 
-    return $customer;
-  }
+		return $customer;
+	}
 }

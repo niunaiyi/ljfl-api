@@ -13,8 +13,8 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 class EmailIsMissedException extends Exception
 {
 
-    public $httpStatusCode = SymfonyResponse::HTTP_INTERNAL_SERVER_ERROR;
+	public $httpStatusCode = SymfonyResponse::HTTP_INTERNAL_SERVER_ERROR;
 
-    public $message = 'One of the Emails is missed, check your configs..';
+	public $message = 'One of the Emails is missed, check your configs..';
 
 }

@@ -14,24 +14,24 @@
  *
  * @apiSuccessExample  {json}  Success-Response:
  * HTTP/1.1 200 OK
-{
-    "data": {
-        "object": "Setting",
-        "id": "aadfa72342sa",
-        "key": "hello",
-        "value": "world"
-    },
-    "meta": {
-        "include": [],
-        "custom": []
-    }
-}
+ * {
+ * "data": {
+ * "object": "Setting",
+ * "id": "aadfa72342sa",
+ * "key": "hello",
+ * "value": "world"
+ * },
+ * "meta": {
+ * "include": [],
+ * "custom": []
+ * }
+ * }
  */
 
 $router->post('settings', [
-    'as' => 'api_settings_create_setting',
-    'uses'  => 'Controller@createSetting',
-    'middleware' => [
-      'auth:api',
-    ],
+	'as' => 'api_settings_create_setting',
+	'uses' => 'Controller@createSetting',
+	'middleware' => [
+		'auth:api',
+	],
 ]);

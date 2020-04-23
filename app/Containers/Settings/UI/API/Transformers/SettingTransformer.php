@@ -7,37 +7,37 @@ use App\Ship\Parents\Transformers\Transformer;
 
 class SettingTransformer extends Transformer
 {
-    /**
-     * @var  array
-     */
-    protected $defaultIncludes = [
-    ];
+	/**
+	 * @var  array
+	 */
+	protected $defaultIncludes = [
+	];
 
-    /**
-     * @var  array
-     */
-    protected $availableIncludes = [
-    ];
+	/**
+	 * @var  array
+	 */
+	protected $availableIncludes = [
+	];
 
-    /**
-     * @param Setting $entity
-     * @return array
-     */
-    public function transform(Setting $entity)
-    {
-        $response = [
+	/**
+	 * @param Setting $entity
+	 * @return array
+	 */
+	public function transform(Setting $entity)
+	{
+		$response = [
 
-            'object' => 'Setting',
-            'id' => $entity->getHashedKey(),
+			'object' => 'Setting',
+			'id' => $entity->getHashedKey(),
 
-            'key' => $entity->key,
-            'value' => $entity->value,
-        ];
+			'key' => $entity->key,
+			'value' => $entity->value,
+		];
 
-        $response = $this->ifAdmin([
-            'real_id'    => $entity->id,
-        ], $response);
+		$response = $this->ifAdmin([
+			'real_id' => $entity->id,
+		], $response);
 
-        return $response;
-    }
+		return $response;
+	}
 }

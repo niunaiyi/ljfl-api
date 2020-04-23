@@ -6,12 +6,12 @@ use Illuminate\Database\Schema\Blueprint;
 class UpdateUserTableWithSocialauthColumns extends Migration
 {
 
-    /**
-     * Run the migrations.
-     */
-    public function up()
-    {
-        Schema::table('users', function (Blueprint $table) {
+	/**
+	 * Run the migrations.
+	 */
+	public function up()
+	{
+		Schema::table('users', function (Blueprint $table) {
 //            $table->string('social_provider')->nullable();
 //            $table->string('social_nickname')->nullable();
 //            $table->string('social_id')->nullable();
@@ -21,15 +21,15 @@ class UpdateUserTableWithSocialauthColumns extends Migration
 //            $table->string('social_expires_in')->nullable();
 //            $table->string('social_avatar')->nullable();
 //            $table->string('social_avatar_original')->nullable();
-        });
-    }
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down()
-    {
-        Schema::table('users', function (Blueprint $table) {
+	/**
+	 * Reverse the migrations.
+	 */
+	public function down()
+	{
+		Schema::table('users', function (Blueprint $table) {
 //            $table->dropColumn('social_provider');
 //            $table->dropColumn('social_nickname');
 //            $table->dropColumn('social_id');
@@ -39,6 +39,6 @@ class UpdateUserTableWithSocialauthColumns extends Migration
 //            $table->dropColumn('social_expires_in');
 //            $table->dropColumn('social_avatar');
 //            $table->dropColumn('social_avatar_original');
-        });
-    }
+		});
+	}
 }

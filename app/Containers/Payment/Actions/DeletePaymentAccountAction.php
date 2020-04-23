@@ -14,18 +14,18 @@ use App\Ship\Transporters\DataTransporter;
 class DeletePaymentAccountAction extends Action
 {
 
-    /**
-     * @param \App\Ship\Transporters\DataTransporter $data
-     */
-    public function run(DataTransporter $data): void
-    {
-        $user = Apiato::call('Authentication@GetAuthenticatedUserTask');
+	/**
+	 * @param \App\Ship\Transporters\DataTransporter $data
+	 */
+	public function run(DataTransporter $data): void
+	{
+		$user = Apiato::call('Authentication@GetAuthenticatedUserTask');
 
-        $paymentAccount = Apiato::call('Payment@FindPaymentAccountByIdTask', [$data->id]);
+		$paymentAccount = Apiato::call('Payment@FindPaymentAccountByIdTask', [$data->id]);
 
-        // check if this account belongs to our user
-        Apiato::call('Payment@CheckIfPaymentAccountBelongsToUserTask', [$user, $paymentAccount]);
+		// check if this account belongs to our user
+		Apiato::call('Payment@CheckIfPaymentAccountBelongsToUserTask', [$user, $paymentAccount]);
 
-        Apiato::call('Payment@DeletePaymentAccountTask', [$paymentAccount]);
-    }
+		Apiato::call('Payment@DeletePaymentAccountTask', [$paymentAccount]);
+	}
 }

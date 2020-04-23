@@ -14,29 +14,29 @@ use App\Ship\Transporters\DataTransporter;
 class CreateStripeAccountAction extends Action
 {
 
-    /**
-     * @param \App\Ship\Transporters\DataTransporter $data
-     *
-     * @return  mixed
-     */
-    public function run(DataTransporter $data)
-    {
-        $user = Apiato::call('Authentication@GetAuthenticatedUserTask');
+	/**
+	 * @param \App\Ship\Transporters\DataTransporter $data
+	 *
+	 * @return  mixed
+	 */
+	public function run(DataTransporter $data)
+	{
+		$user = Apiato::call('Authentication@GetAuthenticatedUserTask');
 
-        $sanitizedData = $data->sanitizeInput([
-            'customer_id',
-            'card_id',
-            'card_funding',
-            'card_last_digits',
-            'card_fingerprint',
-            'nickname',
-        ]);
+		$sanitizedData = $data->sanitizeInput([
+			'customer_id',
+			'card_id',
+			'card_funding',
+			'card_last_digits',
+			'card_fingerprint',
+			'nickname',
+		]);
 
-        $account = Apiato::call('Stripe@CreateStripeAccountTask', [$sanitizedData]);
+		$account = Apiato::call('Stripe@CreateStripeAccountTask', [$sanitizedData]);
 
-        $result = Apiato::call('Payment@AssignPaymentAccountToUserTask', [$account, $user, $sanitizedData['nickname']]);
+		$result = Apiato::call('Payment@AssignPaymentAccountToUserTask', [$account, $user, $sanitizedData['nickname']]);
 
-        return $result;
-    }
+		return $result;
+	}
 
 }

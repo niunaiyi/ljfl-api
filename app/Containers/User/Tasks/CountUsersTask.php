@@ -13,19 +13,19 @@ use App\Ship\Parents\Tasks\Task;
 class CountUsersTask extends Task
 {
 
-  protected $repository;
+	protected $repository;
 
-  public function __construct(UserRepository $repository)
-  {
-    $this->repository = $repository;
-  }
+	public function __construct(UserRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-  /**
-   * @return  int
-   */
-  public function run(): int
-  {
-    return $this->repository->all()->count();
-  }
+	/**
+	 * @return  int
+	 */
+	public function run(): int
+	{
+		return $this->repository->all()->count();
+	}
 
 }

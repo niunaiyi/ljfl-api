@@ -7,39 +7,29 @@ use App\Ship\Parents\Transformers\Transformer;
 
 class DictTransformer extends Transformer
 {
-  /**
-   * @var  array
-   */
-  protected $defaultIncludes = [
+	/**
+	 * @var  array
+	 */
+	protected $defaultIncludes = [
 
-  ];
+	];
 
-  /**
-   * @var  array
-   */
-  protected $availableIncludes = [
+	/**
+	 * @var  array
+	 */
+	protected $availableIncludes = [
 
-  ];
+	];
 
-  /**
-   * @param Dict $entity
-   *
-   * @return array
-   */
-  public function transform(Dict $entity)
-  {
-    $response = [
-      'object' => 'Dict',
-      'id' => $entity->getHashedKey(),
-      'created_at' => $entity->created_at,
-      'updated_at' => $entity->updated_at,
+	/**
+	 * @param Dict $entity
+	 *
+	 * @return array
+	 */
+	public function transform(Dict $entity)
+	{
+		$response = $entity->toArray();
 
-    ];
-
-    $response = $this->ifAdmin([
-      'real_id' => $entity->id,
-    ], $response);
-
-    return $response;
-  }
+		return $response;
+	}
 }

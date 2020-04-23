@@ -15,71 +15,71 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 class ListTasksCommand extends ConsoleCommand
 {
 
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = "apiato:list:tasks {--withfilename}";
+	/**
+	 * The name and signature of the console command.
+	 *
+	 * @var string
+	 */
+	protected $signature = "apiato:list:tasks {--withfilename}";
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = "List all Tasks in the Application.";
+	/**
+	 * The console command description.
+	 *
+	 * @var string
+	 */
+	protected $description = "List all Tasks in the Application.";
 
-    /**
-     * ListActionsCommand constructor.
-     *
-     * @param \Symfony\Component\Console\Output\ConsoleOutput $console
-     */
-    public function __construct(ConsoleOutput $console)
-    {
-        parent::__construct();
+	/**
+	 * ListActionsCommand constructor.
+	 *
+	 * @param \Symfony\Component\Console\Output\ConsoleOutput $console
+	 */
+	public function __construct(ConsoleOutput $console)
+	{
+		parent::__construct();
 
-        $this->console = $console;
-    }
+		$this->console = $console;
+	}
 
-    /**
-     * Handle the command
-     */
-    public function handle()
-    {
-        foreach (Apiato::getContainersNames() as $containerName) {
+	/**
+	 * Handle the command
+	 */
+	public function handle()
+	{
+		foreach (Apiato::getContainersNames() as $containerName) {
 
-            $this->console->writeln("<fg=yellow> [$containerName]</fg=yellow>");
+			$this->console->writeln("<fg=yellow> [$containerName]</fg=yellow>");
 
-            $directory = base_path('app/Containers/' . $containerName . '/Tasks');
+			$directory = base_path('app/Containers/' . $containerName . '/Tasks');
 
-            if (File::isDirectory($directory)) {
+			if (File::isDirectory($directory)) {
 
-                $files = File::allFiles($directory);
+				$files = File::allFiles($directory);
 
-                foreach ($files as $action) {
+				foreach ($files as $action) {
 
-                    // get the file name as is
-                    $fileName = $originalFileName = $action->getFilename();
+					// get the file name as is
+					$fileName = $originalFileName = $action->getFilename();
 
-                    // remove the Task.php postfix from each file name
-                    $fileName = str_replace('Task.php', '', $fileName);
+					// remove the Task.php postfix from each file name
+					$fileName = str_replace('Task.php', '', $fileName);
 
-                    // further, remove the `.php', if the file does not end on 'Task.php'
-                    $fileName = str_replace('.php', '', $fileName);
+					// further, remove the `.php', if the file does not end on 'Task.php'
+					$fileName = str_replace('.php', '', $fileName);
 
-                    // uncamelize the word and replace it with spaces
-                    $fileName = Apiato::uncamelize($fileName);
+					// uncamelize the word and replace it with spaces
+					$fileName = Apiato::uncamelize($fileName);
 
-                    // check if flag exist
-                    $includeFileName = '';
-                    if ($this->option('withfilename')) {
-                        $includeFileName = "<fg=red>($originalFileName)</fg=red>";
-                    }
+					// check if flag exist
+					$includeFileName = '';
+					if ($this->option('withfilename')) {
+						$includeFileName = "<fg=red>($originalFileName)</fg=red>";
+					}
 
-                    $this->console->writeln("<fg=green>  - $fileName</fg=green>  $includeFileName");
-                }
-            }
-        }
-    }
+					$this->console->writeln("<fg=green>  - $fileName</fg=green>  $includeFileName");
+				}
+			}
+		}
+	}
 
 }

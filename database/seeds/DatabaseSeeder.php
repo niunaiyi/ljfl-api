@@ -10,15 +10,15 @@ use Illuminate\Database\Seeder as LaravelSeeder;
  */
 class DatabaseSeeder extends LaravelSeeder
 {
-    use SeederLoaderTrait;
+	use SeederLoaderTrait;
 
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        $this->runLoadingSeeders();
-    }
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+		$this->runLoadingSeeders();
+	}
 }

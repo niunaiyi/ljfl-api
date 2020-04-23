@@ -12,20 +12,20 @@ use Apiato\Core\Abstracts\Providers\MiddlewareProvider as AbstractMiddlewareProv
 abstract class MiddlewareProvider extends AbstractMiddlewareProvider
 {
 
-    /**
-     * Perform post-registration booting of services.
-     */
-    public function boot()
-    {
-        parent::boot();
-    }
+	/**
+	 * Perform post-registration booting of services.
+	 */
+	public function boot()
+	{
+		parent::boot();
+	}
 
-    /**
-     * Register anything in the container.
-     */
-    public function register()
-    {
-        parent::register();
-    }
+	/**
+	 * Register anything in the container.
+	 */
+	public function register()
+	{
+		parent::register();
+	}
 
 }

@@ -14,20 +14,20 @@ use App\Ship\Transporters\DataTransporter;
 class UpdateSettingAction extends Action
 {
 
-    /**
-     * @param \App\Ship\Transporters\DataTransporter $data
-     *
-     * @return  mixed
-     */
-    public function run(DataTransporter $data)
-    {
-        $sanitizedData = $data->sanitizeInput([
-            'key',
-            'value'
-        ]);
+	/**
+	 * @param \App\Ship\Transporters\DataTransporter $data
+	 *
+	 * @return  mixed
+	 */
+	public function run(DataTransporter $data)
+	{
+		$sanitizedData = $data->sanitizeInput([
+			'key',
+			'value'
+		]);
 
-        $setting = Apiato::call('Settings@UpdateSettingTask', [$data->id, $sanitizedData]);
+		$setting = Apiato::call('Settings@UpdateSettingTask', [$data->id, $sanitizedData]);
 
-        return $setting;
-    }
+		return $setting;
+	}
 }

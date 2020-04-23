@@ -16,22 +16,22 @@ use Cartalyst\Stripe\Laravel\StripeServiceProvider;
 class MainServiceProvider extends MainProvider
 {
 
-    /**
-     * Container Service Providers.
-     *
-     * @var array
-     */
-    public $serviceProviders = [
-        StripeServiceProvider::class,
-    ];
+	/**
+	 * Container Service Providers.
+	 *
+	 * @var array
+	 */
+	public $serviceProviders = [
+		StripeServiceProvider::class,
+	];
 
-    /**
-     * Container Aliases
-     *
-     * @var  array
-     */
-    public $aliases = [
-        'Stripe' => Stripe::class,
-    ];
+	/**
+	 * Container Aliases
+	 *
+	 * @var  array
+	 */
+	public $aliases = [
+		'Stripe' => Stripe::class,
+	];
 
 }

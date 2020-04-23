@@ -21,9 +21,9 @@
 
 /** @var Route $router */
 $router->get('customers', [
-  'as' => 'api_customer_get_all_customers',
-  'uses' => 'Controller@getAllCustomers',
-  'middleware' => [
-    'auth:api',
-  ],
+	'as' => 'api_customer_get_all_customers',
+	'uses' => 'Controller@getAllCustomers',
+	'middleware' => [
+		'auth:api',
+	],
 ]);

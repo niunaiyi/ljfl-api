@@ -15,19 +15,19 @@ use Mockery;
 trait TestsMockHelperTrait
 {
 
-    /**
-     * Mocking helper
-     *
-     * @param $class
-     *
-     * @return  \Mockery\MockInterface
-     */
-    public function mockIt($class)
-    {
-        $mock = Mockery::mock($class);
-        App::instance($class, $mock);
+	/**
+	 * Mocking helper
+	 *
+	 * @param $class
+	 *
+	 * @return  \Mockery\MockInterface
+	 */
+	public function mockIt($class)
+	{
+		$mock = Mockery::mock($class);
+		App::instance($class, $mock);
 
-        return $mock;
-    }
+		return $mock;
+	}
 
 }

@@ -12,13 +12,13 @@ use App\Ship\Parents\Repositories\Repository;
  */
 class StripeAccountRepository extends Repository
 {
-    /**
-     * Specify Model class name.
-     *
-     * @return string
-     */
-    public function model()
-    {
-        return StripeAccount::class;
-    }
+	/**
+	 * Specify Model class name.
+	 *
+	 * @return string
+	 */
+	public function model()
+	{
+		return StripeAccount::class;
+	}
 }

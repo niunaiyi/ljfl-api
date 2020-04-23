@@ -8,10 +8,10 @@ use App\Ship\Parents\Requests\Request;
 
 class GetAllCustomersAction extends Action
 {
-  public function run(Request $request)
-  {
-    $customers = Apiato::call('Customer@GetAllCustomersTask', [], ['addRequestCriteria']);
+	public function run(Request $request)
+	{
+		$customers = Apiato::call('Customer@GetAllCustomersTask', [], ['addRequestCriteria']);
 
-    return $customers;
-  }
+		return $customers;
+	}
 }

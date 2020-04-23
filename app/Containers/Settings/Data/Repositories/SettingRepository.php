@@ -12,25 +12,25 @@ use App\Ship\Parents\Repositories\Repository;
  */
 class SettingRepository extends Repository
 {
-    /**
-     * @var array
-     */
-    protected $fieldSearchable = [
-        'id' => '=',
-        'key' => '=',
-    ];
+	/**
+	 * @var array
+	 */
+	protected $fieldSearchable = [
+		'id' => '=',
+		'key' => '=',
+	];
 
-    public function boot()
-    {
-        parent::boot();
-        // probably do some stuff here ...
-    }
+	public function boot()
+	{
+		parent::boot();
+		// probably do some stuff here ...
+	}
 
-    /**
-     * @return  mixed
-     */
-    public function model()
-    {
-        return Setting::class;
-    }
+	/**
+	 * @return  mixed
+	 */
+	public function model()
+	{
+		return Setting::class;
+	}
 }

@@ -13,37 +13,37 @@ use Prettus\Repository\Contracts\RepositoryInterface as PrettusRepositoryInterfa
 class ThisEqualThatCriteria extends Criteria
 {
 
-    /**
-     * @var
-     */
-    private $field;
+	/**
+	 * @var
+	 */
+	private $field;
 
-    /**
-     * @var
-     */
-    private $value;
+	/**
+	 * @var
+	 */
+	private $value;
 
-    /**
-     * ThisEqualThatCriteria constructor.
-     *
-     * @param $field
-     * @param $value
-     */
-    public function __construct($field, $value)
-    {
-        $this->field = $field;
-        $this->value = $value;
-    }
+	/**
+	 * ThisEqualThatCriteria constructor.
+	 *
+	 * @param $field
+	 * @param $value
+	 */
+	public function __construct($field, $value)
+	{
+		$this->field = $field;
+		$this->value = $value;
+	}
 
-    /**
-     * @param                                                   $model
-     * @param \Prettus\Repository\Contracts\RepositoryInterface $repository
-     *
-     * @return  mixed
-     */
-    public function apply($model, PrettusRepositoryInterface $repository)
-    {
-        return $model->where($this->field, $this->value);
-    }
+	/**
+	 * @param                                                   $model
+	 * @param \Prettus\Repository\Contracts\RepositoryInterface $repository
+	 *
+	 * @return  mixed
+	 */
+	public function apply($model, PrettusRepositoryInterface $repository)
+	{
+		return $model->where($this->field, $this->value);
+	}
 
 }

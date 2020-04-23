@@ -10,12 +10,15 @@ use App\Ship\Parents\Repositories\Repository;
 class CustomerRepository extends Repository
 {
 
-  /**
-   * @var array
-   */
-  protected $fieldSearchable = [
-    'id' => '=',
-    // ...
-  ];
+	/**
+	 * @var array
+	 */
+	protected $fieldSearchable = [
+		'nickname' => 'like',
+		'realname' => 'like',
+		'phonenumber' => 'like',
+		'addresses.name' => 'like',
+		'addresses.parent_name' => 'like',
+	];
 
 }

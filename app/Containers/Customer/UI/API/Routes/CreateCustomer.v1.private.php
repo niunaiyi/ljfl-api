@@ -21,9 +21,9 @@
 
 /** @var Route $router */
 $router->post('customers', [
-  'as' => 'api_customer_create_customer',
-  'uses' => 'Controller@createCustomer',
-  'middleware' => [
-    'auth:api',
-  ],
+	'as' => 'api_customer_create_customer',
+	'uses' => 'Controller@createCustomer',
+	'middleware' => [
+		'auth:api',
+	],
 ]);

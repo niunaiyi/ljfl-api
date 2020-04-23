@@ -19,6 +19,7 @@ class UserRepository extends Repository
 		'realname' => 'like',
 		'username' => 'like',
 		'address.parent_name' => 'like',
+		'roles.display_name' => 'like',
 	];
 
 }

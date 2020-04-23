@@ -10,19 +10,19 @@ use Exception;
 class DeleteCustomerTask extends Task
 {
 
-  protected $repository;
+	protected $repository;
 
-  public function __construct(CustomerRepository $repository)
-  {
-    $this->repository = $repository;
-  }
+	public function __construct(CustomerRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-  public function run($id)
-  {
-    try {
-      return $this->repository->delete($id);
-    } catch (Exception $exception) {
-      throw new DeleteResourceFailedException();
-    }
-  }
+	public function run($id)
+	{
+		try {
+			return $this->repository->delete($id);
+		} catch (Exception $exception) {
+			throw new DeleteResourceFailedException();
+		}
+	}
 }

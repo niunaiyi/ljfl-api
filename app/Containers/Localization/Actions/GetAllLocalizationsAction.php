@@ -14,13 +14,13 @@ use Illuminate\Support\Collection;
 class GetAllLocalizationsAction extends Action
 {
 
-    /**
-     * @return  \Illuminate\Support\Collection
-     */
-    public function run(): Collection
-    {
-        $localizations = Apiato::call('Localization@GetAllLocalizationsTask');
+	/**
+	 * @return  \Illuminate\Support\Collection
+	 */
+	public function run(): Collection
+	{
+		$localizations = Apiato::call('Localization@GetAllLocalizationsTask');
 
-        return $localizations;
-    }
+		return $localizations;
+	}
 }

@@ -16,42 +16,42 @@ use Illuminate\Http\Request;
 class RequestsMonitorMiddleware extends Middleware
 {
 
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
-     *
-     * @return  mixed
-     */
-    public function handle(Request $request, Closure $next)
-    {
-        $response = $next($request);
+	/**
+	 * @param \Illuminate\Http\Request $request
+	 * @param \Closure $next
+	 *
+	 * @return  mixed
+	 */
+	public function handle(Request $request, Closure $next)
+	{
+		$response = $next($request);
 
-        $output = new Output($request, $response);
+		$output = new Output($request, $response);
 
-        $output->newRequest();
-        $output->spaceLine();
+		$output->newRequest();
+		$output->spaceLine();
 
-        $output->header("REQUEST INFO");
-        $output->endpoint();
-        $output->version();
-        $output->ip();
-        $output->format();
-        $output->spaceLine();
+		$output->header("REQUEST INFO");
+		$output->endpoint();
+		$output->version();
+		$output->ip();
+		$output->format();
+		$output->spaceLine();
 
-        $output->header("USER INFO");
-        $output->userInfo();
-        $output->spaceLine();
+		$output->header("USER INFO");
+		$output->userInfo();
+		$output->spaceLine();
 
-        $output->header("REQUEST DATA");
-        $output->requestData();
-        $output->spaceLine();
+		$output->header("REQUEST DATA");
+		$output->requestData();
+		$output->spaceLine();
 
-        $output->header("RESPONSE DATA");
-        $output->responseData();
-        $output->spaceLine();
+		$output->header("RESPONSE DATA");
+		$output->responseData();
+		$output->spaceLine();
 
-        (new RequestsLogger())->releaseOutput($output);
+		(new RequestsLogger())->releaseOutput($output);
 
-        return $response;
-    }
+		return $response;
+	}
 }

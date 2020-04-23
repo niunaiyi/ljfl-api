@@ -22,80 +22,80 @@ use Illuminate\Foundation\Testing\TestCase as LaravelTestCase;
 abstract class TestCase extends LaravelTestCase
 {
 
-    use TestCaseTrait,
-        TestsRequestHelperTrait,
-        TestsResponseHelperTrait,
-        TestsMockHelperTrait,
-        TestsAuthHelperTrait,
-        TestsUploadHelperTrait,
-        HashIdTrait,
-        RefreshDatabase;
+	use TestCaseTrait,
+		TestsRequestHelperTrait,
+		TestsResponseHelperTrait,
+		TestsMockHelperTrait,
+		TestsAuthHelperTrait,
+		TestsUploadHelperTrait,
+		HashIdTrait,
+		RefreshDatabase;
 
-    /**
-     * The base URL to use while testing the application.
-     *
-     * @var string
-     */
-    protected $baseUrl;
+	/**
+	 * The base URL to use while testing the application.
+	 *
+	 * @var string
+	 */
+	protected $baseUrl;
 
-    /**
-     * Setup the test environment, before each test.
-     *
-     * @return void
-     */
-    public function setUp() : void
-    {
-        parent::setUp();
-    }
+	/**
+	 * Setup the test environment, before each test.
+	 *
+	 * @return void
+	 */
+	public function setUp(): void
+	{
+		parent::setUp();
+	}
 
-    /**
-     * Reset the test environment, after each test.
-     */
-    public function tearDown() : void
-    {
-        parent::tearDown();
-    }
+	/**
+	 * Reset the test environment, after each test.
+	 */
+	public function tearDown(): void
+	{
+		parent::tearDown();
+	}
 
-    /**
-     * Refresh the in-memory database.
-     * Overridden refreshTestDatabase Trait
-     *
-     * @return void
-     */
-    protected function refreshInMemoryDatabase()
-    {
-        // migrate the database
-        $this->migrateDatabase();
+	/**
+	 * Refresh the in-memory database.
+	 * Overridden refreshTestDatabase Trait
+	 *
+	 * @return void
+	 */
+	protected function refreshInMemoryDatabase()
+	{
+		// migrate the database
+		$this->migrateDatabase();
 
-        // seed the database
-        $this->seed();
+		// seed the database
+		$this->seed();
 
-        // Install Passport Client for Testing
-        $this->setupPassportOAuth2();
+		// Install Passport Client for Testing
+		$this->setupPassportOAuth2();
 
-        $this->app[Kernel::class]->setArtisan(null);
-    }
+		$this->app[Kernel::class]->setArtisan(null);
+	}
 
-    /**
-     * Refresh a conventional test database.
-     * Overridden refreshTestDatabase Trait
-     *
-     * @return void
-     */
-    protected function refreshTestDatabase()
-    {
-        if (! RefreshDatabaseState::$migrated) {
+	/**
+	 * Refresh a conventional test database.
+	 * Overridden refreshTestDatabase Trait
+	 *
+	 * @return void
+	 */
+	protected function refreshTestDatabase()
+	{
+		if (!RefreshDatabaseState::$migrated) {
 
-            $this->artisan('migrate:fresh');
-            $this->seed();
-            $this->setupPassportOAuth2();
+			$this->artisan('migrate:fresh');
+			$this->seed();
+			$this->setupPassportOAuth2();
 
-            $this->app[Kernel::class]->setArtisan(null);
+			$this->app[Kernel::class]->setArtisan(null);
 
-            RefreshDatabaseState::$migrated = true;
-        }
+			RefreshDatabaseState::$migrated = true;
+		}
 
-        $this->beginDatabaseTransaction();
-    }
+		$this->beginDatabaseTransaction();
+	}
 
 }

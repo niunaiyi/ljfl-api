@@ -20,6 +20,7 @@ class UpdateAddressTask extends Task
 	public function run($id, array $data)
 	{
 		try {
+			\Log::info($data);
 			return $this->repository->update($data, $id);
 		} catch (Exception $exception) {
 			throw new UpdateResourceFailedException();

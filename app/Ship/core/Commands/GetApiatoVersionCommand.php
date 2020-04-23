@@ -13,34 +13,34 @@ use App\Ship\Parents\Commands\ConsoleCommand;
 class GetApiatoVersionCommand extends ConsoleCommand
 {
 
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = "apiato";
+	/**
+	 * The name and signature of the console command.
+	 *
+	 * @var string
+	 */
+	protected $signature = "apiato";
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = "Display the current Apiato version.";
+	/**
+	 * The console command description.
+	 *
+	 * @var string
+	 */
+	protected $description = "Display the current Apiato version.";
 
-    /**
-     * GetApiatoVersionCommand constructor.
-     */
-    public function __construct()
-    {
-      parent::__construct();
-    }
+	/**
+	 * GetApiatoVersionCommand constructor.
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
 
-    /**
-     * Handle the command
-     */
-    public function handle()
-    {
-      $this->info(Apiato::VERSION);
-    }
+	/**
+	 * Handle the command
+	 */
+	public function handle()
+	{
+		$this->info(Apiato::VERSION);
+	}
 
 }

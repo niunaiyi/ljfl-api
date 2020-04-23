@@ -16,41 +16,41 @@ use App\Ship\Parents\Tasks\Task;
 class GetAllPaymentAccountsTask extends Task
 {
 
-    protected $repository;
+	protected $repository;
 
-    /**
-     * GetAllPaymentAccountsTask constructor.
-     *
-     * @param \App\Containers\Payment\Data\Repositories\PaymentAccountRepository $repository
-     */
-    public function __construct(PaymentAccountRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+	/**
+	 * GetAllPaymentAccountsTask constructor.
+	 *
+	 * @param \App\Containers\Payment\Data\Repositories\PaymentAccountRepository $repository
+	 */
+	public function __construct(PaymentAccountRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-    /**
-     * @return  mixed
-     */
-    public function run()
-    {
-        return $this->repository->paginate();
-    }
+	/**
+	 * @return  mixed
+	 */
+	public function run()
+	{
+		return $this->repository->paginate();
+	}
 
-    /**
-     * @return  mixed
-     */
-    public function ordered()
-    {
-        return $this->repository->pushCriteria(new OrderByCreationDateDescendingCriteria());
-    }
+	/**
+	 * @return  mixed
+	 */
+	public function ordered()
+	{
+		return $this->repository->pushCriteria(new OrderByCreationDateDescendingCriteria());
+	}
 
-    /**
-     * @param \App\Containers\User\Models\User $user
-     *
-     * @return  mixed
-     */
-    public function filterByUser(User $user)
-    {
-        return $this->repository->pushCriteria(new ThisUserCriteria($user->id));
-    }
+	/**
+	 * @param \App\Containers\User\Models\User $user
+	 *
+	 * @return  mixed
+	 */
+	public function filterByUser(User $user)
+	{
+		return $this->repository->pushCriteria(new ThisUserCriteria($user->id));
+	}
 }

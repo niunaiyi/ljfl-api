@@ -40,70 +40,70 @@ use Illuminate\Support\ServiceProvider;
 class GeneratorsServiceProvider extends ServiceProvider
 {
 
-    /**
-     * Bootstrap the application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-    }
+	/**
+	 * Bootstrap the application services.
+	 *
+	 * @return void
+	 */
+	public function boot()
+	{
+		//
+	}
 
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        // all generators ordered by name
-        $this->registerGenerators([
-            ActionGenerator::class,
-            ConfigurationGenerator::class,
-            ContainerGenerator::class,
-            ContainerApiGenerator::class,
-            ContainerWebGenerator::class,
-            ControllerGenerator::class,
-            EventGenerator::class,
-            EventHandlerGenerator::class,
-            ExceptionGenerator::class,
-            JobGenerator::class,
-            MailGenerator::class,
-            MigrationGenerator::class,
-            ModelGenerator::class,
-            NotificationGenerator::class,
-            ReadmeGenerator::class,
-            RepositoryGenerator::class,
-            RequestGenerator::class,
-            RouteGenerator::class,
-            SeederGenerator::class,
-            ServiceProviderGenerator::class,
-            SubActionGenerator::class,
-            TestFunctionalTestGenerator::class,
-            TestTestCaseGenerator::class,
-            TestUnitTestGenerator::class,
-            TaskGenerator::class,
-            TransformerGenerator::class,
-            TransporterGenerator::class,
-            ValueGenerator::class,
-        ]);
-    }
+	/**
+	 * Register the application services.
+	 *
+	 * @return void
+	 */
+	public function register()
+	{
+		// all generators ordered by name
+		$this->registerGenerators([
+			ActionGenerator::class,
+			ConfigurationGenerator::class,
+			ContainerGenerator::class,
+			ContainerApiGenerator::class,
+			ContainerWebGenerator::class,
+			ControllerGenerator::class,
+			EventGenerator::class,
+			EventHandlerGenerator::class,
+			ExceptionGenerator::class,
+			JobGenerator::class,
+			MailGenerator::class,
+			MigrationGenerator::class,
+			ModelGenerator::class,
+			NotificationGenerator::class,
+			ReadmeGenerator::class,
+			RepositoryGenerator::class,
+			RequestGenerator::class,
+			RouteGenerator::class,
+			SeederGenerator::class,
+			ServiceProviderGenerator::class,
+			SubActionGenerator::class,
+			TestFunctionalTestGenerator::class,
+			TestTestCaseGenerator::class,
+			TestUnitTestGenerator::class,
+			TaskGenerator::class,
+			TransformerGenerator::class,
+			TransporterGenerator::class,
+			ValueGenerator::class,
+		]);
+	}
 
-    /**
-     * Register the generators.
-     * @param array $classes
-     */
-    private function registerGenerators(array $classes)
-    {
-        foreach ($classes as $class) {
-            $lowerClass = strtolower($class);
+	/**
+	 * Register the generators.
+	 * @param array $classes
+	 */
+	private function registerGenerators(array $classes)
+	{
+		foreach ($classes as $class) {
+			$lowerClass = strtolower($class);
 
-            $this->app->singleton("command.porto.$lowerClass", function ($app) use ($class) {
-                return $app[$class];
-            });
+			$this->app->singleton("command.porto.$lowerClass", function ($app) use ($class) {
+				return $app[$class];
+			});
 
-            $this->commands("command.porto.$lowerClass");
-        }
-    }
+			$this->commands("command.porto.$lowerClass");
+		}
+	}
 }

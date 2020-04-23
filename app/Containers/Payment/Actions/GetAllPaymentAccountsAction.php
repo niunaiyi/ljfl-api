@@ -13,22 +13,22 @@ use App\Ship\Parents\Actions\Action;
 class GetAllPaymentAccountsAction extends Action
 {
 
-    /**
-     * @return  mixed
-     */
-    public function run()
-    {
-        $user = Apiato::call('Authentication@GetAuthenticatedUserTask');
+	/**
+	 * @return  mixed
+	 */
+	public function run()
+	{
+		$user = Apiato::call('Authentication@GetAuthenticatedUserTask');
 
-        $paymentAccounts = Apiato::call('Payment@GetAllPaymentAccountsTask',
-            [],
-            [
-                'addRequestCriteria',
-                'ordered',
-                ['filterByUser' => [$user]]
-            ]
-        );
+		$paymentAccounts = Apiato::call('Payment@GetAllPaymentAccountsTask',
+			[],
+			[
+				'addRequestCriteria',
+				'ordered',
+				['filterByUser' => [$user]]
+			]
+		);
 
-        return $paymentAccounts;
-    }
+		return $paymentAccounts;
+	}
 }

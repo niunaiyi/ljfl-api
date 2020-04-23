@@ -13,8 +13,8 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 class InternalErrorException extends Exception
 {
 
-    public $httpStatusCode = SymfonyResponse::HTTP_INTERNAL_SERVER_ERROR;
+	public $httpStatusCode = SymfonyResponse::HTTP_INTERNAL_SERVER_ERROR;
 
-    public $message = 'Something went wrong!';
+	public $message = 'Something went wrong!';
 
 }

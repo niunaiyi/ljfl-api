@@ -13,8 +13,12 @@ use Apiato\Core\Traits\HasResourceKeyTrait;
  */
 abstract class Model extends AbstractModel
 {
+	use HashIdTrait;
+	use HasResourceKeyTrait;
 
-    use HashIdTrait;
-    use HasResourceKeyTrait;
-
+	protected $casts = [
+		'created_at' => 'datetime:Y-m-d H:m:s',
+		'updated_at' => 'datetime:Y-m-d H:m:s',
+		'deleted_at' => 'datetime:Y-m-d H:m:s',
+	];
 }

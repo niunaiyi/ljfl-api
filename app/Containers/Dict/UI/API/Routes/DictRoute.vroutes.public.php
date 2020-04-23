@@ -21,9 +21,9 @@
 
 /** @var Route $router */
 $router->get('{id}', [
-  'as' => 'api_dict_dicts',
-  'uses' => 'Controller@dicts',
-  'middleware' => [
-    'auth:api',
-  ],
+	'as' => 'api_dict_dicts',
+	'uses' => 'Controller@dicts',
+	'middleware' => [
+		'auth:api',
+	],
 ]);

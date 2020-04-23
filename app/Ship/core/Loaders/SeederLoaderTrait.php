@@ -17,48 +17,48 @@ use Illuminate\Support\Collection;
 trait SeederLoaderTrait
 {
 
-    /**
-     * Default seeders directory for containers and port
-     *
-     * @var  string
-     */
-    protected $seedersPath = '/Data/Seeders';
+	/**
+	 * Default seeders directory for containers and port
+	 *
+	 * @var  string
+	 */
+	protected $seedersPath = '/Data/Seeders';
 
-    /**
-     * runLoadingSeeders
-     */
-    public function runLoadingSeeders()
-    {
-        $this->loadSeedersFromContainers();
-        $this->loadSeedersFromShip();
-    }
+	/**
+	 * runLoadingSeeders
+	 */
+	public function runLoadingSeeders()
+	{
+		$this->loadSeedersFromContainers();
+		$this->loadSeedersFromShip();
+	}
 
-    /**
-     * loadSeedersFromContainers
-     */
-    private function loadSeedersFromContainers()
-    {
-        $seedersClasses = new Collection();
+	/**
+	 * loadSeedersFromContainers
+	 */
+	private function loadSeedersFromContainers()
+	{
+		$seedersClasses = new Collection();
 
-        $containersDirectories = [];
+		$containersDirectories = [];
 
-        foreach (Apiato::getContainersNames() as $containerName) {
+		foreach (Apiato::getContainersNames() as $containerName) {
 
-            $containersDirectories[] = base_path('app/Containers/' . $containerName . $this->seedersPath);
+			$containersDirectories[] = base_path('app/Containers/' . $containerName . $this->seedersPath);
 
-        }
+		}
 
-        $seedersClasses = $this->findSeedersClasses($containersDirectories, $seedersClasses);
-        $orderedSeederClasses = $this->sortSeeders($seedersClasses);
+		$seedersClasses = $this->findSeedersClasses($containersDirectories, $seedersClasses);
+		$orderedSeederClasses = $this->sortSeeders($seedersClasses);
 
-        $this->loadSeeders($orderedSeederClasses);
-    }
+		$this->loadSeeders($orderedSeederClasses);
+	}
 
-    /**
-     * loadSeedersFromShip
-     */
-    private function loadSeedersFromShip()
-    {
+	/**
+	 * loadSeedersFromShip
+	 */
+	private function loadSeedersFromShip()
+	{
 //        $seedersClasses = new Collection();
 //
 //        // it has to do it's own loop for now
@@ -72,87 +72,87 @@ trait SeederLoaderTrait
 //        $orderedSeederClasses = $this->sortSeeders($seedersClasses);
 //
 //        $this->loadSeeders($orderedSeederClasses);
-    }
+	}
 
-    /**
-     * @param array $directories
-     * @param       $seedersClasses
-     *
-     * @return  mixed
-     */
-    private function findSeedersClasses(array $directories, $seedersClasses)
-    {
-        foreach ($directories as $directory) {
+	/**
+	 * @param array $directories
+	 * @param       $seedersClasses
+	 *
+	 * @return  mixed
+	 */
+	private function findSeedersClasses(array $directories, $seedersClasses)
+	{
+		foreach ($directories as $directory) {
 
-            if (File::isDirectory($directory)) {
+			if (File::isDirectory($directory)) {
 
-                $files = File::allFiles($directory);
+				$files = File::allFiles($directory);
 
-                foreach ($files as $seederClass) {
+				foreach ($files as $seederClass) {
 
-                    if (File::isFile($seederClass)) {
+					if (File::isFile($seederClass)) {
 
-                        // do not seed the classes now, just store them in a collection and w
-                        $seedersClasses->push(
-                            Apiato::getClassFullNameFromFile(
-                                $seederClass->getPathname())
-                        );
-                    }
-                }
-            }
-        }
+						// do not seed the classes now, just store them in a collection and w
+						$seedersClasses->push(
+							Apiato::getClassFullNameFromFile(
+								$seederClass->getPathname())
+						);
+					}
+				}
+			}
+		}
 
-        return $seedersClasses;
-    }
+		return $seedersClasses;
+	}
 
-    /**
-     * @param $seedersClasses
-     *
-     * @return  \Illuminate\Support\Collection
-     */
-    private function sortSeeders($seedersClasses)
-    {
-        $orderedSeederClasses = new Collection();
+	/**
+	 * @param $seedersClasses
+	 *
+	 * @return  \Illuminate\Support\Collection
+	 */
+	private function sortSeeders($seedersClasses)
+	{
+		$orderedSeederClasses = new Collection();
 
-        if ($seedersClasses->isEmpty()) {
-            return $orderedSeederClasses;
-        }
+		if ($seedersClasses->isEmpty()) {
+			return $orderedSeederClasses;
+		}
 
-        foreach ($seedersClasses as $key => $seederFullClassName) {
-            // if the class full namespace contain "_" it means it needs to be seeded in order
-            if (preg_match('/_/', $seederFullClassName)) {
-                // move all the seeder classes that needs to be seeded in order to their own Collection
-                $orderedSeederClasses->push($seederFullClassName);
-                // delete the moved classes from the original collection
-                $seedersClasses->forget($key);
-            }
-        }
+		foreach ($seedersClasses as $key => $seederFullClassName) {
+			// if the class full namespace contain "_" it means it needs to be seeded in order
+			if (preg_match('/_/', $seederFullClassName)) {
+				// move all the seeder classes that needs to be seeded in order to their own Collection
+				$orderedSeederClasses->push($seederFullClassName);
+				// delete the moved classes from the original collection
+				$seedersClasses->forget($key);
+			}
+		}
 
-        // sort the classes that needed to be ordered
-        $orderedSeederClasses = $orderedSeederClasses->sortBy(function ($seederFullClassName) {
-            // get the order number form the end of each class name
-            $orderNumber = substr($seederFullClassName, strpos($seederFullClassName, "_") + 1);
+		// sort the classes that needed to be ordered
+		$orderedSeederClasses = $orderedSeederClasses->sortBy(function ($seederFullClassName) {
+			// get the order number form the end of each class name
+			$orderNumber = substr($seederFullClassName, strpos($seederFullClassName, "_") + 1);
 
-            return $orderNumber;
-        });
+			return $orderNumber;
+		});
 
-        // append the randomly ordered seeder classes to the end of the ordered seeder classes
-        foreach ($seedersClasses as $seederClass) {
-            $orderedSeederClasses->push($seederClass);
-        }
+		// append the randomly ordered seeder classes to the end of the ordered seeder classes
+		foreach ($seedersClasses as $seederClass) {
+			$orderedSeederClasses->push($seederClass);
+		}
 
-        return $orderedSeederClasses;
-    }
+		return $orderedSeederClasses;
+	}
 
-    /**
-     * @param $seedersClasses
-     */
-    private function loadSeeders($seedersClasses)
-    {
-        foreach ($seedersClasses as $seeder) {
-            // seed it with call
-            $this->call($seeder);
-        }
-    }
+	/**
+	 * @param $seedersClasses
+	 */
+	private function loadSeeders($seedersClasses)
+	{
+		foreach ($seedersClasses as $seeder) {
+			// seed it with call
+			$this->call($seeder);
+		}
+	}
 
 }

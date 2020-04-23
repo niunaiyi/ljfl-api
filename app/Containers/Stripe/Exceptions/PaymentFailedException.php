@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
  */
 class PaymentFailedException extends Exception
 {
-    public $httpStatusCode = SymfonyResponse::HTTP_PAYMENT_REQUIRED;
+	public $httpStatusCode = SymfonyResponse::HTTP_PAYMENT_REQUIRED;
 
-    public $message = 'Payment failed!';
+	public $message = 'Payment failed!';
 }

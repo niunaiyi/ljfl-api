@@ -14,46 +14,46 @@ use Symfony\Component\Process\Process;
  */
 class GenerateSwaggerTask extends Task
 {
-    use DocsGeneratorTrait;
+	use DocsGeneratorTrait;
 
-    /**
-     * @param $type
-     * @param $console
-     *
-     * @return  mixed
-     * @throws \Symfony\Component\Process\Exception\RuntimeException
-     * @throws \Symfony\Component\Process\Exception\LogicException
-     * @throws \Symfony\Component\Process\Exception\ProcessFailedException
-     */
-    public function run($type, $console)
-    {
-        $path = $this->getDocumentationPath($type);
+	/**
+	 * @param $type
+	 * @param $console
+	 *
+	 * @return  mixed
+	 * @throws \Symfony\Component\Process\Exception\RuntimeException
+	 * @throws \Symfony\Component\Process\Exception\LogicException
+	 * @throws \Symfony\Component\Process\Exception\ProcessFailedException
+	 */
+	public function run($type, $console)
+	{
+		$path = $this->getDocumentationPath($type);
 
-        $exe = $this->getSwaggerConverter();
+		$exe = $this->getSwaggerConverter();
 
-        $app_path = './app';
-        $apidoc_json = '/apidoc.json';
-        copy($this->getJsonFilePath($type).$apidoc_json, $app_path.$apidoc_json);
+		$app_path = './app';
+		$apidoc_json = '/apidoc.json';
+		copy($this->getJsonFilePath($type) . $apidoc_json, $app_path . $apidoc_json);
 
-        $command = $exe . ' ' . "-v -f '.*\.php$' -i {$app_path} -o {$path}/swagger";
+		$command = $exe . ' ' . "-v -f '.*\.php$' -i {$app_path} -o {$path}/swagger";
 
-        $process = new Process($command);
+		$process = new Process($command);
 
-        // execute the command
-        $process->run();
+		// execute the command
+		$process->run();
 
-        unlink($app_path.$apidoc_json);
+		unlink($app_path . $apidoc_json);
 
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
-        }
+		if (!$process->isSuccessful()) {
+			throw new ProcessFailedException($process);
+		}
 
-        // echo the output
-        $console->info('[' . $type . '] ' . $command);
-        $console->info('Result: ' . $process->getOutput());
+		// echo the output
+		$console->info('[' . $type . '] ' . $command);
+		$console->info('Result: ' . $process->getOutput());
 
-        // return the past to that generated documentation
-        return $this->getFullApiUrl($type).'/swagger/swagger.json';
-    }
+		// return the past to that generated documentation
+		return $this->getFullApiUrl($type) . '/swagger/swagger.json';
+	}
 
 }

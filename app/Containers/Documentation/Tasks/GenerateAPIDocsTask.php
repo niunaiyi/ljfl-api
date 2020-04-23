@@ -14,47 +14,47 @@ use Symfony\Component\Process\Process;
  */
 class GenerateAPIDocsTask extends Task
 {
-    use DocsGeneratorTrait;
+	use DocsGeneratorTrait;
 
-    /**
-     * @param $type
-     * @param $console
-     *
-     * @return  mixed
-     * @throws \Symfony\Component\Process\Exception\RuntimeException
-     * @throws \Symfony\Component\Process\Exception\LogicException
-     * @throws \Symfony\Component\Process\Exception\ProcessFailedException
-     */
-    public function run($type, $console)
-    {
-        $path = $this->getDocumentationPath($type);
+	/**
+	 * @param $type
+	 * @param $console
+	 *
+	 * @return  mixed
+	 * @throws \Symfony\Component\Process\Exception\RuntimeException
+	 * @throws \Symfony\Component\Process\Exception\LogicException
+	 * @throws \Symfony\Component\Process\Exception\ProcessFailedException
+	 */
+	public function run($type, $console)
+	{
+		$path = $this->getDocumentationPath($type);
 
-        $command = [
-            $this->getExecutable(),
-            # executable parameters
-            "-c",
-            $this->getJsonFilePath($type) . ' ' . $this->getEndpointFiles($type),
-            "-i",
-            "app",
-            "-o",
-            $path
-        ];
+		$command = [
+			$this->getExecutable(),
+			# executable parameters
+			"-c",
+			$this->getJsonFilePath($type) . ' ' . $this->getEndpointFiles($type),
+			"-i",
+			"app",
+			"-o",
+			$path
+		];
 
-        $process = new Process($command);
+		$process = new Process($command);
 
-        // execute the command
-        $process->run();
+		// execute the command
+		$process->run();
 
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
-        }
+		if (!$process->isSuccessful()) {
+			throw new ProcessFailedException($process);
+		}
 
-        // echo the output
-        $console->info('[' . $type . '] ' . implode (' ', $command));
-        $console->info('Result: ' . $process->getOutput());
+		// echo the output
+		$console->info('[' . $type . '] ' . implode(' ', $command));
+		$console->info('Result: ' . $process->getOutput());
 
-        // return the past to that generated documentation
-        return $this->getFullApiUrl($type);
-    }
+		// return the past to that generated documentation
+		return $this->getFullApiUrl($type);
+	}
 
 }

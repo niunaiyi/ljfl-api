@@ -13,8 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 class ValidationFailedException extends Exception
 {
 
-    public $httpStatusCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+	public $httpStatusCode = Response::HTTP_UNPROCESSABLE_ENTITY;
 
-    public $message = 'Invalid Input.';
+	public $message = 'Invalid Input.';
 
 }

@@ -14,65 +14,65 @@ use Locale;
 class Localization extends Value
 {
 
-    /**
-     * @var  null
-     */
-    private $language = null;
+	/**
+	 * @var  null
+	 */
+	private $language = null;
 
-    /**
-     * @var  array
-     */
-    private $regions = [];
+	/**
+	 * @var  array
+	 */
+	private $regions = [];
 
-    /**
-     * A resource key to be used by the the JSON API Serializer responses.
-     */
-    protected $resourceKey = 'localizations';
+	/**
+	 * A resource key to be used by the the JSON API Serializer responses.
+	 */
+	protected $resourceKey = 'localizations';
 
-    /**
-     * Localization constructor.
-     *
-     * @param       $language
-     * @param array $regions
-     */
-    public function __construct($language, array $regions = [])
-    {
-        $this->language = $language;
+	/**
+	 * Localization constructor.
+	 *
+	 * @param       $language
+	 * @param array $regions
+	 */
+	public function __construct($language, array $regions = [])
+	{
+		$this->language = $language;
 
-        foreach ($regions as $region) {
-            $this->regions[] = new Region($region);
-        }
-    }
+		foreach ($regions as $region) {
+			$this->regions[] = new Region($region);
+		}
+	}
 
-    /**
-     * @return  string
-     */
-    public function getDefaultName()
-    {
-        return Locale::getDisplayLanguage($this->language, Config::get('app.locale'));
-    }
+	/**
+	 * @return  string
+	 */
+	public function getDefaultName()
+	{
+		return Locale::getDisplayLanguage($this->language, Config::get('app.locale'));
+	}
 
-    /**
-     * @return  string
-     */
-    public function getLocaleName()
-    {
-        return Locale::getDisplayLanguage($this->language, $this->language);
-    }
+	/**
+	 * @return  string
+	 */
+	public function getLocaleName()
+	{
+		return Locale::getDisplayLanguage($this->language, $this->language);
+	}
 
-    /**
-     * @return  null
-     */
-    public function getLanguage()
-    {
-        return $this->language;
-    }
+	/**
+	 * @return  null
+	 */
+	public function getLanguage()
+	{
+		return $this->language;
+	}
 
-    /**
-     * @return  array
-     */
-    public function getRegions()
-    {
-        return $this->regions;
-    }
+	/**
+	 * @return  array
+	 */
+	public function getRegions()
+	{
+		return $this->regions;
+	}
 }

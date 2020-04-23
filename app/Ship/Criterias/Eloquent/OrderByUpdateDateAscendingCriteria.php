@@ -13,15 +13,15 @@ use Prettus\Repository\Contracts\RepositoryInterface as PrettusRepositoryInterfa
 class OrderByUpdateDateAscendingCriteria extends Criteria
 {
 
-    /**
-     * @param                                                   $model
-     * @param \Prettus\Repository\Contracts\RepositoryInterface $repository
-     *
-     * @return mixed
-     */
-    public function apply($model, PrettusRepositoryInterface $repository)
-    {
-        return $model->orderBy('updated_at', 'asc');
-    }
+	/**
+	 * @param                                                   $model
+	 * @param \Prettus\Repository\Contracts\RepositoryInterface $repository
+	 *
+	 * @return mixed
+	 */
+	public function apply($model, PrettusRepositoryInterface $repository)
+	{
+		return $model->orderBy('updated_at', 'asc');
+	}
 
 }

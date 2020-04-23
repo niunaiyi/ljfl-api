@@ -12,20 +12,20 @@ use Apiato\Core\Abstracts\Providers\MainProvider as AbstractMainProvider;
 abstract class MainProvider extends AbstractMainProvider
 {
 
-    /**
-     * Perform post-registration booting of services.
-     */
-    public function boot()
-    {
-        parent::boot();
-    }
+	/**
+	 * Perform post-registration booting of services.
+	 */
+	public function boot()
+	{
+		parent::boot();
+	}
 
-    /**
-     * Register anything in the container.
-     */
-    public function register()
-    {
-        parent::register();
-    }
+	/**
+	 * Register anything in the container.
+	 */
+	public function register()
+	{
+		parent::register();
+	}
 
 }

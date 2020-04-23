@@ -20,51 +20,51 @@ use App\Ship\Transporters\DataTransporter;
 class Controller extends ApiController
 {
 
-    /**
-     * @param GetAllPaymentAccountsRequest $request
-     *
-     * @return array
-     */
-    public function getAllPaymentAccounts(GetAllPaymentAccountsRequest $request)
-    {
-        $paymentAccounts = Apiato::call('Payment@GetAllPaymentAccountsAction');
+	/**
+	 * @param GetAllPaymentAccountsRequest $request
+	 *
+	 * @return array
+	 */
+	public function getAllPaymentAccounts(GetAllPaymentAccountsRequest $request)
+	{
+		$paymentAccounts = Apiato::call('Payment@GetAllPaymentAccountsAction');
 
-        return $this->transform($paymentAccounts, PaymentAccountTransformer::class);
-    }
+		return $this->transform($paymentAccounts, PaymentAccountTransformer::class);
+	}
 
-    /**
-     * @param FindPaymentAccountRequest $request
-     *
-     * @return array
-     */
-    public function getPaymentAccount(FindPaymentAccountRequest $request)
-    {
-        $paymentAccount = Apiato::call('Payment@FindPaymentAccountDetailsAction', [new DataTransporter($request)]);
+	/**
+	 * @param FindPaymentAccountRequest $request
+	 *
+	 * @return array
+	 */
+	public function getPaymentAccount(FindPaymentAccountRequest $request)
+	{
+		$paymentAccount = Apiato::call('Payment@FindPaymentAccountDetailsAction', [new DataTransporter($request)]);
 
-        return $this->transform($paymentAccount, PaymentAccountTransformer::class);
-    }
+		return $this->transform($paymentAccount, PaymentAccountTransformer::class);
+	}
 
-    /**
-     * @param UpdatePaymentAccountRequest $request
-     *
-     * @return array
-     */
-    public function updatePaymentAccount(UpdatePaymentAccountRequest $request)
-    {
-        $paymentAccount = Apiato::call('Payment@UpdatePaymentAccountAction', [new DataTransporter($request)]);
+	/**
+	 * @param UpdatePaymentAccountRequest $request
+	 *
+	 * @return array
+	 */
+	public function updatePaymentAccount(UpdatePaymentAccountRequest $request)
+	{
+		$paymentAccount = Apiato::call('Payment@UpdatePaymentAccountAction', [new DataTransporter($request)]);
 
-        return $this->transform($paymentAccount, PaymentAccountTransformer::class);
-    }
+		return $this->transform($paymentAccount, PaymentAccountTransformer::class);
+	}
 
-    /**
-     * @param DeletePaymentAccountRequest $request
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function deletePaymentAccount(DeletePaymentAccountRequest $request)
-    {
-        Apiato::call('Payment@DeletePaymentAccountAction', [new DataTransporter($request)]);
+	/**
+	 * @param DeletePaymentAccountRequest $request
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function deletePaymentAccount(DeletePaymentAccountRequest $request)
+	{
+		Apiato::call('Payment@DeletePaymentAccountAction', [new DataTransporter($request)]);
 
-        return $this->noContent();
-    }
+		return $this->noContent();
+	}
 }

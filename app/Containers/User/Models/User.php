@@ -20,59 +20,59 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends UserModel implements ChargeableInterface
 {
 
-  use ChargeableTrait;
-  use AuthorizationTrait;
-  use Notifiable;
-  use HasRoles;
-  use HasFillableRelations;
-  use Filterable;
+	use ChargeableTrait;
+	use AuthorizationTrait;
+	use Notifiable;
+	use HasRoles;
+	use HasFillableRelations;
+	use Filterable;
 
-  /**
-   * The database table used by the model.
-   *
-   * @var string
-   */
-  protected $table = 'users';
+	/**
+	 * The database table used by the model.
+	 *
+	 * @var string
+	 */
+	protected $table = 'users';
 
-  /**
-   * The attributes that are mass assignable.
-   *
-   * @var array
-   */
-  protected $fillable = [
-    'username',
-    'realname',
-    'password',
-    'address_id',
-  ];
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array
+	 */
+	protected $fillable = [
+		'username',
+		'realname',
+		'password',
+		'address_id',
+	];
 
-  /**
-   * The dates attributes.
-   *
-   * @var array
-   */
-  protected $dates = [
-    'created_at',
-    'updated_at',
-    'deleted_at',
-  ];
+	/**
+	 * The dates attributes.
+	 *
+	 * @var array
+	 */
+	protected $dates = [
+		'created_at',
+		'updated_at',
+		'deleted_at',
+	];
 
-  /**
-   * The attributes excluded from the model's JSON form.
-   *
-   * @var array
-   */
-  protected $hidden = [
-    'password',
-  ];
+	/**
+	 * The attributes excluded from the model's JSON form.
+	 *
+	 * @var array
+	 */
+	protected $hidden = [
+		'password',
+	];
 
-  public function setPasswordAttribute($password)
-  {
-    $this->attributes['password'] = bcrypt($password);
-  }
+	public function setPasswordAttribute($password)
+	{
+		$this->attributes['password'] = bcrypt($password);
+	}
 
-  public function address()
-  {
-    return $this->hasOne(Address::class, 'id', 'address_id');
-  }
+	public function address()
+	{
+		return $this->hasOne(Address::class, 'id', 'address_id');
+	}
 }

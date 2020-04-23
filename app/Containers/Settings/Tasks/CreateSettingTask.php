@@ -11,26 +11,25 @@ use Exception;
 class CreateSettingTask extends Task
 {
 
-    protected $repository;
+	protected $repository;
 
-    public function __construct(SettingRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+	public function __construct(SettingRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-    /**
-     * @param array $data
-     *
-     * @return Setting
-     * @throws CreateResourceFailedException
-     */
-    public function run(array $data): Setting
-    {
-        try {
-            return $this->repository->create($data);
-        }
-        catch (Exception $exception) {
-            throw new CreateResourceFailedException();
-        }
-    }
+	/**
+	 * @param array $data
+	 *
+	 * @return Setting
+	 * @throws CreateResourceFailedException
+	 */
+	public function run(array $data): Setting
+	{
+		try {
+			return $this->repository->create($data);
+		} catch (Exception $exception) {
+			throw new CreateResourceFailedException();
+		}
+	}
 }

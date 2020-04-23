@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class UnsupportedSocialAuthProviderException extends Exception
 {
-    public $httpStatusCode = Response::HTTP_NOT_ACCEPTABLE;
+	public $httpStatusCode = Response::HTTP_NOT_ACCEPTABLE;
 
-    public $message = 'Unsupported Social Auth Provider.';
+	public $message = 'Unsupported Social Auth Provider.';
 }

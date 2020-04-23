@@ -10,12 +10,12 @@ use App\Ship\Parents\Repositories\Repository;
 class DictRepository extends Repository
 {
 
-  /**
-   * @var array
-   */
-  protected $fieldSearchable = [
-    'id' => '=',
-    // ...
-  ];
+	/**
+	 * @var array
+	 */
+	protected $fieldSearchable = [
+		'id' => '=',
+		// ...
+	];
 
 }

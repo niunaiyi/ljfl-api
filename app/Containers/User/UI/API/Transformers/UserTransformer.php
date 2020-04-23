@@ -15,40 +15,40 @@ use App\Ship\Parents\Transformers\Transformer;
 class UserTransformer extends Transformer
 {
 
-  /**
-   * @var  array
-   */
-  protected $availableIncludes = [
-    'roles',
-    'address',
-  ];
+	/**
+	 * @var  array
+	 */
+	protected $availableIncludes = [
+		'roles',
+		'address',
+	];
 
-  /**
-   * @var  array
-   */
-  protected $defaultIncludes = [
-  ];
+	/**
+	 * @var  array
+	 */
+	protected $defaultIncludes = [
+	];
 
-  /**
-   * @param \App\Containers\User\Models\User $user
-   *
-   * @return array
-   */
-  public function transform(User $user)
-  {
-    $response = $user->toArray();
-    $response['object'] = 'User';
-    return $response;
-  }
+	/**
+	 * @param \App\Containers\User\Models\User $user
+	 *
+	 * @return array
+	 */
+	public function transform(User $user)
+	{
+		$response = $user->toArray();
+		$response['object'] = 'User';
+		return $response;
+	}
 
-  public function includeAddress(User $user)
-  {
-    return $this->item($user->address()->first(), new AddressTransformer());
-  }
+	public function includeAddress(User $user)
+	{
+		return $this->item($user->address()->first(), new AddressTransformer());
+	}
 
-  public function includeRoles(User $user)
-  {
-    return $this->collection($user->roles, new RoleTransformer());
-  }
+	public function includeRoles(User $user)
+	{
+		return $this->collection($user->roles, new RoleTransformer());
+	}
 
 }

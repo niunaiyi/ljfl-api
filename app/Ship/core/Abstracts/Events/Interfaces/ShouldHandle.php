@@ -9,5 +9,5 @@ namespace Apiato\Core\Abstracts\Events\Interfaces;
  */
 interface ShouldHandle
 {
-    public function handle();
+	public function handle();
 }

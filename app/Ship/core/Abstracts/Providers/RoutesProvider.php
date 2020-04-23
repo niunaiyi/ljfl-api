@@ -13,33 +13,33 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as LaravelRoute
 class RoutesProvider extends LaravelRouteServiceProvider
 {
 
-    use RoutesLoaderTrait;
+	use RoutesLoaderTrait;
 
-    /**
-     * This namespace is applied to your controller routes.
-     *
-     * In addition, it is set as the URL generator's root namespace.
-     *
-     * @var string
-     */
-    protected $namespace;
+	/**
+	 * This namespace is applied to your controller routes.
+	 *
+	 * In addition, it is set as the URL generator's root namespace.
+	 *
+	 * @var string
+	 */
+	protected $namespace;
 
-    /**
-     * Define your route model bindings, pattern filters, etc.
-     */
-    public function boot()
-    {
-        parent::boot();
-    }
+	/**
+	 * Define your route model bindings, pattern filters, etc.
+	 */
+	public function boot()
+	{
+		parent::boot();
+	}
 
-    /**
-     * Define the routes for the application.
-     *
-     * @return void
-     */
-    public function map()
-    {
-        $this->runRoutesAutoLoader();
-    }
+	/**
+	 * Define the routes for the application.
+	 *
+	 * @return void
+	 */
+	public function map()
+	{
+		$this->runRoutesAutoLoader();
+	}
 
 }
