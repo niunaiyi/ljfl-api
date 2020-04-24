@@ -8,7 +8,11 @@ use App\Ship\Parents\Models\Model;
 class Customer extends Model
 {
 	protected $fillable = [
-
+		'realname',
+		'nickname',
+		'openid',
+		'phonenumber',
+		'addresses',
 	];
 
 	protected $attributes = [

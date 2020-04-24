@@ -18,6 +18,7 @@ class UserRepository extends Repository
 	protected $fieldSearchable = [
 		'realname' => 'like',
 		'username' => 'like',
+		'phonenumber' => 'like',
 		'address.parent_name' => 'like',
 		'roles.display_name' => 'like',
 	];

@@ -2,6 +2,7 @@
 
 namespace App\Containers\User\Tasks;
 
+use App\Containers\Address\Models\Address;
 use App\Containers\User\Data\Criterias\AdminsCriteria;
 use App\Containers\User\Data\Criterias\ClientsCriteria;
 use App\Containers\User\Data\Criterias\RoleCriteria;
@@ -32,8 +33,14 @@ class GetAllUsersTask extends Task
 		$this->repository = $repository;
 	}
 
-	public function run()
+	public function run($addressroot)
 	{
+		if ($addressroot) {
+			$this->repository->whereHas('address', function ($query) use ($addressroot) {
+				$address = Address::find($addressroot);
+				$query->whereRaw('parent_name<@\'' . $address->parent_name . '\'');
+			});
+		}
 		return $this->repository->paginate();
 	}
 
@@ -56,5 +63,4 @@ class GetAllUsersTask extends Task
 	{
 		$this->repository->pushCriteria(new RoleCriteria($roles));
 	}
-
 }

@@ -107,6 +107,18 @@ class Controller extends ApiController
 	 *
 	 * @return  JsonResponse
 	 */
+	public function updateRole(UpdateRoleRequest $request)
+	{
+		Apiato::call('Authorization@UpdateRoleAction', [new DataTransporter($request)]);
+
+		return $this->noContent();
+	}
+
+	/**
+	 * @param DeleteRoleRequest $request
+	 *
+	 * @return  JsonResponse
+	 */
 	public function deleteRole(DeleteRoleRequest $request)
 	{
 		Apiato::call('Authorization@DeleteRoleAction', [new DataTransporter($request)]);

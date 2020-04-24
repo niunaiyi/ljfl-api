@@ -22,7 +22,6 @@ trait HasRequestCriteriaTrait
 	public function addRequestCriteria($repository = null)
 	{
 		$validatedRepository = $this->validateRepository($repository);
-
 		$validatedRepository->pushCriteria(app(RequestCriteria::class));
 	}
 

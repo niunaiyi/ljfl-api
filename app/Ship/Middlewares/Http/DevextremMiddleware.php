@@ -3,6 +3,7 @@
 namespace App\Ship\Middlewares\Http;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class DevextremMiddleware
 {
@@ -16,10 +17,7 @@ class DevextremMiddleware
 	public function handle($request, Closure $next)
 	{
 		if ($request->has('filter')) {
-			$filters = $request->filter;
 			$request->offsetUnset('filter');
-			$value = $this->getSearchValue($filters);
-			$request->offsetSet('search', $value);
 		}
 		if ($request->has('skip')) {
 			$skip = $request->skip;
@@ -27,9 +25,19 @@ class DevextremMiddleware
 			$request->offsetUnset('skip');
 			$request->offsetUnset('take');
 			$request->offsetSet('limit', $take);
-			$request->offsetSet('page', $skip);
+			$request->offsetSet('page', ($skip + $take) / $take);
 		}
-		\Log::info($request);
+
+		if ($request->has('sort')) {
+			$sorts = json_decode($request->sort);
+			foreach ($sorts as $sort) {
+				$fieldName = $sort->selector;
+				$desc = $sort->desc ? 'desc' : 'asc';
+				$request->offsetSet('orderBy', $fieldName);
+				$request->offsetSet('sortedBy', $desc);
+			}
+			$request->offsetUnset('sort');
+		}
 		return $next($request);
 	}
 }

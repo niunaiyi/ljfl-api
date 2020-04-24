@@ -52,11 +52,11 @@ class CreateAddressRequest extends Request
 	public function rules()
 	{
 		return [
-//      'name' => ['required', 'string', 'max:20'],
-//      'dzlx_value' => ['required', 'numeric'],
-//      'hylx_value' => ['required', 'numeric'],
-//      'parent_id' => ['required', 'numeric', 'exists:App\Containers\Address\Models\Address,id'],
-//      'position' => ['required','array'],
+			'name' => ['required', 'string', 'max:20'],
+			'dzlx_value' => ['required', 'numeric'],
+			'hylx_value' => ['required', 'numeric'],
+			'parent_id' => ['required', 'numeric', 'exists:App\Containers\Address\Models\Address,id'],
+			'position' => ['required', 'array'],
 		];
 	}
 

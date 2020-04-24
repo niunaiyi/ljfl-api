@@ -56,7 +56,7 @@ class UpdateAddressRequest extends Request
 			'name' => ['string', 'max:20'],
 			'dzlx_value' => ['numeric'],
 			'hylx_value' => ['numeric'],
-//			'position' => ['object'],
+			'position' => ['array'],
 		];
 	}
 

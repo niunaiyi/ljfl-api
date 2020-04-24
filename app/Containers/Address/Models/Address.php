@@ -35,4 +35,9 @@ class Address extends Model
 	{
 		return Address::whereRaw('parent_name = subpath(\'' . $this->parent_name . '\', 0, -1) ');
 	}
+
+	public function descendants()
+	{
+		return Address::whereRaw('parent_name ~ \'' . $this->parent_name . '.*\'');
+	}
 }

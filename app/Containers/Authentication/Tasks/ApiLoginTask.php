@@ -24,7 +24,6 @@ class ApiLoginTask extends Task
 		if (!$user = Auth::attempt(['username' => $username, 'password' => $password])) {
 			throw new LoginFailedException();
 		}
-		\Log::info($user);
 		return Auth::user();
 	}
 }

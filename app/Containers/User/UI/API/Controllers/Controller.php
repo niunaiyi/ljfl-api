@@ -80,7 +80,7 @@ class Controller extends ApiController
 	 */
 	public function getAllUsers(GetAllUsersRequest $request)
 	{
-		$users = Apiato::call('User@GetAllUsersAction');
+		$users = Apiato::call('User@GetAllUsersAction', [$request]);
 
 		return $this->transform($users, UserTransformer::class);
 	}

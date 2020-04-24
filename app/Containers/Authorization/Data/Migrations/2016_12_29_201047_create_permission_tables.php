@@ -21,7 +21,8 @@ class CreatePermissionTables extends Migration
 			$table->string('guard_name');
 			$table->string('display_name')->nullable();
 			$table->string('description')->nullable();
-			$table->timestamps();
+			$table->timestamp('created_at')->useCurrent();
+			$table->timestamp('updated_at')->useCurrent();
 		});
 
 		Schema::create($tableNames['roles'], function (Blueprint $table) {
@@ -30,7 +31,8 @@ class CreatePermissionTables extends Migration
 			$table->string('guard_name');
 			$table->string('display_name')->nullable();
 			$table->string('description')->nullable();
-			$table->timestamps();
+			$table->timestamp('created_at')->useCurrent();
+			$table->timestamp('updated_at')->useCurrent();
 		});
 
 		Schema::create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames, $foreignKeys) {

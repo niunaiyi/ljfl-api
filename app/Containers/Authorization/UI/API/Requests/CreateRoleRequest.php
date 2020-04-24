@@ -48,8 +48,8 @@ class CreateRoleRequest extends Request
 	{
 		return [
 			'name' => 'required|unique:roles,name|min:2|max:20|no_spaces',
+			'display_name' => 'required|max:100',
 			'description' => 'max:255',
-			'display_name' => 'max:100',
 		];
 	}
 
