@@ -9,7 +9,7 @@ use App\Ship\Parents\Requests\Request;
  *
  * @author Mahmoud Zalt <mahmoud@zalt.me>
  */
-class CreateRoleRequest extends Request
+class UpdateRoleRequest extends Request
 {
 
 	/**
@@ -49,7 +49,7 @@ class CreateRoleRequest extends Request
 		return [
 			'id' => 'required|exists:roles,id',
 			'name' => 'unique:roles,name|min:2|max:20|no_spaces',
-			'display_name' => 'required|max:100',
+			'display_name' => 'min:4|max:100',
 			'description' => 'max:255',
 			'permissions' =>'array',
 		];

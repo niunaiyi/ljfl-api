@@ -2,6 +2,7 @@
 
 namespace App\Containers\Authorization\Tasks;
 
+use App\Containers\Authorization\Data\Repositories\RoleRepository;
 use App\Containers\User\Models\User;
 use App\Ship\Parents\Tasks\Task;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -14,6 +15,13 @@ use Illuminate\Contracts\Auth\Authenticatable;
 class AssignUserToRoleTask extends Task
 {
 
+	protected $repository;
+
+	public function __construct(RoleRepository $repository)
+	{
+		$this->repository = $repository;
+	}
+
 	/**
 	 * @param User $user
 	 * @param array $roles
@@ -22,7 +30,7 @@ class AssignUserToRoleTask extends Task
 	 */
 	public function run(User $user, array $roles): Authenticatable
 	{
-		return $user->assignRole($roles);
+		return $user->givePermissionTo($roles);
 	}
 
 }

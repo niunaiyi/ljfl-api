@@ -28,13 +28,9 @@ class PermissionTransformer extends Transformer
 	 */
 	public function transform(Permission $permission)
 	{
-		return [
-			'object' => 'Permission',
-			'id' => $permission->getHashedKey(), // << Unique Identifier
-			'name' => $permission->name, // << Unique Identifier
-			'description' => $permission->description,
-			'display_name' => $permission->display_name,
-		];
+		$data = $permission->toArray();
+		$data['object'] = 'Permission';
+		return $data;
 	}
 
 }

@@ -6,6 +6,7 @@ use App\Containers\Drop\UI\API\Requests\CreateDropRequest;
 use App\Containers\Drop\UI\API\Requests\DeleteDropRequest;
 use App\Containers\Drop\UI\API\Requests\GetAllDropsRequest;
 use App\Containers\Drop\UI\API\Requests\FindDropByIdRequest;
+use App\Containers\Drop\UI\API\Requests\IdRequest;
 use App\Containers\Drop\UI\API\Requests\UpdateDropRequest;
 use App\Containers\Drop\UI\API\Transformers\DropTransformer;
 use App\Ship\Parents\Controllers\ApiController;
@@ -29,11 +30,22 @@ class Controller extends ApiController
         return $this->created($this->transform($drop, DropTransformer::class));
     }
 
+	/**
+	 * @param CreateDropRequest $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function countDropByAddressId(IDRequest $request)
+	{
+		$drop = Apiato::call('Drop@CountDropByAddressIdAction', [$request]);
+
+		return $drop;
+	}
+
     /**
-     * @param FindDropByIdRequest $request
+     * @param IdRequest $request
      * @return array
      */
-    public function findDropById(FindDropByIdRequest $request)
+    public function findDropById(IdRequest $request)
     {
         $drop = Apiato::call('Drop@FindDropByIdAction', [$request]);
 

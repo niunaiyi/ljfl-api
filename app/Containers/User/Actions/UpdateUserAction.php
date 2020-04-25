@@ -34,7 +34,6 @@ class UpdateUserAction extends Action
 			$user = Apiato::call('User@UpdateUserRolesTask', [$request->id, $request->roles['data']]);
 		}
 
-
 		$user = Apiato::call('User@UpdateUserTask', [$request->id, $data]);
 		return $user;
 	}

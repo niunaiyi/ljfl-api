@@ -19,8 +19,7 @@ class GetAddressChildrenTask extends Task
 	public function run($id)
 	{
 		try {
-			$addresses = $this->repository->find($id)->children()->get();
-			return $addresses;
+			return $this->repository->find($id)->children()->get();
 		} catch (Exception $exception) {
 			throw new NotFoundException();
 		}

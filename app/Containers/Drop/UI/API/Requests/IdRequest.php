@@ -5,9 +5,9 @@ namespace App\Containers\Drop\UI\API\Requests;
 use App\Ship\Parents\Requests\Request;
 
 /**
- * Class FindDropByIdRequest.
+ * Class IdRequest.
  */
-class FindDropByIdRequest extends Request
+class IdRequest extends Request
 {
 
 	/**

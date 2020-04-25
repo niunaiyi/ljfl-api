@@ -14,8 +14,14 @@ class DropRepository extends Repository
      * @var array
      */
     protected $fieldSearchable = [
-        'id' => '=',
-        // ...
+	    'device.name' => 'like',
+    	'user.realname' => 'like',
+    	'user.username' => 'like',
+        'customer.realname' => 'like',
+        'customer.nickname' => 'like',
+        'ljlx.name' => 'like',
+        'ljxl.name' => 'like',
+        'jlbz.name' => 'like',
     ];
 
 }

@@ -30,7 +30,7 @@ class RoleTransformer extends Transformer
 	public function transform(Role $role)
 	{
 		$reponse = $role->toArray();
-		$reponse['object'] = 'Role';
+//		$reponse['object'] = 'Role';
 		return $reponse;
 	}
 

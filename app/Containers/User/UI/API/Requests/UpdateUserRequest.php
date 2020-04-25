@@ -47,9 +47,9 @@ class UpdateUserRequest extends Request
 	public function rules()
 	{
 		return [
-			'username' => 'string|unique:users|min:6|max:20',
-			'realname' => 'string|min:6|max:10',
-			'password' => 'string|min:6|max:10',
+			'username' => 'string|unique:users|min:3|max:20',
+			'realname' => 'string|min:2|max:10',
+			'password' => 'string|min:4|max:10',
 			'phonenumber' => 'string|unique:users',
 			'address_id' => 'numeric',
 			'roles' => 'array',

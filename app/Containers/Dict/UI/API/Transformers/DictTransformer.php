@@ -28,8 +28,9 @@ class DictTransformer extends Transformer
 	 */
 	public function transform(Dict $entity)
 	{
-		$response = $entity->toArray();
+		$data = $entity->toArray();
+		$data['object'] = 'Dict';
 
-		return $response;
+		return $data;
 	}
 }
