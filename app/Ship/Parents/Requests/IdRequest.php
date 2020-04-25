@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Containers\Address\UI\API\Requests;
+namespace App\Ship\Parents\Requests;
 
-use App\Containers\Address\Data\Transporters\DeleteAddressTransporter;
 use App\Ship\Parents\Requests\Request;
 
 /**
- * Class DeleteAddressRequest.
+ * Class IdRequest.
  */
-class DeleteAddressRequest extends Request
+class IdRequest extends Request
 {
 
 	/**
@@ -16,7 +15,7 @@ class DeleteAddressRequest extends Request
 	 *
 	 * @var string
 	 */
-	protected $transporter = DeleteAddressTransporter::class;
+	protected $transporter = \App\Containers\Drop\Data\Transporters\FindDropByIdTransporter::class;
 
 	/**
 	 * Define which Roles and/or Permissions has access to this request.
@@ -44,7 +43,7 @@ class DeleteAddressRequest extends Request
 	 * @var  array
 	 */
 	protected $urlParameters = [
-		 'id',
+		'id',
 	];
 
 	/**
@@ -53,7 +52,7 @@ class DeleteAddressRequest extends Request
 	public function rules()
 	{
 		return [
-			// 'id' => 'required',
+			'id' => 'required',
 			// '{user-input}' => 'required|max:255',
 		];
 	}
