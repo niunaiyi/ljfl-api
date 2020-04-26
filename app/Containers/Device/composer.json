@@ -1,0 +1,6 @@
+{
+  "name": "apiato/device",
+  "description": "Device Container for apiato.",
+  "require": {
+  }
+}
