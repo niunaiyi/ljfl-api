@@ -6,6 +6,7 @@ use App\Ship\Middlewares\Http\Authenticate;
 use App\Ship\Middlewares\Http\ProcessETagHeadersMiddleware;
 use App\Ship\Middlewares\Http\ProfilerMiddleware;
 use App\Ship\Middlewares\Http\ValidateJsonContent;
+use Fruitcake\Cors\HandleCors;
 use Illuminate\Foundation\Http\Kernel as LaravelHttpKernel;
 
 /**
@@ -60,6 +61,7 @@ class HttpKernel extends LaravelHttpKernel
 			'bindings',
 			ProcessETagHeadersMiddleware::class,
 			ProfilerMiddleware::class,
+			HandleCors::class,
 		],
 	];
 
