@@ -8,12 +8,15 @@ use App\Containers\Authentication\Data\Transporters\ProxyRefreshTransporter;
 use App\Containers\Authentication\UI\API\Requests\LoginRequest;
 use App\Containers\Authentication\UI\API\Requests\LogoutRequest;
 use App\Containers\Authentication\UI\API\Requests\RefreshRequest;
+use App\Containers\Customer\Models\Customer;
 use App\Containers\User\UI\API\Transformers\UserTransformer;
 use App\Ship\Parents\Controllers\ApiController;
+use App\Ship\Parents\Requests\Request;
 use App\Ship\Transporters\DataTransporter;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cookie;
+use EasyWeChat\Factory;
 
 /**
  * Class Controller
@@ -22,6 +25,67 @@ use Illuminate\Support\Facades\Cookie;
  */
 class Controller extends ApiController
 {
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return JsonResponse
+	 */
+	public function mplogin(Request $request)
+	{
+		$config = config('wechat.mini_program.default');
+		$code = $request->get("code", "");
+		// 开始拉取用户信息
+
+		$mp = Factory::miniProgram($config);
+		$session = $mp->auth->session($code);
+		$customer = Customer::whereOpenid($session['openid'])->first();
+		if ($customer) {
+			$session['phoneNumber'] = $customer->phonenumber;
+		}
+		return response()->json($session, 200);
+	}
+
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return array
+	 * @throws \EasyWeChat\Kernel\Exceptions\DecryptException
+	 */
+	public function GetUserInfo(Request $request)
+	{
+		$config = config('wechat.mini_program.default');
+		$mp = Factory::miniProgram($config);
+		$decryptedData = $mp->encryptor->decryptData($request->get('session'), $request->get('iv'), $request->get('encryptedData'));
+		$customer = Customer::firstOrNew(['phonenumber' => $decryptedData['phoneNumber']]);
+		$customer->openid = $request->get('openid');
+		$customer->nickname = $request->get('nickname');
+		$customer->phonenumber = $decryptedData['phoneNumber'];
+		$customer->save();
+
+		return $decryptedData;
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return array
+	 * @throws \EasyWeChat\Kernel\Exceptions\DecryptException
+	 */
+	public function getCustomerInfo(Request $request)
+	{
+		$config = config('wechat.mini_program.default');
+		$mp = Factory::miniProgram($config);
+		$decryptedData = $mp->encryptor->decryptData($request->get('session'), $request->get('iv'), $request->get('encryptedData'));
+		$customer = Customer::firstOrNew(['phonenumber' => $decryptedData['phoneNumber']]);
+		$customer->openid = $request->get('openid');
+		$customer->nickname = $request->get('nickname');
+		$customer->phonenumber = $decryptedData['phoneNumber'];
+		$customer->save();
+
+		return $decryptedData;
+	}
 
 	/**
 	 * @param LoginRequest $request
