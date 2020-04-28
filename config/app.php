@@ -170,6 +170,7 @@ return [
 		 * NOTE: all packages service providers must be registered inside their container's main service providers.
 		 */
 		Apiato\Core\Providers\ApiatoProvider::class,
+		Fruitcake\Cors\CorsServiceProvider::class,
 	],
 
 	/*
