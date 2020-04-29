@@ -6,7 +6,6 @@ use App\Ship\Middlewares\Http\Authenticate;
 use App\Ship\Middlewares\Http\ProcessETagHeadersMiddleware;
 use App\Ship\Middlewares\Http\ProfilerMiddleware;
 use App\Ship\Middlewares\Http\ValidateJsonContent;
-use Fruitcake\Cors\HandleCors;
 use Illuminate\Foundation\Http\Kernel as LaravelHttpKernel;
 
 /**
@@ -35,7 +34,7 @@ class HttpKernel extends LaravelHttpKernel
 		\Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
 
 		// CORS package middleware
-		\Fruitcake\Cors\HandleCors::class,
+		\Barryvdh\Cors\HandleCors::class,
 		\App\Ship\Middlewares\Http\DevextremMiddleware::class,
 	];
 
@@ -53,6 +52,7 @@ class HttpKernel extends LaravelHttpKernel
 			\Illuminate\View\Middleware\ShareErrorsFromSession::class,
 			\App\Ship\Middlewares\Http\VerifyCsrfToken::class,
 			\Illuminate\Routing\Middleware\SubstituteBindings::class,
+			HandleCors::class,
 		],
 
 		'api' => [
