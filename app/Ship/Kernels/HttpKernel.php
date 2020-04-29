@@ -33,9 +33,10 @@ class HttpKernel extends LaravelHttpKernel
 		\App\Ship\Middlewares\Http\TrustProxies::class,
 		\Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
 
-		// CORS package middleware
-		\Barryvdh\Cors\HandleCors::class,
 		\App\Ship\Middlewares\Http\DevextremMiddleware::class,
+
+		// CORS package middleware
+		\Fruitcake\Cors\HandleCors::class,
 	];
 
 	/**
@@ -52,7 +53,6 @@ class HttpKernel extends LaravelHttpKernel
 			\Illuminate\View\Middleware\ShareErrorsFromSession::class,
 			\App\Ship\Middlewares\Http\VerifyCsrfToken::class,
 			\Illuminate\Routing\Middleware\SubstituteBindings::class,
-			HandleCors::class,
 		],
 
 		'api' => [
@@ -61,7 +61,6 @@ class HttpKernel extends LaravelHttpKernel
 			'bindings',
 			ProcessETagHeadersMiddleware::class,
 			ProfilerMiddleware::class,
-			HandleCors::class,
 		],
 	];
 
