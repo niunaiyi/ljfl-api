@@ -23,6 +23,7 @@ class UpdateStationTask extends Task
             return $this->repository->update($data, $id);
         }
         catch (Exception $exception) {
+        	\Log::info($exception);
             throw new UpdateResourceFailedException();
         }
     }

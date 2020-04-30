@@ -9,7 +9,10 @@ use App\Ship\Parents\Models\Model;
 class Station extends Model
 {
     protected $fillable = [
-
+		'name',
+		'address_id',
+		'position',
+		'user_id',
     ];
 
     protected $attributes = [

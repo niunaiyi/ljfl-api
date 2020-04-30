@@ -33,7 +33,6 @@ class Customer extends Model
 	 */
 	protected $resourceKey = 'customers';
 
-
 	public function addresses()
 	{
 		return $this->belongsToMany(Address::class, 'customer_address', 'customer_id', 'address_id');

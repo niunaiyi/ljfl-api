@@ -10,9 +10,16 @@ class CreateStationAction extends Action
 {
     public function run(Request $request)
     {
-        $data = $request->sanitizeInput([
-            // add your request data here
-        ]);
+		$data = $request->sanitizeInput([
+			'name',
+			'user_id',
+			'address_id',
+			'position',
+		]);
+
+		if ($request->has('position')) {
+			$data['position'] = json_encode($data['position']);
+		}
 
         $station = Apiato::call('Station@CreateStationTask', [$data]);
 

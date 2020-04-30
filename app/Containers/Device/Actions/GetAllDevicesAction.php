@@ -11,8 +11,6 @@ class GetAllDevicesAction extends Action
     public function run(Request $request)
     {
     	$addressroot = $request->addressroot;
-        $devices = Apiato::call('Device@GetAllDevicesTask', [$addressroot], ['addRequestCriteria']);
-
-        return $devices;
+		return Apiato::call('Device@GetAllDevicesTask', [$addressroot], ['addRequestCriteria']);
     }
 }

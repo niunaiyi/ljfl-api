@@ -25,6 +25,5 @@ class GetAllDevicesTask extends Task
 		    });
 	    }
 	    return $this->repository->paginate();
-        return $this->repository->paginate();
     }
 }

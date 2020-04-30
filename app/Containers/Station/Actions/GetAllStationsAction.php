@@ -10,8 +10,8 @@ class GetAllStationsAction extends Action
 {
     public function run(Request $request)
     {
-        $stations = Apiato::call('Station@GetAllStationsTask', [], ['addRequestCriteria']);
+		$addressroot = $request->addressroot;
 
-        return $stations;
+		return  Apiato::call('Station@GetAllStationsTask', [$addressroot], ['addRequestCriteria']);
     }
 }
