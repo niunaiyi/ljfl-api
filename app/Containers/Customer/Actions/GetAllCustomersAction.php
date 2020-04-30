@@ -10,8 +10,13 @@ class GetAllCustomersAction extends Action
 {
 	public function run(Request $request)
 	{
-		$customers = Apiato::call('Customer@GetAllCustomersTask', [], ['addRequestCriteria']);
-
-		return $customers;
+		$addressroot = $request->addressroot;
+		return Apiato::call('Customer@Customer',
+			[$addressroot],
+			[
+				'addRequestCriteria',
+				'ordered',
+			]
+		);
 	}
 }
