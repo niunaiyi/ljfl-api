@@ -23,6 +23,7 @@ class CreateDeviceTask extends Task
             return $this->repository->create($data);
         }
         catch (Exception $exception) {
+			\Log::info($exception);
             throw new CreateResourceFailedException();
         }
     }

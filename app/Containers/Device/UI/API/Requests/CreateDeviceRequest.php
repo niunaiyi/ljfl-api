@@ -52,7 +52,7 @@ class CreateDeviceRequest extends Request
 	public function rules()
 	{
 		return [
-			'name' => ['required', 'string', 'min:6', 'max:20'],
+			'name' => ['required', 'string', 'min:2', 'max:20'],
 			'sblx_value' => ['required', 'numeric'],
 			'sbxh_value' => ['required', 'numeric'],
 			'position' => ['required', 'array'],

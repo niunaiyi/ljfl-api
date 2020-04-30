@@ -11,8 +11,16 @@ class CreateDeviceAction extends Action
     public function run(Request $request)
     {
         $data = $request->sanitizeInput([
-            // add your request data here
+			'name',
+			'sblx_value',
+			'sbxh_value',
+			'user_id',
+			'address_id',
+			'position',
         ]);
+		if ($request->has('position')) {
+			$data['position'] = json_encode($data['position']);
+		}
 
         $device = Apiato::call('Device@CreateDeviceTask', [$data]);
 

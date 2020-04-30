@@ -48,7 +48,7 @@ class CreatePermissionTask extends Task
 				'name' => $name,
 				'description' => $description,
 				'display_name' => $displayName,
-				'guard_name' => 'web',
+				'guard_name' => 'api',
 			]);
 		} catch (Exception $exception) {
 			throw new CreateResourceFailedException();

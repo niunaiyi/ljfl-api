@@ -11,10 +11,18 @@ class CreateCustomerAction extends Action
 	public function run(Request $request)
 	{
 		$data = $request->sanitizeInput([
-			// add your request data here
+			'nickname',
+			'realname',
+			'openid',
+			'phonenumber',
+			'score',
 		]);
 
+
 		$customer = Apiato::call('Customer@CreateCustomerTask', [$data]);
+		if ($request->has('addresses')) {
+			$customer = Apiato::call('Customer@UpdateCustomerAddressesTask', [$customer->id, $request->addresses['data']]);
+		}
 
 		return $customer;
 	}

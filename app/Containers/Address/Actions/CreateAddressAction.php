@@ -17,10 +17,8 @@ class CreateAddressAction extends Action
 			'position',
 		]);
 		$parent_name = Apiato::call('Address@GetAddressParentNameTask', [$request->parent_id]);
-		$data['parent_name'] = $parent_name;
+		$data['parent_name'] = $parent_name .'.' .$data['name'];
 
-		$address = Apiato::call('Address@CreateAddressTask', [$data]);
-
-		return $address;
+		return Apiato::call('Address@CreateAddressTask', [$data]);
 	}
 }
