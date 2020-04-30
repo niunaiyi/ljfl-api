@@ -4,6 +4,7 @@ namespace App\Containers\User\UI\API\Controllers;
 
 use Apiato\Core\Foundation\Facades\Apiato;
 use App\Containers\User\UI\API\Requests\CreateAdminRequest;
+use App\Containers\User\UI\API\Requests\CreateUserRequest;
 use App\Containers\User\UI\API\Requests\DeleteUserRequest;
 use App\Containers\User\UI\API\Requests\FindUserByIdRequest;
 use App\Containers\User\UI\API\Requests\ForgotPasswordRequest;
@@ -42,6 +43,18 @@ class Controller extends ApiController
 	 *
 	 * @return  mixed
 	 */
+	public function createUser(CreateUserRequest $request)
+	{
+		$user = Apiato::call('User@CreateUserAction', [$request]);
+
+		return $this->transform($user, UserTransformer::class);
+	}
+
+	/**
+	 * @param \App\Containers\User\UI\API\Requests\CreateAdminRequest $request
+	 *
+	 * @return  mixed
+	 */
 	public function createAdmin(CreateAdminRequest $request)
 	{
 		$admin = Apiato::call('User@CreateAdminAction', [new DataTransporter($request)]);
@@ -50,7 +63,7 @@ class Controller extends ApiController
 	}
 
 	/**
-	 * @param \App\Containers\User\UI\API\Requests\UpdateUserRequest $request
+	 * @param UpdateUserRequest $request
 	 *
 	 * @return  mixed
 	 */

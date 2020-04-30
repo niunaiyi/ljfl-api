@@ -31,6 +31,7 @@ class CreateUserByCredentialsTask extends Task
 	 * @param string $password
 	 * @param string $address_id
 	 *
+	 * @param bool $activated
 	 * @return  mixed
 	 */
 	public function run(
@@ -38,7 +39,8 @@ class CreateUserByCredentialsTask extends Task
 		string $realname,
 		string $phonenumber,
 		string $password,
-		string $address_id
+		string $address_id,
+		bool   $activated = false
 	): User
 	{
 
@@ -50,6 +52,7 @@ class CreateUserByCredentialsTask extends Task
 				'realname' => $realname,
 				'phonenumber' => $phonenumber,
 				'address_id' => $address_id,
+				'activated'  => $activated,
 			]);
 
 		} catch (Exception $e) {

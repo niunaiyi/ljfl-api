@@ -28,7 +28,6 @@ class CountDropByAddressIdTask extends Task
 		        $drops = $this->repository->whereHas('device', function ($query) use ($address) {
 			        $query->whereHas('address', function ($query) use ($address) {
 				        $strSQL = '\'' . $address->parent_name . '\'@> parent_name';
-				        \Log::info($strSQL);
 				        $query->whereRaw($strSQL);
 			        });
 		        })->selectRaw('ljlx_value, ljxl_value, sum(amount) as ljsum')

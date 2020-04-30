@@ -9,7 +9,7 @@ use App\Ship\Parents\Requests\Request;
  *
  * @author Mahmoud Zalt <mahmoud@zalt.me>
  */
-class CreateAdminRequest extends Request
+class CreateUserRequest extends Request
 {
 
 	/**
@@ -50,7 +50,7 @@ class CreateAdminRequest extends Request
 			'username' => 'required|max:40|unique:users',
 			'realname' => 'required|min:3|max:30',
 			'password' => 'required|min:3|max:30',
-			'phonenumber' =>'required|min:11|max:11|numeric',
+			'phonenumber' =>'required|min:10|max:15',
 			'address_id' => 'required|numeric',
 			'activated' => 'required|bool',
 			'roles' => 'required|array',
