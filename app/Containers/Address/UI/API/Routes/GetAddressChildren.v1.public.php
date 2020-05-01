@@ -48,7 +48,7 @@
 $router->get('addresses/{id}/children', [
 	'as' => 'api_address_get_children',
 	'uses' => 'Controller@getAddressChildren',
-	'middleware' => [
-		'auth:api',
-	],
+//	'middleware' => [
+//		'auth:api',
+//	],
 ]);

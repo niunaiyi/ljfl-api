@@ -6,6 +6,7 @@ use Apiato\Core\Foundation\Facades\Apiato;
 use App\Containers\Address\UI\API\Requests\CreateAddressRequest;
 use App\Containers\Address\UI\API\Requests\DeleteAddressRequest;
 use App\Containers\Address\UI\API\Requests\FindAddressByIdRequest;
+use App\Containers\Address\UI\API\Requests\FindAddressByPositionRequest;
 use App\Containers\Address\UI\API\Requests\GetAddressChildrenRequest;
 use App\Containers\Address\UI\API\Requests\GetAllAddressesRequest;
 use App\Containers\Address\UI\API\Requests\UpdateAddressRequest;
@@ -39,6 +40,18 @@ class Controller extends ApiController
 		$address = Apiato::call('Address@FindAddressByIdAction', [$request]);
 
 		return $this->transform($address, AddressTransformer::class);
+	}
+
+
+	/**
+	 * @param FindAddressByPositionRequest $request
+	 * @return array
+	 */
+	public function findAddressByPosition(FindAddressByPositionRequest $request)
+	{
+		$addresses = Apiato::call('Address@findAddressByPositionAction', [$request]);
+
+		return $this->transform($addresses, AddressTransformer::class);
 	}
 
 	/**

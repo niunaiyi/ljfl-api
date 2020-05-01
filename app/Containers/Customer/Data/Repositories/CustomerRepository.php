@@ -16,6 +16,7 @@ class CustomerRepository extends Repository
 	protected $fieldSearchable = [
 		'nickname' => 'like',
 		'realname' => 'like',
+		'openid' => 'like',
 		'phonenumber' => 'like',
 		'addresses.name' => 'like',
 		'addresses.parent_name' => 'like',

@@ -2,9 +2,9 @@
 
 /**
  * @apiGroup           Customer
- * @apiName            createCustomer
+ * @apiName            updateCustomer
  *
- * @api                {POST} /v1/customers Endpoint title here..
+ * @api                {PATCH} /v1/customers/:id Endpoint title here..
  * @apiDescription     Endpoint description here..
  *
  * @apiVersion         1.0.0
@@ -20,9 +20,9 @@
  */
 
 /** @var Route $router */
-$router->post('customers', [
-	'as' => 'api_customer_create_customer',
-	'uses' => 'Controller@createCustomer',
+$router->put('customers/{id}', [
+	'as' => 'api_customer_update_customer',
+	'uses' => 'Controller@updateCustomer',
 //	'middleware' => [
 //		'auth:api',
 //	],
