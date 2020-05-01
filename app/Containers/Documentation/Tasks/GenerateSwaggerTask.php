@@ -14,46 +14,57 @@ use Symfony\Component\Process\Process;
  */
 class GenerateSwaggerTask extends Task
 {
-	use DocsGeneratorTrait;
+    use DocsGeneratorTrait;
 
-	/**
-	 * @param $type
-	 * @param $console
-	 *
-	 * @return  mixed
-	 * @throws \Symfony\Component\Process\Exception\RuntimeException
-	 * @throws \Symfony\Component\Process\Exception\LogicException
-	 * @throws \Symfony\Component\Process\Exception\ProcessFailedException
-	 */
-	public function run($type, $console)
-	{
-		$path = $this->getDocumentationPath($type);
+    /**
+     * @param $type
+     * @param $console
+     *
+     * @return  mixed
+     * @throws \Symfony\Component\Process\Exception\RuntimeException
+     * @throws \Symfony\Component\Process\Exception\LogicException
+     * @throws \Symfony\Component\Process\Exception\ProcessFailedException
+     */
+    public function run($type, $console)
+    {
+        // little hack to move the apidoc.json file to the /app directory in order to be seen by apidoc-swagger
+        // since the command doesn't support passing custom path.
+        $app_path = 'app';
+        $apidoc_json = '/apidoc.json';
+        copy($this->getJsonFilePath($type) . $apidoc_json, $app_path . $apidoc_json);
 
-		$exe = $this->getSwaggerConverter();
+        $command = [
+            $this->getSwaggerConverter(),
+            // executable parameters
+            "-v",
+            "",
+            "-f",
+            "'.*\.php$'",
+            "-i",
+            $app_path,
+            "-o",
+            "{$this->getDocumentationPath($type)}/swagger"
+        ];
 
-		$app_path = './app';
-		$apidoc_json = '/apidoc.json';
-		copy($this->getJsonFilePath($type) . $apidoc_json, $app_path . $apidoc_json);
+        $process = new Process($command);
 
-		$command = $exe . ' ' . "-v -f '.*\.php$' -i {$app_path} -o {$path}/swagger";
+        // execute the command
+        $process->run();
 
-		$process = new Process($command);
+        // delete the apidoc.json file after executing the command since it's no longer needed.
+        unlink($app_path . $apidoc_json);
 
-		// execute the command
-		$process->run();
+        if (!$process->isSuccessful()) {
+            $console->error('Error Output: ' . $process->getOutput());
+            throw new ProcessFailedException($process);
+        }
 
-		unlink($app_path . $apidoc_json);
+        // echo the output
+        $console->info('[' . $type . '] ' . implode (' ', $command));
+        $console->info('Output: ' . $process->getOutput());
 
-		if (!$process->isSuccessful()) {
-			throw new ProcessFailedException($process);
-		}
-
-		// echo the output
-		$console->info('[' . $type . '] ' . $command);
-		$console->info('Result: ' . $process->getOutput());
-
-		// return the past to that generated documentation
-		return $this->getFullApiUrl($type) . '/swagger/swagger.json';
-	}
+        // return the past to that generated documentation
+        return $this->getFullApiUrl($type).'/swagger/swagger.json';
+    }
 
 }
