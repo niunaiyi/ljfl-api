@@ -12,14 +12,13 @@ class CustomerTransformer extends Transformer
 	 * @var  array
 	 */
 	protected $defaultIncludes = [
-		'addresses',
 	];
 
 	/**
 	 * @var  array
 	 */
 	protected $availableIncludes = [
-
+		'addresses',
 	];
 
 	/**

@@ -23,7 +23,7 @@
 $router->get('customers', [
 	'as' => 'api_customer_get_all_customers',
 	'uses' => 'Controller@getAllCustomers',
-	'middleware' => [
-		'auth:api',
-	],
+//	'middleware' => [
+//		'auth:api',
+//	],
 ]);
