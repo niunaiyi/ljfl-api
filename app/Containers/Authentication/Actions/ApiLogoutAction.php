@@ -16,17 +16,17 @@ use Lcobucci\JWT\Parser;
 class ApiLogoutAction extends Action
 {
 
-	/**
-	 * @param DataTransporter $data
-	 *
-	 * @return  bool
-	 */
-	public function run(DataTransporter $data): bool
-	{
-		$id = App::make(Parser::class)->parse($data->bearerToken)->getHeader('jti');
+    /**
+     * @param \App\Ship\Transporters\DataTransporter $data
+     *
+     * @return  bool
+     */
+    public function run(DataTransporter $data): bool
+    {
+        $id = App::make(Parser::class)->parse($data->bearerToken)->getClaim('jti');
 
-		DB::table('oauth_access_tokens')->where('id', '=', $id)->update(['revoked' => true]);
+        DB::table('oauth_access_tokens')->where('id', '=', $id)->update(['revoked' => true]);
 
-		return true;
-	}
+        return true;
+    }
 }
