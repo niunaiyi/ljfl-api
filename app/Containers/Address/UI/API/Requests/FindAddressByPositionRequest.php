@@ -53,7 +53,7 @@ class FindAddressByPositionRequest extends Request
 	public function rules()
 	{
 		return [
-			'position' => 'required|array',
+			'position' => 'required',
 			// '{user-input}' => 'required|max:255',
 		];
 	}

@@ -20,8 +20,7 @@ class findAddressByPositionTask extends Task
 	public function run($position)
 	{
 		try {
-			//return $this->repository->find($position);
-			return  $this->repository->findWhere(['dzlx_value' =>'101003'])->limit(5);
+			return  $this->repository->findWhere(['dzlx_value' =>'101003'])->take(5);
 		} catch (Exception $exception) {
 			throw new NotFoundException();
 		}

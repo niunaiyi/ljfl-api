@@ -49,7 +49,7 @@ class Controller extends ApiController
 	 */
 	public function findAddressByPosition(FindAddressByPositionRequest $request)
 	{
-		$addresses = Apiato::call('Address@findAddressByPositionAction', [$request]);
+		$addresses = Apiato::call('Address@FindAddressByPositionAction', [$request]);
 
 		return $this->transform($addresses, AddressTransformer::class);
 	}
@@ -60,6 +60,7 @@ class Controller extends ApiController
 	 */
 	public function getAllAddresses(GetAllAddressesRequest $request)
 	{
+		\Log::info('getAllAddresses');
 		$addresses = Apiato::call('Address@GetAllAddressesAction', [$request]);
 
 		return $this->transform($addresses, AddressTransformer::class);

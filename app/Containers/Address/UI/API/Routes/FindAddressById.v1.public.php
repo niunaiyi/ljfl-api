@@ -45,4 +45,4 @@ $router->get('addresses/{id}', [
 	'middleware' => [
 		'auth:api',
 	],
-]);
+])->where('id', '[0-9]+');;
