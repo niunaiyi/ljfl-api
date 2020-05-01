@@ -2,9 +2,9 @@
 
 /**
  * @apiGroup           Drop
- * @apiName            findDropById
+ * @apiName            CountDropByAddressId
  *
- * @api                {GET} /v1/drops/:id Endpoint title here..
+ * @api                {GET} /v1/drops/addresses/:id 根据地址统计投放
  * @apiDescription     Endpoint description here..
  *
  * @apiVersion         1.0.0

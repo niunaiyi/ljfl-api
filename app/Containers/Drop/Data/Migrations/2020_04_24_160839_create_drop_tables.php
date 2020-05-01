@@ -17,7 +17,7 @@ class CreateDropTables extends Migration
 		    $table->bigInteger('customer_id')->unsigned()->comment('居民ID');
 		    $table->bigInteger('device_id')->unsigned()->comment('设备ID');
 		    $table->bigInteger('user_id')->nullable()->comment('用户ID');;
-		    $table->integer('ljfl_value')->unsigned()->comment('垃圾分类');
+		    $table->integer('ljlx_value')->unsigned()->comment('垃圾分类');
 		    $table->integer('ljxl_value')->unsigned()->comment('垃圾分类小类');
 		    $table->integer('jlbz_value')->unsigned()->comment('计量标准')->default(105002);
 		    $table->integer('amount')->unsigned()->comment('投放数量')->default(1);
