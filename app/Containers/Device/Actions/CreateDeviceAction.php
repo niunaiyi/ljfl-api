@@ -8,22 +8,20 @@ use Apiato\Core\Foundation\Facades\Apiato;
 
 class CreateDeviceAction extends Action
 {
-    public function run(Request $request)
-    {
-        $data = $request->sanitizeInput([
+	public function run(Request $request)
+	{
+		$data = $request->sanitizeInput([
 			'name',
 			'sblx_value',
 			'sbxh_value',
 			'user_id',
 			'address_id',
 			'position',
-        ]);
+		]);
 		if ($request->has('position')) {
 			$data['position'] = json_encode($data['position']);
 		}
 
-        $device = Apiato::call('Device@CreateDeviceTask', [$data]);
-
-        return $device;
-    }
+		return Apiato::call('Device@CreateDeviceTask', [$data]);
+	}
 }

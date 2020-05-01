@@ -10,8 +10,6 @@ class FindDeviceByIdAction extends Action
 {
     public function run(Request $request)
     {
-        $device = Apiato::call('Device@FindDeviceByIdTask', [$request->id]);
-
-        return $device;
+	    return Apiato::call('Device@FindDeviceByIdTask', [$request->id]);
     }
 }

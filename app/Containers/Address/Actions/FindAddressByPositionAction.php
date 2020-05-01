@@ -10,8 +10,6 @@ class FindAddressByPositionAction extends Action
 {
 	public function run(Request $request)
 	{
-		$address = Apiato::call('Address@FindAddressByPositionTask', [$request->position]);
-
-		return $address;
+		return Apiato::call('Address@FindAddressByPositionTask', [$request->position]);
 	}
 }

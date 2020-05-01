@@ -10,8 +10,6 @@ class GetAddressChildrenAction extends Action
 {
 	public function run(Request $request)
 	{
-		$addresses = Apiato::call('Address@GetAddressChildrenTask', [$request->id]);
-
-		return $addresses;
+		return Apiato::call('Address@GetAddressChildrenTask', [$request->id]);
 	}
 }

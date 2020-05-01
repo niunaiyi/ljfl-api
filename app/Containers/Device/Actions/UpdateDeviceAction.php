@@ -22,8 +22,6 @@ class UpdateDeviceAction extends Action
 		    $data['position'] = json_encode($data['position']);
 	    }
 
-        $device = Apiato::call('Device@UpdateDeviceTask', [$request->id, $data]);
-
-        return $device;
+	    return  Apiato::call('Device@UpdateDeviceTask', [$request->id, $data]);
     }
 }

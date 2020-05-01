@@ -30,7 +30,6 @@ class UpdateAddressAction extends Action
 			$address = Apiato::call('Address@ChangeAddressParentTask', [$request->id, $request->parent_id]);
 		}
 
-		$address = Apiato::call('Address@UpdateAddressTask', [$request->id, $data]);
-		return $address;
+		return Apiato::call('Address@UpdateAddressTask', [$request->id, $data]);
 	}
 }

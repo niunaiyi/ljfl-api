@@ -10,8 +10,6 @@ class FindAddressByIdAction extends Action
 {
 	public function run(Request $request)
 	{
-		$address = Apiato::call('Address@FindAddressByIdTask', [$request->id]);
-
-		return $address;
+		return Apiato::call('Address@FindAddressByIdTask', [$request->id]);
 	}
 }
